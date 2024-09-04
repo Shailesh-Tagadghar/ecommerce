@@ -1,5 +1,6 @@
 // import 'package:flutter/material.dart';
 
+import 'package:ecommerce/Modules/Splash/splash_screen.dart';
 import 'package:ecommerce/Routes/app_routes.dart';
 import 'package:get/get.dart';
 
@@ -15,9 +16,9 @@ class AppPages {
   /// Static list of routes with Page name, Route name & Transition
   ///
   static final routes = [
-    // GetPage(
-    //     name: AppRoutes.splashScreen,
-    //     page: () => const SplashScreen(),
-    //     transition: transition),
+    GetPage(
+        name: AppRoutes.splashScreen,
+        page: () => SplashScreen(),
+        transition: transition),
   ];
 }

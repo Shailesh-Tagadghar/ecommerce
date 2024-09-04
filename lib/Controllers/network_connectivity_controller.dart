@@ -19,16 +19,15 @@ class NetworkConnectivityController extends GetxController {
   void onInit() {
     super.onInit();
     _getConnectionType();
-    _streamSubscription = _connectivity.onConnectivityChanged
-        .listen(_updateState as void Function(List<ConnectivityResult> event)?);
+    _streamSubscription =
+        _connectivity.onConnectivityChanged.listen(_updateState);
   }
 
   // a method to get which connection result, if you we connected to internet or no if yes then which network
   Future<void> _getConnectionType() async {
     ConnectivityResult? connectivityResult;
     try {
-      connectivityResult =
-          (await (_connectivity.checkConnectivity())) as ConnectivityResult?;
+      connectivityResult = await (_connectivity.checkConnectivity());
     } on PlatformException catch (e) {
       Get.printInfo(info: 'Connection Error : ${e.message}');
     }
