@@ -4,7 +4,6 @@
 class StringConstants {
   //Splash Screen
   static const String projectText = 'E-Commerce Application';
-  static const String splashLargeText = 'We serve incomparable delicacies';
 }
 
 ///
