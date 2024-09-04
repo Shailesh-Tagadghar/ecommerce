@@ -1,5 +1,6 @@
 // import 'package:flutter/material.dart';
 
+import 'package:ecommerce/Modules/Auth/signIn.dart';
 import 'package:ecommerce/Modules/Splash/splash_screen.dart';
 import 'package:ecommerce/Routes/app_routes.dart';
 import 'package:get/get.dart';
@@ -18,7 +19,11 @@ class AppPages {
   static final routes = [
     GetPage(
         name: AppRoutes.splashScreen,
-        page: () => SplashScreen(),
+        page: () => const SplashScreen(),
+        transition: transition),
+    GetPage(
+        name: AppRoutes.splashScreen,
+        page: () => const Signin(),
         transition: transition),
   ];
 }

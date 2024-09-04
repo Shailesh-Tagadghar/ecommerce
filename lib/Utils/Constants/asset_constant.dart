@@ -9,6 +9,9 @@ class AssetConstant {
   static const String authBackgroundTransparent =
       '$globalImagePath/authbg_transparent.png';
 
+//Splash
+  static const String splashLogo = '$globalImagePath/logo.png';
+
   // Welcome images
   static const String welcome1 = '$globalImagePath/welcome1.png';
   static const String welcome2 = '$globalImagePath/welcome2.png';
@@ -51,4 +54,8 @@ class AssetConstant {
   static const String googlePay = '$globalImagePath/googlepay.png';
   static const String payPal = '$globalImagePath/paypal.png';
   static const String razorPay = '$globalImagePath/razorpay.png';
+
+  //Json File
+  static const String tryLottie = '$globalJSONPath/try_lottie.json';
+  static const String fashionLottie = '$globalJSONPath/fashionApp.json';
 }
