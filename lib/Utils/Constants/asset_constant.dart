@@ -44,11 +44,6 @@ class AssetConstant {
   /// Icons path declaration
   // static const String addImage = '$globalIconPath/add_image.png';   (example)
 
-  ///
-  /// JSON path declaration
-  static const String successLottie = '$globalJSONPath/success_lottie.json';
-  static const String failedLottie = '$globalJSONPath/failed_lottie.json';
-
   //Payment Methods Icons
   //  static const String appleLogo = '$globalImagePath/apple-logo.png';
   static const String googlePay = '$globalImagePath/googlepay.png';
