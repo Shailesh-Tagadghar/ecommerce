@@ -6,63 +6,38 @@ import 'package:ecommerce/Utils/Constants/color_constant.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
-import 'package:sizer/sizer.dart';
 
 class SplashScreen extends StatelessWidget {
-  const SplashScreen({super.key});
+  final RxBool showLogo = true.obs; // Initially show the logo
+  final RxBool showLottie = false.obs; // Initially hide Lottie
+
+  SplashScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final SplashController controller = Get.put(SplashController());
+    Timer(const Duration(seconds: 3), () {
+      showLogo.value = false; // Hide the logo
+      showLottie.value = true; // Show Lottie animation
+
+      // Second timer to navigate to the login screen after showing Lottie for 3 seconds
+      Timer(const Duration(seconds: 3), () {
+        Get.toNamed(AppRoutes.signInScreen);
+      });
+    });
     return Scaffold(
       backgroundColor: ColorConstants.background,
       body: Center(
         child: Obx(
-          () {
-            return GestureDetector(
-              onTap: controller.navigateToLogin,
-              child: controller.showLottie.value
+          () => showLogo.value
+              ? Image.asset(AssetConstant.splashLogo) // Show logo for 3 seconds
+              : showLottie.value
                   ? Lottie.asset(
-                      AssetConstant.fashionLottie,
-                      height: 40.h,
-                      repeat: true,
-                      reverse: true,
-                      animate: true,
+                      // AssetConstant.fashionLottie,
+                      AssetConstant.tryLottie,
                     )
-                  : Image.asset(AssetConstant.splashLogo),
-            );
-          },
+                  : const SizedBox(),
         ),
       ),
     );
-  }
-}
-
-class SplashController extends GetxController {
-  var showLottie = false.obs;
-
-  @override
-  void onInit() {
-    super.onInit();
-
-    // Automatically navigate to login screen after 4 seconds if not showing Lottie
-    Timer(
-      const Duration(seconds: 4),
-      () {
-        if (!showLottie.value) {
-          Get.toNamed(AppRoutes.signInScreen);
-        }
-      },
-    );
-  }
-
-  void navigateToLogin() {
-    // Show Lottie animation
-    showLottie.value = true;
-
-    // Navigate to login screen after Lottie animation
-    Future.delayed(const Duration(seconds: 3), () {
-      Get.toNamed(AppRoutes.signInScreen);
-    });
   }
 }
