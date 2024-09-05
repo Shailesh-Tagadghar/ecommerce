@@ -20,7 +20,7 @@ class SplashScreen extends StatelessWidget {
       showLottie.value = true;
 
       Timer(const Duration(seconds: 3), () {
-        Get.toNamed(AppRoutes.signInScreen);
+        Get.toNamed(AppRoutes.signUpScreen);
       });
     });
     return Scaffold(
