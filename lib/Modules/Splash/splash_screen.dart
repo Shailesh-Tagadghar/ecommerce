@@ -8,18 +8,17 @@ import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
 
 class SplashScreen extends StatelessWidget {
-  final RxBool showLogo = true.obs; // Initially show the logo
-  final RxBool showLottie = false.obs; // Initially hide Lottie
+  final RxBool showLogo = true.obs;
+  final RxBool showLottie = false.obs;
 
   SplashScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     Timer(const Duration(seconds: 3), () {
-      showLogo.value = false; // Hide the logo
-      showLottie.value = true; // Show Lottie animation
+      showLogo.value = false;
+      showLottie.value = true;
 
-      // Second timer to navigate to the login screen after showing Lottie for 3 seconds
       Timer(const Duration(seconds: 3), () {
         Get.toNamed(AppRoutes.signInScreen);
       });
@@ -29,7 +28,7 @@ class SplashScreen extends StatelessWidget {
       body: Center(
         child: Obx(
           () => showLogo.value
-              ? Image.asset(AssetConstant.splashLogo) // Show logo for 3 seconds
+              ? Image.asset(AssetConstant.splashLogo)
               : showLottie.value
                   ? Lottie.asset(
                       // AssetConstant.fashionLottie,
