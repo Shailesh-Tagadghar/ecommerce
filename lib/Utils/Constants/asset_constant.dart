@@ -53,4 +53,5 @@ class AssetConstant {
   //Json File
   static const String tryLottie = '$globalJSONPath/try_lottie.json';
   static const String fashionLottie = '$globalJSONPath/fashionApp.json';
+  static const String clothLottie = '$globalJSONPath/cloths.json';
 }

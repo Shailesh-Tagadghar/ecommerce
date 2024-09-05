@@ -3,9 +3,11 @@ import 'dart:async';
 import 'package:ecommerce/Routes/app_routes.dart';
 import 'package:ecommerce/Utils/Constants/asset_constant.dart';
 import 'package:ecommerce/Utils/Constants/color_constant.dart';
+import 'package:ecommerce/main.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
+import 'package:sizer/sizer.dart';
 
 class SplashScreen extends StatelessWidget {
   final RxBool showLogo = true.obs;
@@ -31,8 +33,8 @@ class SplashScreen extends StatelessWidget {
               ? Image.asset(AssetConstant.splashLogo)
               : showLottie.value
                   ? Lottie.asset(
-                      // AssetConstant.fashionLottie,
-                      AssetConstant.tryLottie,
+                      AssetConstant.clothLottie,
+                      // AssetConstant.tryLottie,
                     )
                   : const SizedBox(),
         ),
