@@ -42,6 +42,15 @@ class StringConstants {
   static const String genderlabel = 'Gender';
   static const String gender = 'select';
   static const String userBtntext = 'Complete Profile';
+
+  //Gender option //country Code
+  static const String select = 'Select';
+  static const String mail = 'Mail';
+  static const String femail = 'Femail';
+  static const String other = 'Other';
+  static const String country1 = '+1';
+  static const String country2 = '+91';
+  static const String country3 = '+453';
 }
 
 ///

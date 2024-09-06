@@ -13,9 +13,8 @@ class UserDetail extends StatelessWidget {
   UserDetail({super.key});
 
   final AuthController authController = Get.put(AuthController());
-
-  final TextEditingController passwordController = TextEditingController();
-  final TextEditingController cnfpasswordController = TextEditingController();
+  final TextEditingController genderController = TextEditingController();
+  final TextEditingController phoneController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +25,12 @@ class UserDetail extends StatelessWidget {
         toolbarHeight: 10.h,
         leadingWidth: 20.w,
         leading: Container(
-          margin: EdgeInsets.only(left: 8.w),
+          margin: EdgeInsets.only(
+            left: 8.w,
+          ),
+          padding: EdgeInsets.all(
+            1.w,
+          ),
           decoration: BoxDecoration(
             border: Border.all(color: ColorConstants.lightGrayColor, width: 1),
             shape: BoxShape.circle,
@@ -47,7 +51,6 @@ class UserDetail extends StatelessWidget {
         backgroundColor: ColorConstants.whiteColor,
         body: Padding(
           padding: EdgeInsets.only(
-            top: 2.h,
             left: 4.w,
             right: 4.w,
             bottom: 2.h,
@@ -184,11 +187,32 @@ class UserDetail extends StatelessWidget {
                       SizedBox(
                         height: 0.2.h,
                       ),
-                      const CustomField(
-                        hintText: StringConstants.phone,
-                        fontSize: 11,
-                        hintTextColor: ColorConstants.greyColor,
-                        keyboardType: TextInputType.phone,
+                      // const CustomField(
+                      //   hintText: StringConstants.phone,
+                      //   fontSize: 11,
+                      //   isPhoneNumber: true,
+                      //   hintTextColor: ColorConstants.greyColor,
+                      //   keyboardType: TextInputType.phone,
+                      // ),
+                      Obx(
+                        () => CustomField(
+                            hintText:
+                                'Enter phone number', // Placeholder for phone input
+                            fontSize: 11,
+                            isPhoneNumber: true,
+                            hintTextColor: ColorConstants.greyColor,
+                            selectedCountryCode:
+                                authController.selectedCountrycode.value,
+                            countryCodes: authController.countryCode,
+                            onCountryCodeChanged: (newValue) {
+                              authController.setSelectedCountryCode(
+                                  newValue); // Update country code
+                            },
+                            onChanged: (newValue) {
+                              authController.setPhoneNumber(
+                                  newValue); // Update phone number
+                            },
+                            controller: phoneController),
                       ),
                       SizedBox(
                         height: 1.5.h,
@@ -202,11 +226,20 @@ class UserDetail extends StatelessWidget {
                       SizedBox(
                         height: 0.2.h,
                       ),
-                      const CustomField(
-                        hintText: StringConstants.gender,
-                        fontSize: 11,
-                        hintTextColor: ColorConstants.greyColor,
-                        keyboardType: TextInputType.name,
+                      Obx(
+                        () => CustomField(
+                          hintText: StringConstants.gender,
+                          fontSize: 11,
+                          isDropdown: true,
+                          hintTextColor: ColorConstants.greyColor,
+                          genderdropdown: authController.genderDropdownValues,
+                          onChanged: (newValue) {
+                            authController.setSelectedDropdownItem(newValue);
+                          },
+                          controller: TextEditingController(
+                            text: authController.selectedDropdownItem.value,
+                          ),
+                        ),
                       ),
                       SizedBox(
                         height: 4.h,

@@ -13,6 +13,12 @@ class CustomField extends StatelessWidget {
   final VoidCallback? onIconPressed;
   final TextEditingController? controller;
   final ValueChanged<String>? onChanged;
+  final bool isDropdown;
+  final List<String>? genderdropdown;
+  final bool isPhoneNumber;
+  final String? selectedCountryCode;
+  final Function(String)? onCountryCodeChanged;
+  final List<String>? countryCodes;
 
   const CustomField({
     super.key,
@@ -26,60 +32,160 @@ class CustomField extends StatelessWidget {
     this.onIconPressed,
     this.controller,
     this.onChanged,
+    this.isDropdown = false,
+    this.genderdropdown,
+    this.isPhoneNumber = false,
+    this.selectedCountryCode,
+    this.onCountryCodeChanged,
+    this.countryCodes,
   });
 
   @override
   Widget build(BuildContext context) {
-    return TextFormField(
-      keyboardType: keyboardType,
-      obscureText: obscureText,
-      obscuringCharacter: obscuringCharacter,
-      controller: controller,
-      onChanged: onChanged,
-      // cursorRadius: const Radius.circular(8),
-      decoration: InputDecoration(
-        contentPadding: EdgeInsets.only(
-          left: 4.w,
-          right: 4.w,
-          bottom: 1.h,
-          top: 1.h,
+    if (isDropdown && genderdropdown != null) {
+      return DropdownButtonFormField<String>(
+        dropdownColor: ColorConstants.whiteColor,
+        decoration: InputDecoration(
+          enabledBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(25),
+            borderSide: const BorderSide(
+              color: ColorConstants.lightGrayColor,
+            ),
+          ),
+          focusedBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(25),
+            borderSide: const BorderSide(
+              color: ColorConstants.lightGrayColor,
+            ),
+          ),
+          errorBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(25),
+            borderSide: const BorderSide(
+              color: ColorConstants.errorColor,
+            ),
+          ),
+          hintText: hintText,
+          hintStyle: TextStyle(
+            color: hintTextColor,
+            fontSize: 14,
+            fontWeight: FontWeight.w500,
+          ),
+          contentPadding: const EdgeInsets.all(16),
         ),
-        hintText: hintText,
-        hintStyle: TextStyle(
-          color: hintTextColor,
-          fontSize: fontSize.sp,
-          fontWeight: FontWeight.w400,
+        items: genderdropdown!.map((String value) {
+          return DropdownMenuItem<String>(
+            value: value,
+            child: Text(value),
+          );
+        }).toList(),
+        onChanged: (newValue) {
+          if (onChanged != null) {
+            onChanged!(newValue!);
+          }
+        },
+        value: controller?.text.isNotEmpty ?? false ? controller?.text : null,
+      );
+    } else if (isPhoneNumber) {
+      return TextFormField(
+        controller: controller,
+        keyboardType: TextInputType.phone,
+        decoration: InputDecoration(
+          prefixIcon: Padding(
+            padding: const EdgeInsets.only(left: 8.0, right: 8.0),
+            child: DropdownButton<String>(
+              value: selectedCountryCode,
+              items: countryCodes?.map((String value) {
+                return DropdownMenuItem<String>(
+                  value: value,
+                  child: Text(value),
+                );
+              }).toList(),
+              onChanged: (newValue) {
+                onCountryCodeChanged!(newValue!);
+              },
+              underline: const SizedBox(), // Remove the dropdown underline
+            ),
+          ),
+          enabledBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(25),
+            borderSide: const BorderSide(
+              color: ColorConstants.lightGrayColor,
+            ),
+          ),
+          focusedBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(25),
+            borderSide: const BorderSide(
+              color: ColorConstants.lightGrayColor,
+            ),
+          ),
+          errorBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(25),
+            borderSide: const BorderSide(
+              color: ColorConstants.errorColor,
+            ),
+          ),
+          hintText: hintText,
+          hintStyle: TextStyle(
+            color: hintTextColor,
+            fontSize: 14,
+            fontWeight: FontWeight.w500,
+          ),
+          contentPadding: const EdgeInsets.all(16),
         ),
-        suffixIcon: showPasswordIcon
-            ? IconButton(
-                icon: Icon(
-                  // obscureText ? Icons.visibility_off : Icons.visibility,
-                  obscureText
-                      ? Icons.visibility_off_outlined
-                      : Icons.visibility_outlined,
-                ),
-                onPressed: onIconPressed,
-              )
-            : null,
-        enabledBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(25),
-          borderSide: const BorderSide(
-            color: ColorConstants.lightGrayColor,
+        onChanged: onChanged,
+      );
+    } else {
+      return TextFormField(
+        keyboardType: keyboardType,
+        obscureText: obscureText,
+        obscuringCharacter: obscuringCharacter,
+        controller: controller,
+        onChanged: onChanged,
+        // cursorRadius: const Radius.circular(8),
+        decoration: InputDecoration(
+          contentPadding: EdgeInsets.only(
+            left: 4.w,
+            right: 4.w,
+            bottom: 1.h,
+            top: 1.h,
+          ),
+          hintText: hintText,
+          hintStyle: TextStyle(
+            color: hintTextColor,
+            fontSize: fontSize.sp,
+            fontWeight: FontWeight.w400,
+          ),
+          suffixIcon: showPasswordIcon
+              ? IconButton(
+                  icon: Icon(
+                    // obscureText ? Icons.visibility_off : Icons.visibility,
+                    obscureText
+                        ? Icons.visibility_off_outlined
+                        : Icons.visibility_outlined,
+                  ),
+                  onPressed: onIconPressed,
+                )
+              : null,
+          enabledBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(25),
+            borderSide: const BorderSide(
+              color: ColorConstants.lightGrayColor,
+            ),
+          ),
+          focusedBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(25),
+            borderSide: const BorderSide(
+              color: ColorConstants.lightGrayColor,
+            ),
+          ),
+          errorBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(25),
+            borderSide: const BorderSide(
+              color: ColorConstants.errorColor,
+            ),
           ),
         ),
-        focusedBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(25),
-          borderSide: const BorderSide(
-            color: ColorConstants.lightGrayColor,
-          ),
-        ),
-        errorBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(25),
-          borderSide: const BorderSide(
-            color: ColorConstants.errorColor,
-          ),
-        ),
-      ),
-    );
+      );
+    }
   }
 }
