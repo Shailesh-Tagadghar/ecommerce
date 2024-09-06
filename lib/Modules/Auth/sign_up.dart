@@ -73,7 +73,7 @@ class Signup extends StatelessWidget {
                     SizedBox(
                       height: 0.2.h,
                     ),
-                    CustomField(
+                    const CustomField(
                       hintText: StringConstants.name,
                       hintTextColor: ColorConstants.greyColor,
                       keyboardType: TextInputType.name,
@@ -90,7 +90,7 @@ class Signup extends StatelessWidget {
                     SizedBox(
                       height: 0.2.h,
                     ),
-                    CustomField(
+                    const CustomField(
                       hintText: StringConstants.email,
                       hintTextColor: ColorConstants.greyColor,
                       keyboardType: TextInputType.emailAddress,

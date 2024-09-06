@@ -5,6 +5,6 @@ class CustomRichText extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return RichText(text: TextSpan());
+    return RichText(text: const TextSpan());
   }
 }

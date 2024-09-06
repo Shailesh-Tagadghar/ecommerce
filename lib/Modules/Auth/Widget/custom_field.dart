@@ -13,7 +13,7 @@ class CustomField extends StatelessWidget {
   final TextEditingController? controller;
   final ValueChanged<String>? onChanged;
 
-  CustomField({
+  const CustomField({
     super.key,
     this.hintText,
     this.hintTextColor = ColorConstants.greyColor,
