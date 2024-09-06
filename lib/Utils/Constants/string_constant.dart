@@ -32,6 +32,16 @@ class StringConstants {
   static const String forgotdisplaytext =
       'Your new password must be different from previosly used passwords.';
   static const String btntext = 'Create New Password';
+
+  //user detail screen
+  static const String profiletext = 'Complete Your Profile';
+  static const String userdisplaytext =
+      'Don\'t worry, only you can see your personal data. No one else will be able to see it.';
+  static const String phonelabel = 'Phone Number';
+  static const String phone = 'Enter Phone Number';
+  static const String genderlabel = 'Gender';
+  static const String gender = 'select';
+  static const String userBtntext = 'Complete Profile';
 }
 
 ///

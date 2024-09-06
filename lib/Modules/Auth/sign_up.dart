@@ -168,7 +168,11 @@ class Signup extends StatelessWidget {
                       height: 6.h,
                       fontSize: 14,
                       weight: FontWeight.w500,
-                      action: () {},
+                      action: () {
+                        Get.toNamed(
+                          AppRoutes.userDetailScreen,
+                        );
+                      },
                     ),
                     SizedBox(
                       height: 4.h,
