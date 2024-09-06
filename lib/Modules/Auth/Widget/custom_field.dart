@@ -5,6 +5,7 @@ import 'package:sizer/sizer.dart';
 class CustomField extends StatelessWidget {
   final String? hintText;
   final Color? hintTextColor;
+  final double fontSize;
   final TextInputType keyboardType;
   final bool obscureText;
   final String obscuringCharacter;
@@ -16,6 +17,7 @@ class CustomField extends StatelessWidget {
   const CustomField({
     super.key,
     this.hintText,
+    this.fontSize = 14,
     this.hintTextColor = ColorConstants.greyColor,
     this.keyboardType = TextInputType.text,
     this.obscureText = false,
@@ -45,7 +47,7 @@ class CustomField extends StatelessWidget {
         hintText: hintText,
         hintStyle: TextStyle(
           color: hintTextColor,
-          fontSize: 12,
+          fontSize: fontSize.sp,
           fontWeight: FontWeight.w400,
         ),
         suffixIcon: showPasswordIcon

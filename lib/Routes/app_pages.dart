@@ -1,5 +1,6 @@
 // import 'package:flutter/material.dart';
 
+import 'package:ecommerce/Modules/Auth/sign_in.dart';
 import 'package:ecommerce/Modules/Auth/sign_up.dart';
 import 'package:ecommerce/Modules/Splash/splash_screen.dart';
 import 'package:ecommerce/Routes/app_routes.dart';
@@ -24,6 +25,10 @@ class AppPages {
     GetPage(
         name: AppRoutes.signUpScreen,
         page: () => Signup(),
+        transition: transition),
+    GetPage(
+        name: AppRoutes.signInScreen,
+        page: () => SignIn(),
         transition: transition),
   ];
 }

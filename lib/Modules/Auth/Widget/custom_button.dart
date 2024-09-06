@@ -8,6 +8,8 @@ class CustomButton extends StatelessWidget {
   final void Function()? action;
   final Color? btnColor, textColor, iconColor;
   final double? width;
+  final FontWeight? weight;
+  final double fontSize;
   final double? height;
 
   const CustomButton({
@@ -15,6 +17,8 @@ class CustomButton extends StatelessWidget {
     required this.label,
     this.action,
     this.btnColor,
+    this.weight,
+    this.fontSize = 14,
     this.textColor,
     this.iconColor,
     this.width,
@@ -46,8 +50,8 @@ class CustomButton extends StatelessWidget {
                 label,
                 style: TextStyle(
                   color: ColorConstants.whiteColor,
-                  fontSize: 11.sp,
-                  fontWeight: FontWeight.w600,
+                  fontSize: fontSize.sp,
+                  fontWeight: weight ?? FontWeight.bold,
                 ),
               ),
             ],

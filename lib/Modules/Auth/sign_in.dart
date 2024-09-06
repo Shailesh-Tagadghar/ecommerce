@@ -10,8 +10,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sizer/sizer.dart';
 
-class Signup extends StatelessWidget {
-  Signup({super.key});
+class SignIn extends StatelessWidget {
+  SignIn({super.key});
 
   final AuthController authController = Get.put(AuthController());
 
@@ -23,7 +23,7 @@ class Signup extends StatelessWidget {
       backgroundColor: ColorConstants.whiteColor,
       body: Padding(
         padding: EdgeInsets.only(
-          top: 10.h,
+          top: 16.h,
           left: 4.w,
           right: 4.w,
           bottom: 2.h,
@@ -34,10 +34,10 @@ class Signup extends StatelessWidget {
             children: [
               const Align(
                 child: CustomText(
-                  text: StringConstants.createaccount,
+                  text: StringConstants.signIn,
                   color: ColorConstants.blackColor,
-                  fontSize: 20,
-                  weight: FontWeight.w500,
+                  fontSize: 18,
+                  weight: FontWeight.w600,
                 ),
               ),
               SizedBox(height: 1.5.h),
@@ -47,15 +47,15 @@ class Signup extends StatelessWidget {
                   right: 12.w,
                 ),
                 child: const CustomText(
-                  text: StringConstants.smalldisplay,
+                  text: StringConstants.welcome,
                   color: ColorConstants.greyColor,
-                  fontSize: 12,
-                  weight: FontWeight.w300,
+                  fontSize: 11,
+                  weight: FontWeight.w400,
                   textAlign: TextAlign.center,
                 ),
               ),
               SizedBox(
-                height: 4.h,
+                height: 6.h,
               ),
               Padding(
                 padding: EdgeInsets.only(
@@ -65,24 +65,6 @@ class Signup extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const CustomText(
-                      text: StringConstants.namelabel,
-                      color: ColorConstants.blackColor,
-                      fontSize: 11,
-                      weight: FontWeight.w400,
-                    ),
-                    SizedBox(
-                      height: 0.2.h,
-                    ),
-                    const CustomField(
-                      hintText: StringConstants.name,
-                      fontSize: 11,
-                      hintTextColor: ColorConstants.greyColor,
-                      keyboardType: TextInputType.name,
-                    ),
-                    SizedBox(
-                      height: 2.h,
-                    ),
                     const CustomText(
                       text: StringConstants.emaillabel,
                       color: ColorConstants.blackColor,
@@ -115,9 +97,9 @@ class Signup extends StatelessWidget {
                         controller: passwordController,
                         obscureText: authController.isPasswordObscured.value,
                         obscuringCharacter: '*',
-                        fontSize: 11,
                         showPasswordIcon: true,
                         hintText: StringConstants.password,
+                        fontSize: 11,
                         hintTextColor: ColorConstants.greyColor,
                         onIconPressed: authController.togglePasswordVisibility,
                       ),
@@ -125,45 +107,22 @@ class Signup extends StatelessWidget {
                     SizedBox(
                       height: 2.h,
                     ),
-                    Row(
-                      children: [
-                        Obx(
-                          () => SizedBox(
-                            height: 2.h,
-                            width: 5.w,
-                            child: Checkbox.adaptive(
-                              value: authController.agreeToTerms.value,
-                              onChanged: (bool? val) {
-                                authController.agreeToTerms.value =
-                                    !authController.agreeToTerms.value;
-                              },
-                              activeColor: ColorConstants.primary,
-                            ),
-                          ),
-                        ),
-                        SizedBox(
-                          width: 1.w,
-                        ),
-                        const CustomText(
-                          text: StringConstants.agree,
-                          color: ColorConstants.blackColor,
-                          fontSize: 12,
-                          weight: FontWeight.w400,
-                        ),
-                        const CustomText(
-                          text: StringConstants.tandc,
-                          color: ColorConstants.rich,
-                          weight: FontWeight.w500,
-                          fontSize: 12,
-                          decoration: TextDecoration.underline,
-                        ),
-                      ],
+                    const Align(
+                      alignment: Alignment.topRight,
+                      child: CustomText(
+                        text: StringConstants.forgotpass,
+                        color: ColorConstants.rich,
+                        fontSize: 12,
+                        weight: FontWeight.w400,
+                        decoration: TextDecoration.underline,
+                        textAlign: TextAlign.right,
+                      ),
                     ),
                     SizedBox(
                       height: 4.h,
                     ),
                     CustomButton(
-                      label: StringConstants.signUp,
+                      label: StringConstants.signIn,
                       btnColor: ColorConstants.rich,
                       height: 6.h,
                       fontSize: 14,
@@ -171,7 +130,7 @@ class Signup extends StatelessWidget {
                       action: () {},
                     ),
                     SizedBox(
-                      height: 4.h,
+                      height: 5.h,
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -278,9 +237,9 @@ class Signup extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         const CustomText(
-                          text: StringConstants.account2,
+                          text: StringConstants.account1,
                           color: ColorConstants.blackColor,
-                          fontSize: 10,
+                          fontSize: 11,
                           weight: FontWeight.w400,
                         ),
                         SizedBox(
@@ -288,10 +247,10 @@ class Signup extends StatelessWidget {
                         ),
                         GestureDetector(
                           onTap: () {
-                            Get.toNamed(AppRoutes.signInScreen);
+                            Get.toNamed(AppRoutes.signUpScreen);
                           },
                           child: const CustomText(
-                            text: StringConstants.signIn,
+                            text: StringConstants.signUp,
                             color: ColorConstants.rich,
                             fontSize: 12,
                             weight: FontWeight.w500,
