@@ -1,5 +1,6 @@
 import 'package:ecommerce/Modules/Auth/Widget/custom_button.dart';
 import 'package:ecommerce/Modules/Auth/Widget/custom_field.dart';
+import 'package:ecommerce/Modules/Auth/Widget/custom_rich_text.dart';
 import 'package:ecommerce/Modules/Auth/Widget/custom_text.dart';
 import 'package:ecommerce/Modules/Auth/auth_controller.dart';
 import 'package:ecommerce/Utils/Constants/asset_constant.dart';
@@ -124,7 +125,7 @@ class Signup extends StatelessWidget {
                       children: [
                         Obx(
                           () => SizedBox(
-                            height: 2.2.h,
+                            height: 2.h,
                             width: 5.w,
                             child: Checkbox.adaptive(
                               value: authController.agreeToTerms.value,
@@ -137,37 +138,36 @@ class Signup extends StatelessWidget {
                           ),
                         ),
                         SizedBox(
-                          width: 0.9.h,
+                          width: 1.w,
                         ),
                         const CustomText(
                           text: StringConstants.agree,
                           color: ColorConstants.blackColor,
-                          fontSize: 11,
+                          fontSize: 12,
                           weight: FontWeight.w400,
                         ),
                         // Container(
-                        //     padding: const EdgeInsets.only(
-                        //       bottom: 0.5,
-                        //     ),
-                        //     decoration: const BoxDecoration(
-                        //       border: Border(
-                        //         bottom: BorderSide(
-                        //           color: ColorConstants.rich,
-                        //           width: 1,
-                        //         ),
+                        //   decoration: BoxDecoration(
+                        //     border: Border(
+                        //       bottom: BorderSide(
+                        //         color: ColorConstants.rich,
+                        //         width: 0.15.h,
                         //       ),
                         //     ),
-                        //     child: const CustomText(
-                        //       text: StringConstants.tandc,
-                        //       color: ColorConstants.rich,
-                        //       weight: FontWeight.w400,
-                        //       fontSize: 11,
-                        //     )),
+                        //   ),
+                        //   child: const CustomText(
+                        //     text: StringConstants.tandc,
+                        //     color: ColorConstants.rich,
+                        //     weight: FontWeight.w500,
+                        //     fontSize: 11,
+                        //   ),
+                        // ),
+
                         const CustomText(
                           text: StringConstants.tandc,
                           color: ColorConstants.rich,
-                          fontSize: 11,
                           weight: FontWeight.w500,
+                          fontSize: 12,
                           decoration: TextDecoration.underline,
                         ),
                       ],
@@ -301,7 +301,6 @@ class Signup extends StatelessWidget {
                           color: ColorConstants.rich,
                           fontSize: 10,
                           weight: FontWeight.w500,
-                          decoration: TextDecoration.underline,
                         ),
                       ],
                     ),
