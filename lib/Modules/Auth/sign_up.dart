@@ -1,6 +1,5 @@
 import 'package:ecommerce/Modules/Auth/Widget/custom_button.dart';
 import 'package:ecommerce/Modules/Auth/Widget/custom_field.dart';
-import 'package:ecommerce/Modules/Auth/Widget/custom_rich_text.dart';
 import 'package:ecommerce/Modules/Auth/Widget/custom_text.dart';
 import 'package:ecommerce/Modules/Auth/auth_controller.dart';
 import 'package:ecommerce/Utils/Constants/asset_constant.dart';
@@ -146,23 +145,6 @@ class Signup extends StatelessWidget {
                           fontSize: 12,
                           weight: FontWeight.w400,
                         ),
-                        // Container(
-                        //   decoration: BoxDecoration(
-                        //     border: Border(
-                        //       bottom: BorderSide(
-                        //         color: ColorConstants.rich,
-                        //         width: 0.15.h,
-                        //       ),
-                        //     ),
-                        //   ),
-                        //   child: const CustomText(
-                        //     text: StringConstants.tandc,
-                        //     color: ColorConstants.rich,
-                        //     weight: FontWeight.w500,
-                        //     fontSize: 11,
-                        //   ),
-                        // ),
-
                         const CustomText(
                           text: StringConstants.tandc,
                           color: ColorConstants.rich,
@@ -301,6 +283,7 @@ class Signup extends StatelessWidget {
                           color: ColorConstants.rich,
                           fontSize: 10,
                           weight: FontWeight.w500,
+                          decoration: TextDecoration.underline,
                         ),
                       ],
                     ),
