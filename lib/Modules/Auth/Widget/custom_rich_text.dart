@@ -1,5 +1,6 @@
 import 'package:ecommerce/Utils/Constants/color_constant.dart';
 import 'package:flutter/gestures.dart';
+
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
 
@@ -33,7 +34,7 @@ class CustomRichText extends StatelessWidget {
   Widget build(BuildContext context) {
     return RichText(
       text: TextSpan(
-        children: <InlineSpan>[
+        children: <TextSpan>[
           TextSpan(
             text: text,
             style: TextStyle(
@@ -42,44 +43,16 @@ class CustomRichText extends StatelessWidget {
               fontWeight: weight ?? FontWeight.bold,
             ),
           ),
-          // TextSpan(
-          //   text: linktext,
-          //   style: linktextStyle ??
-          //       TextStyle(
-          //         color: ColorConstants.rich,
-          //         fontSize: fontSize.sp,
-          //         fontWeight: FontWeight.w500,
-          //         decoration: TextDecoration.underline,
-          //       ),
-          //   recognizer: TapGestureRecognizer()..onTap = onTap,
-          // ),
-          WidgetSpan(
-            alignment: PlaceholderAlignment.middle,
-            child: Stack(
-              children: [
-                Text(
-                  linktext ?? '',
-                  style: linktextStyle ??
-                      TextStyle(
-                        color: ColorConstants.rich,
-                        fontSize: fontSize.sp,
-                        fontWeight: FontWeight.w500,
-                        decoration: TextDecoration.none, // No default underline
-                      ),
+          TextSpan(
+            text: linktext,
+            style: linktextStyle ??
+                TextStyle(
+                  color: ColorConstants.rich,
+                  fontSize: fontSize.sp,
+                  fontWeight: FontWeight.w500,
+                  decoration: TextDecoration.underline,
                 ),
-                Positioned(
-                  bottom: -(underlineGap ??
-                      2), // Gap between the text and underline
-                  child: Container(
-                    width: (linktext?.length ?? 0) *
-                        fontSize.sp *
-                        0.6, // Adjust underline width
-                    height: 1, // Thickness of the underline
-                    color: ColorConstants.rich, // Underline color
-                  ),
-                ),
-              ],
-            ),
+            recognizer: TapGestureRecognizer()..onTap = onTap,
           ),
         ],
       ),
