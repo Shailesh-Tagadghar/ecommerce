@@ -53,7 +53,10 @@ class CustomField extends StatelessWidget {
         suffixIcon: showPasswordIcon
             ? IconButton(
                 icon: Icon(
-                  obscureText ? Icons.visibility_off : Icons.visibility,
+                  // obscureText ? Icons.visibility_off : Icons.visibility,
+                  obscureText
+                      ? Icons.visibility_off_outlined
+                      : Icons.visibility_outlined,
                 ),
                 onPressed: onIconPressed,
               )

@@ -113,7 +113,7 @@ class Signup extends StatelessWidget {
                     Obx(
                       () => CustomField(
                         controller: passwordController,
-                        obscureText: authController.isPasswordObscured.value,
+                        obscureText: authController.isPasswordVisible.value,
                         obscuringCharacter: '*',
                         fontSize: 11,
                         showPasswordIcon: true,

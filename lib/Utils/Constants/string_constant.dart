@@ -12,6 +12,7 @@ class StringConstants {
   static const String emaillabel = 'Email';
   static const String email = 'example@gmail.com';
   static const String passwordlabel = 'Password';
+  static const String cnfpasswordlabel = 'Confirm Password';
   static const String password = '******************';
   static const String forgotpass = 'Forgot Password?';
   static const String diffsigninmethod1 = 'Or sign in with';
@@ -25,6 +26,12 @@ class StringConstants {
   static const String tandc = 'Terms & Condition';
   static const String diffsigninmethod2 = 'Or sign up with';
   static const String account2 = 'Already have an account?';
+
+  //Forgot Pass Screen
+  static const String newPass = 'New Password';
+  static const String forgotdisplaytext =
+      'Your new password must be different from previosly used passwords.';
+  static const String btntext = 'Create New Password';
 }
 
 ///

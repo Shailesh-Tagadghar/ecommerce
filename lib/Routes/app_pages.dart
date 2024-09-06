@@ -1,5 +1,6 @@
 // import 'package:flutter/material.dart';
 
+import 'package:ecommerce/Modules/Auth/forgot_password.dart';
 import 'package:ecommerce/Modules/Auth/sign_in.dart';
 import 'package:ecommerce/Modules/Auth/sign_up.dart';
 import 'package:ecommerce/Modules/Splash/splash_screen.dart';
@@ -29,6 +30,10 @@ class AppPages {
     GetPage(
         name: AppRoutes.signInScreen,
         page: () => SignIn(),
+        transition: transition),
+    GetPage(
+        name: AppRoutes.forgotPassScreen,
+        page: () => ForgotPassword(),
         transition: transition),
   ];
 }

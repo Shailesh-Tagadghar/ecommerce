@@ -95,7 +95,7 @@ class SignIn extends StatelessWidget {
                     Obx(
                       () => CustomField(
                         controller: passwordController,
-                        obscureText: authController.isPasswordObscured.value,
+                        obscureText: authController.isPasswordVisible.value,
                         obscuringCharacter: '*',
                         showPasswordIcon: true,
                         hintText: StringConstants.password,
@@ -107,15 +107,20 @@ class SignIn extends StatelessWidget {
                     SizedBox(
                       height: 2.h,
                     ),
-                    const Align(
-                      alignment: Alignment.topRight,
-                      child: CustomText(
-                        text: StringConstants.forgotpass,
-                        color: ColorConstants.rich,
-                        fontSize: 12,
-                        weight: FontWeight.w400,
-                        decoration: TextDecoration.underline,
-                        textAlign: TextAlign.right,
+                    GestureDetector(
+                      onTap: () {
+                        Get.toNamed(AppRoutes.forgotPassScreen);
+                      },
+                      child: const Align(
+                        alignment: Alignment.topRight,
+                        child: CustomText(
+                          text: StringConstants.forgotpass,
+                          color: ColorConstants.rich,
+                          fontSize: 12,
+                          weight: FontWeight.w400,
+                          decoration: TextDecoration.underline,
+                          textAlign: TextAlign.right,
+                        ),
                       ),
                     ),
                     SizedBox(
