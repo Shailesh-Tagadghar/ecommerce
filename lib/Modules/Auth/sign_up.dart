@@ -113,6 +113,7 @@ class Signup extends StatelessWidget {
                         obscureText: authController.isPasswordObscured.value,
                         obscuringCharacter: '*',
                         showPasswordIcon: true,
+                        hintText: StringConstants.password,
                         hintTextColor: ColorConstants.greyColor,
                         onIconPressed: authController.togglePasswordVisibility,
                       ),
