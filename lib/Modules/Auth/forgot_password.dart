@@ -24,12 +24,14 @@ class ForgotPassword extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: ColorConstants.whiteColor,
         toolbarHeight: 10.h,
-        leadingWidth: 20.w,
+        leadingWidth: 15.w,
         leading: Container(
-          margin: EdgeInsets.only(left: 8.w),
-          decoration: BoxDecoration(
-            border: Border.all(color: ColorConstants.lightGrayColor, width: 1),
-            shape: BoxShape.circle,
+          alignment: Alignment.centerLeft,
+          margin: EdgeInsets.only(
+            left: 4.w,
+          ),
+          padding: EdgeInsets.all(
+            0.6.w,
           ),
           child: IconButton(
             iconSize: 24,

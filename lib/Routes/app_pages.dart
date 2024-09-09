@@ -3,6 +3,7 @@
 import 'package:ecommerce/Modules/Auth/address.dart';
 import 'package:ecommerce/Modules/Auth/forgot_password.dart';
 import 'package:ecommerce/Modules/Auth/navbar.dart';
+import 'package:ecommerce/Modules/Auth/profile.dart';
 import 'package:ecommerce/Modules/Auth/sign_in.dart';
 import 'package:ecommerce/Modules/Auth/sign_up.dart';
 import 'package:ecommerce/Modules/Auth/user_detail.dart';
@@ -48,7 +49,11 @@ class AppPages {
         transition: transition),
     GetPage(
         name: AppRoutes.navbarScreen,
-        page: () => Navbar(),
+        page: () => const Navbar(),
+        transition: transition),
+    GetPage(
+        name: AppRoutes.profileScreen,
+        page: () => Profile(),
         transition: transition),
   ];
 }

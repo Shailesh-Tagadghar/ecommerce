@@ -23,13 +23,14 @@ class Address extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: ColorConstants.whiteColor,
         toolbarHeight: 10.h,
-        leadingWidth: 20.w,
+        leadingWidth: 15.w,
         leading: Container(
+          alignment: Alignment.centerLeft,
           margin: EdgeInsets.only(
-            left: 8.w,
+            left: 4.w,
           ),
           padding: EdgeInsets.all(
-            1.w,
+            0.6.w,
           ),
           decoration: BoxDecoration(
             border: Border.all(color: ColorConstants.lightGrayColor, width: 1),

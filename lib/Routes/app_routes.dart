@@ -9,4 +9,5 @@ class AppRoutes {
   static const userDetailScreen = '/user_detail';
   static const addressScreen = '/address';
   static const navbarScreen = '/navbar';
+  static const profileScreen = '/profile';
 }
