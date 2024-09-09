@@ -7,4 +7,6 @@ class AppRoutes {
   static const signInScreen = '/sign_in';
   static const forgotPassScreen = '/forgot_pass';
   static const userDetailScreen = '/user_detail';
+  static const addressScreen = '/address';
+
 }

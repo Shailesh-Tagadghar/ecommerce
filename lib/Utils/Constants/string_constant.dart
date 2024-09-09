@@ -51,6 +51,20 @@ class StringConstants {
   static const String country1 = '+1';
   static const String country2 = '+91';
   static const String country3 = '+453';
+
+  //Address Screen
+  static const String addresstext = 'Add Your Address';
+  static const String addresslabel = 'Address 1';
+  static const String address = 'Enter your First Address';
+  static const String addresslabel1 = 'Address 2 (optional)';
+  static const String address1 = 'Enter your Second Address';
+  static const String citylabel = 'City';
+  static const String city = 'Enter your City';
+  static const String statelabel = 'State';
+  static const String state = 'Enter your State';
+  static const String pinlabel = 'Pincode';
+  static const String pin = 'Enter your Pincode';
+  static const String saveAddress = 'Save';
 }
 
 ///

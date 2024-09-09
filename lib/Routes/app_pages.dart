@@ -1,5 +1,6 @@
 // import 'package:flutter/material.dart';
 
+import 'package:ecommerce/Modules/Auth/address.dart';
 import 'package:ecommerce/Modules/Auth/forgot_password.dart';
 import 'package:ecommerce/Modules/Auth/sign_in.dart';
 import 'package:ecommerce/Modules/Auth/sign_up.dart';
@@ -39,6 +40,10 @@ class AppPages {
     GetPage(
         name: AppRoutes.userDetailScreen,
         page: () => UserDetail(),
+        transition: transition),
+    GetPage(
+        name: AppRoutes.addressScreen,
+        page: () => Address(),
         transition: transition),
   ];
 }
