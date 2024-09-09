@@ -48,7 +48,7 @@ class AppPages {
         transition: transition),
     GetPage(
         name: AppRoutes.navbarScreen,
-        page: () => const Navbar(),
+        page: () => Navbar(),
         transition: transition),
   ];
 }

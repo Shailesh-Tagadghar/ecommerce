@@ -41,4 +41,5 @@ class ColorConstants {
   static const errorColor = Color.fromARGB(255, 204, 43, 43);
 
   static const successColor = Color.fromARGB(255, 23, 116, 77);
+  static const Color transparent = Color(0xFF6200EE);
 }

@@ -1,5 +1,6 @@
 import 'package:ecommerce/Controllers/global_controller_binding.dart';
 import 'package:ecommerce/Routes/app_pages.dart';
+
 import 'package:ecommerce/Utils/Constants/string_constant.dart';
 import 'package:ecommerce/firebase_options.dart';
 import 'package:firebase_core/firebase_core.dart';
