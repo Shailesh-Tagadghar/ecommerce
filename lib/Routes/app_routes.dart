@@ -10,4 +10,5 @@ class AppRoutes {
   static const addressScreen = '/address';
   static const navbarScreen = '/navbar';
   static const profileScreen = '/profile';
+  static const searchScreen = '/search';
 }

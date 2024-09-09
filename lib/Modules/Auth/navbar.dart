@@ -4,6 +4,7 @@ import 'package:ecommerce/Modules/Auth/auth_controller.dart';
 import 'package:ecommerce/Modules/Auth/forgot_password.dart';
 import 'package:ecommerce/Modules/Auth/profile.dart';
 import 'package:ecommerce/Modules/Auth/user_detail.dart';
+import 'package:ecommerce/Modules/Home/search.dart';
 import 'package:ecommerce/Utils/Constants/color_constant.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -21,7 +22,7 @@ class Navbar extends StatelessWidget {
       UserDetail(),
       ForgotPassword(),
       Address(),
-      UserDetail(),
+      const Search(),
       const Profile(),
     ];
 

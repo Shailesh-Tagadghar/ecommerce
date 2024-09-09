@@ -7,6 +7,7 @@ import 'package:ecommerce/Modules/Auth/profile.dart';
 import 'package:ecommerce/Modules/Auth/sign_in.dart';
 import 'package:ecommerce/Modules/Auth/sign_up.dart';
 import 'package:ecommerce/Modules/Auth/user_detail.dart';
+import 'package:ecommerce/Modules/Home/search.dart';
 import 'package:ecommerce/Modules/Splash/splash_screen.dart';
 import 'package:ecommerce/Routes/app_routes.dart';
 import 'package:get/get.dart';
@@ -54,6 +55,10 @@ class AppPages {
     GetPage(
         name: AppRoutes.profileScreen,
         page: () => const Profile(),
+        transition: transition),
+    GetPage(
+        name: AppRoutes.searchScreen,
+        page: () => const Search(),
         transition: transition),
   ];
 }

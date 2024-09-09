@@ -81,6 +81,11 @@ class StringConstants {
   static const String cancel = 'Cancel';
   static const String confirmLogout = 'Yes, Logout';
   static const String confirm = 'Are you sure you want to log out?';
+
+  //Search SCREEN
+  static const String search = 'Search';
+  static const String recent = 'Recent';
+  static const String clear = 'Clear All';
 }
 
 ///
