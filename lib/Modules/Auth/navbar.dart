@@ -17,18 +17,18 @@ class Navbar extends StatelessWidget {
     // Access the AuthController instance from GetX
     final AuthController controller = Get.find<AuthController>();
 
-    final List<Widget> _pages = [
+    final List<Widget> pages = [
       UserDetail(),
       ForgotPassword(),
       Address(),
       UserDetail(),
-      Profile(),
+      const Profile(),
     ];
 
     return Scaffold(
       backgroundColor: ColorConstants.whiteColor,
       extendBody: true,
-      body: Obx(() => _pages[controller.selectedIndex.value]),
+      body: Obx(() => pages[controller.selectedIndex.value]),
       bottomNavigationBar: Obx(
         () {
           return CrystalNavigationBar(

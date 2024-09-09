@@ -53,7 +53,7 @@ class AppPages {
         transition: transition),
     GetPage(
         name: AppRoutes.profileScreen,
-        page: () => Profile(),
+        page: () => const Profile(),
         transition: transition),
   ];
 }

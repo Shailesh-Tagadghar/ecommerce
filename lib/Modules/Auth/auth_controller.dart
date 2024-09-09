@@ -23,6 +23,18 @@ class AuthController extends GetxController {
   //for navbar selection
   var selectedIndex = 0.obs;
 
+  //profile page list view -- list
+  final List<String> profileList = <String>[
+    StringConstants.row1,
+    StringConstants.row2,
+    StringConstants.row3,
+    StringConstants.row4,
+    StringConstants.row5,
+    StringConstants.row6,
+    StringConstants.row7,
+    StringConstants.logout,
+  ];
+
   void toggleObscureText() {
     obscureText.value = !obscureText.value;
   }

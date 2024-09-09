@@ -66,8 +66,21 @@ class StringConstants {
   static const String pin = 'Enter your Pincode';
   static const String saveAddress = 'Save';
 
-  //Navbar Tabs
-  
+  //Profile Tabs
+  static const String profile = 'Profile';
+  static const String profileName = 'Esther Howard';
+  static const String row1 = 'Your Profile';
+  static const String row2 = 'Payment Methods';
+  static const String row3 = 'My Orders';
+  static const String row4 = 'Settings';
+  static const String row5 = 'Help Center';
+  static const String row6 = 'Privacy Policy';
+  static const String row7 = 'Invites Friends';
+  static const String logout = 'Log Out';
+  static const String logout1 = 'Logout';
+  static const String cancel = 'Cancel';
+  static const String confirmLogout = 'Yes, Logout';
+  static const String confirm = 'Are you sure you want to log out?';
 }
 
 ///
