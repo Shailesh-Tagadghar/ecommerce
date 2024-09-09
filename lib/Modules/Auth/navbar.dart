@@ -31,13 +31,14 @@ class Navbar extends StatelessWidget {
       bottomNavigationBar: Obx(
         () {
           return CrystalNavigationBar(
+            indicatorColor: ColorConstants.whiteColor,
             marginR: EdgeInsets.only(
               left: 6.w,
               right: 6.w,
               top: 2.h,
               bottom: 2.h,
             ),
-            backgroundColor: ColorConstants.blackColor,
+            backgroundColor: ColorConstants.transparent,
             borderRadius: 60,
             items: <CrystalNavigationBarItem>[
               CrystalNavigationBarItem(
