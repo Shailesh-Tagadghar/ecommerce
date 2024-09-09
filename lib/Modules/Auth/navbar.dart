@@ -38,10 +38,14 @@ class _NavbarState extends State<Navbar> {
       extendBody: true,
       body: _pages[_selectedIndex],
       bottomNavigationBar: CrystalNavigationBar(
-        // backgroundColor: const Color.fromARGB(218, 0, 0, 0),
+        marginR: EdgeInsets.only(
+          left: 6.w,
+          right: 6.w,
+          top: 2.h,
+          bottom: 2.h,
+        ),
         backgroundColor: ColorConstants.blackColor,
-        borderRadius: 30,
-
+        borderRadius: 60,
         items: <CrystalNavigationBarItem>[
           CrystalNavigationBarItem(
             icon: Icons.home,
