@@ -480,105 +480,6 @@ class Profile extends StatelessWidget {
         ));
   }
 
-  // void _showLogoutDialog(BuildContext context) {
-  //   showDialog(
-  //     context: context,
-  //     builder: (BuildContext context) {
-  //       return AlertDialog(
-  //         backgroundColor: ColorConstants.whiteColor,
-  //         shape: const RoundedRectangleBorder(
-  //           borderRadius: BorderRadius.all(Radius.circular(12.0)),
-  //         ),
-  //         title: Center(
-  //           child: Column(
-  //             children: [
-  //               const CustomText(
-  //                 text: StringConstants.logout1,
-  //                 fontSize: 15,
-  //                 weight: FontWeight.w500,
-  //                 color: ColorConstants.blackColor,
-  //               ),
-  //               SizedBox(
-  //                 height: 2.h,
-  //               ),
-  //               Divider(
-  //                 color: ColorConstants.background,
-  //                 height: 1.h,
-  //                 thickness: 2,
-  //               ),
-  //             ],
-  //           ),
-  //         ),
-  //         content: const CustomText(
-  //           text: StringConstants.confirm,
-  //           color: ColorConstants.greyColor,
-  //           fontSize: 13,
-  //           textAlign: TextAlign.center,
-  //           weight: FontWeight.w400,
-  //         ),
-  //         actions: <Widget>[
-  //           Row(
-  //             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-  //             children: [
-  //               Container(
-  //                 height: 5.h,
-  //                 width: 32.w,
-  //                 decoration: BoxDecoration(
-  //                   border: Border.all(
-  //                     color: ColorConstants.rich,
-  //                   ),
-  //                   borderRadius: const BorderRadius.all(
-  //                     Radius.circular(100),
-  //                   ),
-  //                 ),
-  //                 child: ElevatedButton(
-  //                   style: ElevatedButton.styleFrom(
-  //                     backgroundColor: ColorConstants.whiteColor,
-  //                   ),
-  //                   child: const CustomText(
-  //                     text: StringConstants.cancel,
-  //                     color: ColorConstants.rich,
-  //                     fontSize: 12,
-  //                     weight: FontWeight.w400,
-  //                   ),
-  //                   onPressed: () {
-  //                     Navigator.of(context).pop();
-  //                   },
-  //                 ),
-  //               ),
-  //               SizedBox(
-  //                 width: 4.w,
-  //               ),
-  //               Container(
-  //                 height: 5.h,
-  //                 width: 32.w,
-  //                 decoration: const BoxDecoration(
-  //                   borderRadius: BorderRadius.all(
-  //                     Radius.circular(100),
-  //                   ),
-  //                 ),
-  //                 child: ElevatedButton(
-  //                     style: ElevatedButton.styleFrom(
-  //                       backgroundColor: ColorConstants.rich,
-  //                     ),
-  //                     child: const CustomText(
-  //                       text: StringConstants.confirmLogout,
-  //                       color: ColorConstants.whiteColor,
-  //                       fontSize: 12,
-  //                       weight: FontWeight.w500,
-  //                     ),
-  //                     onPressed: () {
-  //                       Get.offAllNamed(AppRoutes.signInScreen);
-  //                     }),
-  //               ),
-  //             ],
-  //           ),
-  //         ],
-  //       );
-  //     },
-  //   );
-  // }
-
   void _showLogoutBottomSheet(BuildContext context) {
     showModalBottomSheet(
       context: context,
@@ -605,7 +506,7 @@ class Profile extends StatelessWidget {
                     ),
                     SizedBox(
                       height: 1.h,
-                    ), 
+                    ),
                     const CustomText(
                       text: StringConstants.logout1,
                       fontSize: 16,
