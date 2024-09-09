@@ -65,6 +65,9 @@ class StringConstants {
   static const String pinlabel = 'Pincode';
   static const String pin = 'Enter your Pincode';
   static const String saveAddress = 'Save';
+
+  //Navbar Tabs
+  
 }
 
 ///

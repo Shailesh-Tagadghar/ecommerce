@@ -20,6 +20,7 @@ class UserDetail extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      extendBody: true,
       backgroundColor: ColorConstants.whiteColor,
       appBar: AppBar(
         backgroundColor: ColorConstants.whiteColor,

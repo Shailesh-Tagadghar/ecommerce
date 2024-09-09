@@ -20,6 +20,8 @@ class AuthController extends GetxController {
     StringConstants.country3,
   ];
   var phoneNumber = ''.obs;
+  //for navbar selection
+  var selectedIndex = 0.obs;
 
   void toggleObscureText() {
     obscureText.value = !obscureText.value;
@@ -50,5 +52,10 @@ class AuthController extends GetxController {
   // Method to update the phone number
   void setPhoneNumber(String value) {
     phoneNumber.value = value;
+  }
+
+  //to change navbar index
+  void onItemTapped(int index) {
+    selectedIndex.value = index;
   }
 }

@@ -8,5 +8,5 @@ class AppRoutes {
   static const forgotPassScreen = '/forgot_pass';
   static const userDetailScreen = '/user_detail';
   static const addressScreen = '/address';
-
+  static const navbarScreen = '/navbar';
 }
