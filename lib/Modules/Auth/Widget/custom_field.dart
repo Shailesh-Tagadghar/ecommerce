@@ -91,9 +91,13 @@ class CustomField extends StatelessWidget {
         keyboardType: TextInputType.phone,
         decoration: InputDecoration(
           prefixIcon: Padding(
-            padding: const EdgeInsets.only(left: 8.0, right: 8.0),
+            padding: const EdgeInsets.only(
+              left: 16.0,
+              right: 8.0,
+            ),
             child: DropdownButton<String>(
               value: selectedCountryCode,
+              dropdownColor: ColorConstants.whiteColor,
               items: countryCodes?.map((String value) {
                 return DropdownMenuItem<String>(
                   value: value,
@@ -103,7 +107,8 @@ class CustomField extends StatelessWidget {
               onChanged: (newValue) {
                 onCountryCodeChanged!(newValue!);
               },
-              underline: const SizedBox(), // Remove the dropdown underline
+              underline: const SizedBox(),
+              // Remove the dropdown underline
             ),
           ),
           enabledBorder: OutlineInputBorder(

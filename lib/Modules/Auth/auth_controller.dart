@@ -79,40 +79,133 @@ class AuthController extends GetxController {
   var passwordError = ''.obs;
   var confirmPasswordError = ''.obs;
 
+  final dummyEmail = 'test@gmail.com'.obs; // Dummy email
+  final dummyPassword = 'Test@1234'.obs; // Dummy password
+
   // Validation Methods
+  // void validateName(String value) {
+  //   if (value.isEmpty) {
+  //     nameError.value = "Please enter your name";
+  //   } else {
+  //     nameError.value = '';
+  //   }
+  // }
+
+  // void validateEmail(String value) {
+  //   if (!GetUtils.isEmail(value)) {
+  //     emailError.value = "Please enter a valid email";
+  //   } else {
+  //     emailError.value = '';
+  //   }
+  // }
+
+  // void validatePassword(String value) {
+  //   if (value.length < 6) {
+  //     passwordError.value = "Password should be at least 6 characters";
+  //   } else if (!RegExp(r"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*\W)")
+  //       .hasMatch(value)) {
+  //     passwordError.value =
+  //         "Password must include 1 lowercase, 1 uppercase, 1 number, and 1 special character";
+  //   } else {
+  //     passwordError.value = '';
+  //   }
+  // }
+
+  // void validateConfirmPassword(String password, String confirmPassword) {
+  //   if (password != confirmPassword) {
+  //     confirmPasswordError.value = "Passwords do not match";
+  //   } else {
+  //     confirmPasswordError.value = '';
+  //   }
+  // }
+
+  // //for login and to check the password matching
+  // bool validateForm(String email, String password) {
+  //   bool isValid = true;
+
+  //   // Clear previous errors
+  //   emailError.value = '';
+  //   passwordError.value = '';
+
+  //   // Email validation
+  //   if (email.isEmpty) {
+  //     emailError.value = 'Please enter an email';
+  //     isValid = false;
+  //   } else if (!GetUtils.isEmail(email)) {
+  //     emailError.value = 'Please enter a valid email';
+  //     isValid = false;
+  //   }
+
+  //   // Password validation
+  //   if (password.isEmpty) {
+  //     passwordError.value = 'Please enter a password';
+  //     isValid = false;
+  //   } else if (password.length < 6 ||
+  //       !RegExp(r'^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,}$')
+  //           .hasMatch(password)) {
+  //     passwordError.value =
+  //         'Password must be at least 6 characters with 1 uppercase, 1 lowercase, 1 number, and 1 special character';
+  //     isValid = false;
+  //   }
+
+  //   return isValid;
+  // }
+
+  // Validation Methods
+  String? validateField(String value, String emptyError,
+      {bool Function(String)? condition, String? conditionError}) {
+    if (value.isEmpty) return emptyError;
+    if (condition != null && !condition(value)) return conditionError;
+    return null;
+  }
+
+  // Reusable validation methods
   void validateName(String value) {
-    if (value.isEmpty) {
-      nameError.value = "Please enter your name";
-    } else {
-      nameError.value = '';
-    }
+    nameError.value = validateField(value, "Please enter your name") ?? '';
   }
 
   void validateEmail(String value) {
-    if (!GetUtils.isEmail(value)) {
-      emailError.value = "Please enter a valid email";
-    } else {
-      emailError.value = '';
-    }
+    emailError.value = validateField(value, "Please enter a valid email",
+            condition: GetUtils.isEmail,
+            conditionError: "Invalid email format") ??
+        '';
   }
 
   void validatePassword(String value) {
-    if (value.length < 6) {
-      passwordError.value = "Password should be at least 6 characters";
-    } else if (!RegExp(r"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*\W)")
-        .hasMatch(value)) {
-      passwordError.value =
-          "Password must include 1 lowercase, 1 uppercase, 1 number, and 1 special character";
-    } else {
-      passwordError.value = '';
-    }
+    passwordError.value = validateField(
+            value, "Password should be at least 6 characters",
+            condition: (val) =>
+                RegExp(r"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*\W)")
+                    .hasMatch(val),
+            conditionError:
+                "Password must include 1 lowercase, 1 uppercase, 1 number, and 1 special character") ??
+        '';
   }
 
   void validateConfirmPassword(String password, String confirmPassword) {
-    if (password != confirmPassword) {
-      confirmPasswordError.value = "Passwords do not match";
+    confirmPasswordError.value =
+        (password == confirmPassword) ? '' : "Passwords do not match";
+  }
+
+  // Form validation
+  bool validateForm(String email, String password) {
+    validateEmail(email);
+    validatePassword(password);
+
+    return emailError.isEmpty && passwordError.isEmpty;
+  }
+
+  // checking whether email and password is match or not...
+  bool authenticateUser(String email, String password) {
+    if (email == dummyEmail.value && password == dummyPassword.value) {
+      return true; // Successful authentication
     } else {
-      confirmPasswordError.value = '';
+      if (email != dummyEmail.value) {
+        emailError.value = 'User email not found';
+      } else if (password != dummyPassword.value) {
+        passwordError.value = 'Incorrect password';
+      }
+      return false; // Authentication failed
     }
   }
 }

@@ -15,6 +15,7 @@ class SignIn extends StatelessWidget {
 
   final AuthController authController = Get.put(AuthController());
 
+  final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
 
   @override
@@ -74,11 +75,22 @@ class SignIn extends StatelessWidget {
                     SizedBox(
                       height: 0.2.h,
                     ),
-                    const CustomField(
+                    CustomField(
+                      controller: emailController,
                       hintText: StringConstants.email,
                       fontSize: 11,
                       hintTextColor: ColorConstants.greyColor,
                       keyboardType: TextInputType.emailAddress,
+                    ),
+                    Obx(
+                      () => authController.emailError.isNotEmpty
+                          ? CustomText(
+                              text: authController.emailError.value,
+                              color: Colors.red,
+                              fontSize: 10,
+                              weight: FontWeight.w400,
+                            )
+                          : Container(),
                     ),
                     SizedBox(
                       height: 2.h,
@@ -104,6 +116,14 @@ class SignIn extends StatelessWidget {
                         onIconPressed: authController.togglePasswordVisibility,
                       ),
                     ),
+                    Obx(() => authController.passwordError.isNotEmpty
+                        ? CustomText(
+                            text: authController.passwordError.value,
+                            color: Colors.red,
+                            fontSize: 10,
+                            weight: FontWeight.w400,
+                          )
+                        : Container()),
                     SizedBox(
                       height: 2.h,
                     ),
@@ -132,7 +152,19 @@ class SignIn extends StatelessWidget {
                       height: 6.h,
                       fontSize: 14,
                       weight: FontWeight.w500,
-                      action: () {},
+                      action: () {
+                        if (authController.validateForm(
+                            emailController.text, passwordController.text)) {
+                          bool isAuthenticated =
+                              authController.authenticateUser(
+                                  emailController.text,
+                                  passwordController.text);
+                          if (isAuthenticated) {
+                            // Navigate to Home screen
+                            Get.offNamed(AppRoutes.navbarScreen);
+                          }
+                        }
+                      },
                     ),
                     SizedBox(
                       height: 5.h,
