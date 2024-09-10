@@ -3,6 +3,7 @@ import 'package:ecommerce/Modules/Auth/Widget/custom_field.dart';
 import 'package:ecommerce/Modules/Auth/Widget/custom_text.dart';
 import 'package:ecommerce/Modules/Auth/auth_controller.dart';
 import 'package:ecommerce/Routes/app_routes.dart';
+import 'package:ecommerce/Utils/Constants/asset_constant.dart';
 import 'package:ecommerce/Utils/Constants/color_constant.dart';
 import 'package:ecommerce/Utils/Constants/string_constant.dart';
 import 'package:flutter/material.dart';
@@ -99,6 +100,66 @@ class UserDetail extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
+                      // Align(
+                      //   child: GestureDetector(
+                      //     onTap: () {
+                      //       showModalBottomSheet(
+                      //         context: context,
+                      //         builder: (context) => SizedBox(
+                      //           height: 150,
+                      //           child: Column(
+                      //             children: [
+                      //               ListTile(
+                      //                 leading: const Icon(Icons.photo_library),
+                      //                 title: const Text('Gallery'),
+                      //                 onTap: () {},
+                      //               ),
+                      //               ListTile(
+                      //                 leading: const Icon(Icons.camera_alt),
+                      //                 title: const Text('Camera'),
+                      //                 onTap: () {},
+                      //               ),
+                      //             ],
+                      //           ),
+                      //         ),
+                      //       );
+                      //     },
+                      //     child: Stack(
+                      //       alignment: Alignment.center,
+                      //       children: [
+                      //         CircleAvatar(
+                      //           radius: 60,
+                      //           backgroundColor: ColorConstants.background,
+                      //           child: Align(
+                      //             alignment: Alignment.bottomRight,
+                      //             child: Container(
+                      //               height: 4.h,
+                      //               width: 8.w,
+                      //               decoration: BoxDecoration(
+                      //                 color: ColorConstants.rich,
+                      //                 borderRadius: BorderRadius.circular(100),
+                      //                 border: Border.all(
+                      //                   width: 2,
+                      //                   color: ColorConstants.whiteColor,
+                      //                 ),
+                      //               ),
+                      //               child: const Icon(
+                      //                 AntDesign.edit_outline,
+                      //                 color: ColorConstants.whiteColor,
+                      //                 size: 20,
+                      //               ),
+                      //             ),
+                      //           ),
+                      //         ),
+                      //         const Icon(
+                      //           Icons.person_rounded,
+                      //           color: ColorConstants.greyColor,
+                      //           size: 60,
+                      //         ),
+                      //       ],
+                      //     ),
+                      //   ),
+                      // ),
                       Align(
                         child: GestureDetector(
                           onTap: () {
@@ -128,6 +189,8 @@ class UserDetail extends StatelessWidget {
                             children: [
                               CircleAvatar(
                                 radius: 60,
+                                backgroundImage:
+                                    const AssetImage(AssetConstant.image),
                                 backgroundColor: ColorConstants.background,
                                 child: Align(
                                   alignment: Alignment.bottomRight,
@@ -150,15 +213,16 @@ class UserDetail extends StatelessWidget {
                                   ),
                                 ),
                               ),
-                              const Icon(
-                                Icons.person_rounded,
-                                color: ColorConstants.greyColor,
-                                size: 60,
-                              ),
+                              // const Icon(
+                              //   Icons.person_rounded,
+                              //   color: ColorConstants.greyColor,
+                              //   size: 60,
+                              // ),
                             ],
                           ),
                         ),
                       ),
+
                       SizedBox(
                         height: 3.h,
                       ),
