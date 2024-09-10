@@ -11,4 +11,7 @@ class AppRoutes {
   static const navbarScreen = '/navbar';
   static const profileScreen = '/profile';
   static const searchScreen = '/search';
+  static const homeScreen = '/home';
+  static const cartScreen = '/cart';
+  static const wishlistScreen = '/wishlist';
 }

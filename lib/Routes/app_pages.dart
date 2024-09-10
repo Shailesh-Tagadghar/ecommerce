@@ -2,12 +2,15 @@
 
 import 'package:ecommerce/Modules/Auth/address.dart';
 import 'package:ecommerce/Modules/Auth/forgot_password.dart';
+import 'package:ecommerce/Modules/Home/cart.dart';
+import 'package:ecommerce/Modules/Home/home.dart';
 import 'package:ecommerce/Modules/Home/navbar.dart';
 import 'package:ecommerce/Modules/Home/profile.dart';
 import 'package:ecommerce/Modules/Auth/sign_in.dart';
 import 'package:ecommerce/Modules/Auth/sign_up.dart';
 import 'package:ecommerce/Modules/Auth/user_detail.dart';
 import 'package:ecommerce/Modules/Home/search.dart';
+import 'package:ecommerce/Modules/Home/wishlist.dart';
 import 'package:ecommerce/Modules/Splash/splash_screen.dart';
 import 'package:ecommerce/Routes/app_routes.dart';
 import 'package:get/get.dart';
@@ -59,6 +62,18 @@ class AppPages {
     GetPage(
         name: AppRoutes.searchScreen,
         page: () => const Search(),
+        transition: transition),
+    GetPage(
+        name: AppRoutes.homeScreen,
+        page: () => const Home(),
+        transition: transition),
+    GetPage(
+        name: AppRoutes.cartScreen,
+        page: () => const Cart(),
+        transition: transition),
+    GetPage(
+        name: AppRoutes.wishlistScreen,
+        page: () => const Wishlist(),
         transition: transition),
   ];
 }
