@@ -2,8 +2,8 @@
 
 import 'package:ecommerce/Modules/Auth/address.dart';
 import 'package:ecommerce/Modules/Auth/forgot_password.dart';
-import 'package:ecommerce/Modules/Auth/navbar.dart';
-import 'package:ecommerce/Modules/Auth/profile.dart';
+import 'package:ecommerce/Modules/Home/navbar.dart';
+import 'package:ecommerce/Modules/Home/profile.dart';
 import 'package:ecommerce/Modules/Auth/sign_in.dart';
 import 'package:ecommerce/Modules/Auth/sign_up.dart';
 import 'package:ecommerce/Modules/Auth/user_detail.dart';

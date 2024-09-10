@@ -1,9 +1,9 @@
 import 'package:crystal_navigation_bar/crystal_navigation_bar.dart';
 import 'package:ecommerce/Modules/Auth/address.dart';
-import 'package:ecommerce/Modules/Auth/auth_controller.dart';
 import 'package:ecommerce/Modules/Auth/forgot_password.dart';
-import 'package:ecommerce/Modules/Auth/profile.dart';
+import 'package:ecommerce/Modules/Home/profile.dart';
 import 'package:ecommerce/Modules/Auth/user_detail.dart';
+import 'package:ecommerce/Modules/Home/home_controller.dart';
 import 'package:ecommerce/Modules/Home/search.dart';
 import 'package:ecommerce/Utils/Constants/color_constant.dart';
 import 'package:flutter/material.dart';
@@ -16,7 +16,7 @@ class Navbar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // Access the AuthController instance from GetX
-    final AuthController controller = Get.find<AuthController>();
+    final HomeController controller = Get.find<HomeController>();
 
     final List<Widget> pages = [
       UserDetail(),

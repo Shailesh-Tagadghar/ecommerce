@@ -26,9 +26,6 @@ class AuthController extends GetxController {
     StringConstants.country3,
   ];
 
-  //for navbar selection
-  var selectedIndex = 0.obs;
-
   //profile page list view -- list
   final List<String> profileList = <String>[
     StringConstants.row1,
@@ -70,11 +67,6 @@ class AuthController extends GetxController {
   // Method to update the phone number
   void setPhoneNumber(String value) {
     phoneNumber.value = value;
-  }
-
-  //to change navbar index
-  void onItemTapped(int index) {
-    selectedIndex.value = index;
   }
 
   //Validations
