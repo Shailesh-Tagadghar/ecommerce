@@ -84,6 +84,34 @@ class Search extends StatelessWidget {
                 ),
               ),
             ),
+            SizedBox(
+              height: 2.h,
+            ),
+            const Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                CustomText(
+                  text: StringConstants.recent,
+                  color: ColorConstants.blackColor,
+                  fontSize: 14,
+                  weight: FontWeight.w500,
+                ),
+                CustomText(
+                  text: StringConstants.clear,
+                  color: ColorConstants.rich,
+                  fontSize: 14,
+                  weight: FontWeight.w500,
+                ),
+              ],
+            ),
+            SizedBox(
+              height: 1.h,
+            ),
+            Divider(
+              color: ColorConstants.background,
+              height: 2.h,
+              thickness: 1,
+            )
           ],
         ),
       ),
