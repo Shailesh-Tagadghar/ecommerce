@@ -85,10 +85,17 @@ class AuthController extends GetxController {
   var passwordError = ''.obs;
   var confirmPasswordError = ''.obs;
 
+  //address validations
+  var addressError = ''.obs;
+  var address1Error = ''.obs;
+  var cityError = ''.obs;
+  var stateError = ''.obs;
+  var pinError = ''.obs;
+
   final dummyEmail = 'test@gmail.com'.obs; // Dummy email
   final dummyPassword = 'Test@1234'.obs; // Dummy password
 
-  
+  var fullAddress = ''.obs; // to store full address
 
   void validateName(String value) {
     if (value.isEmpty) {
@@ -128,6 +135,71 @@ class AuthController extends GetxController {
   void validateConfirmPassword(String password, String confirmPassword) {
     confirmPasswordError.value =
         (password == confirmPassword) ? '' : "Passwords do not match";
+  }
+
+  //address validation conditionF
+
+  void validateAddress(String address) {
+    if (address.isEmpty) {
+      addressError.value = 'Address cannot be empty';
+    } else {
+      addressError.value = '';
+    }
+  }
+
+  void validateAddress1(String address1) {
+    address1Error.value = '';
+  }
+
+  void validateCity(String city) {
+    if (city.isEmpty) {
+      cityError.value = 'City cannot be empty';
+    } else {
+      cityError.value = '';
+    }
+  }
+
+  void validateState(String state) {
+    if (state.isEmpty) {
+      stateError.value = 'State cannot be empty';
+    } else {
+      stateError.value = '';
+    }
+  }
+
+  void validatePin(String pin) {
+    if (pin.isEmpty) {
+      pinError.value = 'PIN cannot be empty';
+    } else if (pin.length != 6) {
+      pinError.value = 'PIN must be 6 digits';
+    } else {
+      pinError.value = '';
+    }
+  }
+
+  void saveAddress(
+      String address, String address1, String city, String state, String pin) {
+    validateAddress(address);
+    validateAddress1(address1);
+    validateCity(city);
+    validateState(state);
+    validatePin(pin);
+
+    String fullAddress = address;
+    if (address1.isNotEmpty) {
+      fullAddress += ', $address1';
+    }
+    fullAddress += ', $city, $state, $pin';
+
+    if (addressError.isEmpty &&
+        address1Error.isEmpty &&
+        cityError.isEmpty &&
+        stateError.isEmpty &&
+        pinError.isEmpty) {
+      // fullAddress.value = '$address, $address1, $city, $state, $pin';
+      // print(fullAddress.value);
+      print('Full Address: $fullAddress');
+    }
   }
 
   // Form validation

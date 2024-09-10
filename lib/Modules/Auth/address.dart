@@ -14,8 +14,11 @@ class Address extends StatelessWidget {
   Address({super.key});
 
   final AuthController authController = Get.put(AuthController());
-  final TextEditingController genderController = TextEditingController();
-  final TextEditingController phoneController = TextEditingController();
+  final TextEditingController addressController = TextEditingController();
+  final TextEditingController address1Controller = TextEditingController();
+  final TextEditingController cityController = TextEditingController();
+  final TextEditingController stateController = TextEditingController();
+  final TextEditingController pinController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -61,7 +64,7 @@ class Address extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 SizedBox(
-                  height: 3.h,
+                  height: 1.h,
                 ),
                 const Align(
                   child: CustomText(
@@ -98,9 +101,6 @@ class Address extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      SizedBox(
-                        height: 3.h,
-                      ),
                       const CustomText(
                         text: StringConstants.addresslabel,
                         color: ColorConstants.blackColor,
@@ -110,14 +110,21 @@ class Address extends StatelessWidget {
                       SizedBox(
                         height: 0.2.h,
                       ),
-                      const CustomField(
+                      CustomField(
+                        controller: addressController,
                         hintText: StringConstants.address,
                         fontSize: 11,
                         hintTextColor: ColorConstants.greyColor,
                         keyboardType: TextInputType.name,
+                        // onChanged: (value) => authController.validateAddress(value),
                       ),
+                      Obx(() => CustomText(
+                            text: authController.addressError.value,
+                            color: ColorConstants.errorColor,
+                            fontSize: 10,
+                          )),
                       SizedBox(
-                        height: 1.5.h,
+                        height: 1.h,
                       ),
                       const CustomText(
                         text: StringConstants.addresslabel1,
@@ -128,14 +135,21 @@ class Address extends StatelessWidget {
                       SizedBox(
                         height: 0.2.h,
                       ),
-                      const CustomField(
+                      CustomField(
+                        controller: address1Controller,
                         hintText: StringConstants.address1,
                         fontSize: 11,
                         hintTextColor: ColorConstants.greyColor,
                         keyboardType: TextInputType.name,
+                        // onChanged: (value) => authController.validateAddress1(value),
                       ),
+                      Obx(() => CustomText(
+                            text: authController.address1Error.value,
+                            color: ColorConstants.errorColor,
+                            fontSize: 10,
+                          )),
                       SizedBox(
-                        height: 1.5.h,
+                        height: 1.h,
                       ),
                       const CustomText(
                         text: StringConstants.citylabel,
@@ -146,14 +160,21 @@ class Address extends StatelessWidget {
                       SizedBox(
                         height: 0.2.h,
                       ),
-                      const CustomField(
+                      CustomField(
+                        controller: cityController,
                         hintText: StringConstants.city,
                         fontSize: 11,
                         hintTextColor: ColorConstants.greyColor,
                         keyboardType: TextInputType.name,
+                        // onChanged: (value) => authController.validateCity(value),
                       ),
+                      Obx(() => CustomText(
+                            text: authController.cityError.value,
+                            color: ColorConstants.errorColor,
+                            fontSize: 10,
+                          )),
                       SizedBox(
-                        height: 1.5.h,
+                        height: 1.h,
                       ),
                       const CustomText(
                         text: StringConstants.statelabel,
@@ -164,14 +185,21 @@ class Address extends StatelessWidget {
                       SizedBox(
                         height: 0.2.h,
                       ),
-                      const CustomField(
+                      CustomField(
+                        controller: stateController,
                         hintText: StringConstants.state,
                         fontSize: 11,
                         hintTextColor: ColorConstants.greyColor,
                         keyboardType: TextInputType.name,
+                        //  onChanged: (value) => authController.validateState(value),
                       ),
+                      Obx(() => CustomText(
+                            text: authController.stateError.value,
+                            color: ColorConstants.errorColor,
+                            fontSize: 10,
+                          )),
                       SizedBox(
-                        height: 1.5.h,
+                        height: 1.h,
                       ),
                       const CustomText(
                         text: StringConstants.pinlabel,
@@ -182,12 +210,19 @@ class Address extends StatelessWidget {
                       SizedBox(
                         height: 0.2.h,
                       ),
-                      const CustomField(
+                      CustomField(
+                        controller: pinController,
                         hintText: StringConstants.pin,
                         fontSize: 11,
                         hintTextColor: ColorConstants.greyColor,
-                        keyboardType: TextInputType.name,
+                        keyboardType: TextInputType.number,
+                        //  onChanged: (value) => authController.validatePin(value),
                       ),
+                      Obx(() => CustomText(
+                            text: authController.pinError.value,
+                            color: ColorConstants.errorColor,
+                            fontSize: 10,
+                          )),
                       SizedBox(
                         height: 4.h,
                       ),
@@ -198,9 +233,40 @@ class Address extends StatelessWidget {
                         fontSize: 14,
                         weight: FontWeight.w500,
                         action: () {
-                          Get.toNamed(
-                            AppRoutes.navbarScreen,
-                          );
+                          // Get.toNamed(
+                          //   AppRoutes.navbarScreen,
+                          // );
+                          // authController.saveAddress(
+                          //   addressController.text,
+                          //   address1Controller.text,
+                          //   cityController.text,
+                          //   stateController.text,
+                          //   pinController.text,
+                          // );
+                          // Get.toNamed(AppRoutes.navbarScreen);
+
+                          authController
+                              .validateAddress(addressController.text);
+                          authController
+                              .validateAddress1(address1Controller.text);
+                          authController.validateCity(cityController.text);
+                          authController.validateState(stateController.text);
+                          authController.validatePin(pinController.text);
+
+                          if (authController.addressError.value.isEmpty &&
+                              authController.address1Error.value.isEmpty &&
+                              authController.cityError.value.isEmpty &&
+                              authController.stateError.value.isEmpty &&
+                              authController.pinError.value.isEmpty) {
+                            authController.saveAddress(
+                              addressController.text,
+                              address1Controller.text,
+                              cityController.text,
+                              stateController.text,
+                              pinController.text,
+                            );
+                            Get.toNamed(AppRoutes.navbarScreen);
+                          }
                         },
                       ),
                     ],
