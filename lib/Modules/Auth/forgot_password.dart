@@ -115,6 +115,14 @@ class ForgotPassword extends StatelessWidget {
                               authController.togglePasswordVisibility,
                         ),
                       ),
+                      Obx(() => authController.passwordError.isNotEmpty
+                          ? CustomText(
+                              text: authController.passwordError.value,
+                              color: Colors.red,
+                              fontSize: 10,
+                              weight: FontWeight.w400,
+                            )
+                          : Container()),
                       SizedBox(
                         height: 2.h,
                       ),
@@ -141,6 +149,14 @@ class ForgotPassword extends StatelessWidget {
                               authController.toggleCnfPasswordVisibility,
                         ),
                       ),
+                      Obx(() => authController.confirmPasswordError.isNotEmpty
+                          ? CustomText(
+                              text: authController.confirmPasswordError.value,
+                              color: Colors.red,
+                              fontSize: 10,
+                              weight: FontWeight.w400,
+                            )
+                          : Container()),
                       SizedBox(
                         height: 5.h,
                       ),
@@ -150,7 +166,37 @@ class ForgotPassword extends StatelessWidget {
                         height: 6.h,
                         fontSize: 14,
                         weight: FontWeight.w500,
-                        action: () {},
+                        action: () {
+                          // authController
+                          //     .validatePassword(passwordController.text);
+                          // authController.validateConfirmPassword(
+                          //   passwordController.text,
+                          //   cnfpasswordController.text,
+                          // );
+
+                          // if (authController.passwordError.value.isEmpty &&
+                          //     authController
+                          //         .confirmPasswordError.value.isEmpty) {
+                          //   // Handle password change
+                          //   print('Passwords are valid and match.');
+
+                          //   // Call the method to save new password here
+                          // }
+                          // Retrieve passwords from controllers
+                          String password = passwordController.text;
+                          String confirmPassword = cnfpasswordController.text;
+
+                          // Validate the passwords
+                          authController.validatePassword(password);
+                          authController.validateConfirmPassword(
+                              password, confirmPassword);
+
+                          if (authController.passwordError.isEmpty &&
+                              authController.confirmPasswordError.isEmpty) {
+                            // Store and print the new password
+                            authController.saveNewPassword(password);
+                          }
+                        },
                       ),
                     ],
                   ),

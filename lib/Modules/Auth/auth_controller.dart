@@ -137,6 +137,13 @@ class AuthController extends GetxController {
         (password == confirmPassword) ? '' : "Passwords do not match";
   }
 
+  var updatedPassword = ''.obs; // to store new password value
+
+  void saveNewPassword(String newPassword) {
+    updatedPassword.value = newPassword;
+    print("New Password: $newPassword");
+  }
+
   //address validation conditionF
 
   void validateAddress(String address) {
