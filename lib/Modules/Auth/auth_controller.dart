@@ -88,13 +88,7 @@ class AuthController extends GetxController {
   final dummyEmail = 'test@gmail.com'.obs; // Dummy email
   final dummyPassword = 'Test@1234'.obs; // Dummy password
 
-  // Validation Methods
-  // String? validateField(String value, String emptyError,
-  //     {bool Function(String)? condition, String? conditionError}) {
-  //   if (value.isEmpty) return emptyError;
-  //   if (condition != null && !condition(value)) return conditionError;
-  //   return null;
-  // }
+  
 
   void validateName(String value) {
     if (value.isEmpty) {

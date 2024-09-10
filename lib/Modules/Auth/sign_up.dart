@@ -82,7 +82,7 @@ class Signup extends StatelessWidget {
                       fontSize: 11,
                       hintTextColor: ColorConstants.greyColor,
                       keyboardType: TextInputType.name,
-                      onChanged: (value) => authController.validateName(value),
+                      // onChanged: (value) => authController.validateName(value),
                     ),
                     Obx(
                       () => authController.nameError.value.isNotEmpty
@@ -110,7 +110,7 @@ class Signup extends StatelessWidget {
                       fontSize: 11,
                       hintTextColor: ColorConstants.greyColor,
                       keyboardType: TextInputType.emailAddress,
-                      onChanged: (value) => authController.validateEmail(value),
+                      // onChanged: (value) => authController.validateEmail(value),
                     ),
                     Obx(
                       () => authController.emailError.value.isNotEmpty
@@ -141,8 +141,8 @@ class Signup extends StatelessWidget {
                         showPasswordIcon: true,
                         hintText: StringConstants.password,
                         hintTextColor: ColorConstants.greyColor,
-                        onChanged: (value) =>
-                            authController.validatePassword(value),
+                        // onChanged: (value) =>
+                        //     authController.validatePassword(value),
                         onIconPressed: authController.togglePasswordVisibility,
                       ),
                     ),
