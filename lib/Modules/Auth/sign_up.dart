@@ -84,15 +84,6 @@ class Signup extends StatelessWidget {
                       keyboardType: TextInputType.name,
                       // onChanged: (value) => authController.validateName(value),
                     ),
-                    // Obx(
-                    //   () => authController.nameError.value.isNotEmpty
-                    //       ? Text(
-                    //           authController.nameError.value,
-                    //           style: const TextStyle(color: Colors.red),
-                    //         )
-                    //       : const SizedBox.shrink(),
-                    // ),
-
                     Obx(
                       () => authController.nameError.value.isNotEmpty
                           ? CustomText(
@@ -123,15 +114,6 @@ class Signup extends StatelessWidget {
                       keyboardType: TextInputType.emailAddress,
                       // onChanged: (value) => authController.validateEmail(value),
                     ),
-                    // Obx(
-                    //   () => authController.emailError.value.isNotEmpty
-                    //       ? Text(
-                    //           authController.emailError.value,
-                    //           style: const TextStyle(color: Colors.red),
-                    //         )
-                    //       : const SizedBox.shrink(),
-                    // ),
-
                     Obx(
                       () => authController.emailError.value.isNotEmpty
                           ? CustomText(
@@ -168,14 +150,6 @@ class Signup extends StatelessWidget {
                         onIconPressed: authController.togglePasswordVisibility,
                       ),
                     ),
-                    // Obx(
-                    //   () => authController.passwordError.value.isNotEmpty
-                    //       ? Text(
-                    //           authController.passwordError.value,
-                    //           style: const TextStyle(color: Colors.red),
-                    //         )
-                    //       : const SizedBox.shrink(),
-                    // ),
                     Obx(
                       () => authController.passwordError.value.isNotEmpty
                           ? CustomText(

@@ -196,8 +196,6 @@ class AuthController extends GetxController {
         cityError.isEmpty &&
         stateError.isEmpty &&
         pinError.isEmpty) {
-      // fullAddress.value = '$address, $address1, $city, $state, $pin';
-      // print(fullAddress.value);
       print('Full Address: $fullAddress');
     }
   }

@@ -238,17 +238,7 @@ class Address extends StatelessWidget {
                         fontSize: 14,
                         weight: FontWeight.w500,
                         action: () {
-                          // Get.toNamed(
-                          //   AppRoutes.navbarScreen,
-                          // );
-                          // authController.saveAddress(
-                          //   addressController.text,
-                          //   address1Controller.text,
-                          //   cityController.text,
-                          //   stateController.text,
-                          //   pinController.text,
-                          // );
-                          // Get.toNamed(AppRoutes.navbarScreen);
+                          
 
                           authController
                               .validateAddress(addressController.text);
