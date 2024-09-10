@@ -215,6 +215,7 @@ class Signup extends StatelessWidget {
                         if (authController.nameError.value.isEmpty &&
                             authController.emailError.value.isEmpty &&
                             authController.passwordError.value.isEmpty) {
+                          authController.setUserName(nameController.text);
                           Get.toNamed(AppRoutes.userDetailScreen);
                         }
                       },

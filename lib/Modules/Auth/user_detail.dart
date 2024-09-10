@@ -2,7 +2,7 @@ import 'package:ecommerce/Modules/Auth/Widget/custom_button.dart';
 import 'package:ecommerce/Modules/Auth/Widget/custom_field.dart';
 import 'package:ecommerce/Modules/Auth/Widget/custom_text.dart';
 import 'package:ecommerce/Modules/Auth/auth_controller.dart';
-import 'package:ecommerce/Routes/app_routes.dart';
+// import 'package:ecommerce/Routes/app_routes.dart';
 import 'package:ecommerce/Utils/Constants/asset_constant.dart';
 import 'package:ecommerce/Utils/Constants/color_constant.dart';
 import 'package:ecommerce/Utils/Constants/string_constant.dart';
@@ -15,11 +15,13 @@ class UserDetail extends StatelessWidget {
   UserDetail({super.key});
 
   final AuthController authController = Get.put(AuthController());
+  final TextEditingController nameController = TextEditingController();
   final TextEditingController genderController = TextEditingController();
   final TextEditingController phoneController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
+    nameController.text = authController.userName.value;
     return Scaffold(
       backgroundColor: ColorConstants.whiteColor,
       appBar: AppBar(
@@ -172,12 +174,20 @@ class UserDetail extends StatelessWidget {
                                     ListTile(
                                       leading: const Icon(Icons.photo_library),
                                       title: const Text('Gallery'),
-                                      onTap: () {},
+                                      onTap: () {
+                                        authController.pickImageFromGallery();
+                                        // Get.back();
+                                        Navigator.pop(context);
+                                      },
                                     ),
                                     ListTile(
                                       leading: const Icon(Icons.camera_alt),
                                       title: const Text('Camera'),
-                                      onTap: () {},
+                                      onTap: () {
+                                        authController.pickImageFromCamera();
+                                        // Get.back();
+                                        Navigator.pop(context);
+                                      },
                                     ),
                                   ],
                                 ),
@@ -187,28 +197,39 @@ class UserDetail extends StatelessWidget {
                           child: Stack(
                             alignment: Alignment.center,
                             children: [
-                              CircleAvatar(
-                                radius: 60,
-                                backgroundImage:
-                                    const AssetImage(AssetConstant.image),
-                                backgroundColor: ColorConstants.background,
-                                child: Align(
-                                  alignment: Alignment.bottomRight,
-                                  child: Container(
-                                    height: 4.h,
-                                    width: 8.w,
-                                    decoration: BoxDecoration(
-                                      color: ColorConstants.rich,
-                                      borderRadius: BorderRadius.circular(100),
-                                      border: Border.all(
-                                        width: 2,
-                                        color: ColorConstants.whiteColor,
+                              Obx(
+                                () =>
+                                    // child:
+                                    CircleAvatar(
+                                  radius: 60,
+                                  // backgroundImage:
+                                  //     const AssetImage(AssetConstant.image),
+                                  backgroundImage: authController
+                                              .profileImage.value !=
+                                          null
+                                      ? FileImage(authController
+                                          .profileImage.value!) as ImageProvider
+                                      : const AssetImage(AssetConstant.image),
+                                  backgroundColor: ColorConstants.background,
+                                  child: Align(
+                                    alignment: Alignment.bottomRight,
+                                    child: Container(
+                                      height: 4.h,
+                                      width: 8.w,
+                                      decoration: BoxDecoration(
+                                        color: ColorConstants.rich,
+                                        borderRadius:
+                                            BorderRadius.circular(100),
+                                        border: Border.all(
+                                          width: 2,
+                                          color: ColorConstants.whiteColor,
+                                        ),
                                       ),
-                                    ),
-                                    child: const Icon(
-                                      AntDesign.edit_outline,
-                                      color: ColorConstants.whiteColor,
-                                      size: 20,
+                                      child: const Icon(
+                                        AntDesign.edit_outline,
+                                        color: ColorConstants.whiteColor,
+                                        size: 20,
+                                      ),
                                     ),
                                   ),
                                 ),
@@ -222,7 +243,17 @@ class UserDetail extends StatelessWidget {
                           ),
                         ),
                       ),
-
+                      Obx(() => authController.imageError.value.isNotEmpty
+                          ? Padding(
+                              padding: const EdgeInsets.only(top: 8.0),
+                              child: CustomText(
+                                text: authController.imageError.value,
+                                color: ColorConstants.errorColor,
+                                fontSize: 10,
+                                weight: FontWeight.w400,
+                              ),
+                            )
+                          : const SizedBox.shrink()),
                       SizedBox(
                         height: 3.h,
                       ),
@@ -235,12 +266,21 @@ class UserDetail extends StatelessWidget {
                       SizedBox(
                         height: 0.2.h,
                       ),
-                      const CustomField(
+                      // const CustomField(
+                      //   hintText: StringConstants.name,
+                      //   fontSize: 11,
+                      //   hintTextColor: ColorConstants.greyColor,
+                      //   keyboardType: TextInputType.name,
+                      // ),
+                      CustomField(
+                        controller: nameController,
                         hintText: StringConstants.name,
                         fontSize: 11,
-                        hintTextColor: ColorConstants.greyColor,
+                        hintTextColor: ColorConstants.blackColor,
                         keyboardType: TextInputType.name,
+                        readonly: false,
                       ),
+
                       SizedBox(
                         height: 1.5.h,
                       ),
@@ -262,23 +302,38 @@ class UserDetail extends StatelessWidget {
                       // ),
                       Obx(
                         () => CustomField(
-                            hintText:
-                                'Enter phone number', // Placeholder for phone input
-                            fontSize: 11,
-                            isPhoneNumber: true,
-                            hintTextColor: ColorConstants.greyColor,
-                            selectedCountryCode:
-                                authController.selectedCountrycode.value,
-                            countryCodes: authController.countryCode,
-                            onCountryCodeChanged: (newValue) {
-                              authController.setSelectedCountryCode(
-                                  newValue); // Update country code
-                            },
-                            onChanged: (newValue) {
-                              authController.setPhoneNumber(
-                                  newValue); // Update phone number
-                            },
-                            controller: phoneController),
+                          hintText: StringConstants
+                              .phone, // Placeholder for phone input
+                          fontSize: 11,
+                          isPhoneNumber: true,
+                          hintTextColor: ColorConstants.greyColor,
+                          selectedCountryCode:
+                              authController.selectedCountrycode.value,
+                          countryCodes: authController.countryCode,
+                          onCountryCodeChanged: (newValue) {
+                            authController.setSelectedCountryCode(
+                                newValue); // Update country code
+                          },
+                          onChanged: (newValue) {
+                            authController.setPhoneNumber(
+                                newValue); // Update phone number
+                          },
+                          controller: phoneController,
+                        ),
+                      ),
+                      Obx(() => authController.phoneError.value.isNotEmpty
+                          ? Padding(
+                              padding: const EdgeInsets.only(top: 8.0),
+                              child: CustomText(
+                                text: authController.phoneError.value,
+                                color: ColorConstants.errorColor,
+                                fontSize: 10,
+                                weight: FontWeight.w400,
+                              ),
+                            )
+                          : const SizedBox.shrink()),
+                      SizedBox(
+                        height: 1.5.h,
                       ),
                       SizedBox(
                         height: 1.5.h,
@@ -307,6 +362,19 @@ class UserDetail extends StatelessWidget {
                           ),
                         ),
                       ),
+                      Obx(
+                        () => authController.genderError.value.isNotEmpty
+                            ? Padding(
+                                padding: const EdgeInsets.only(top: 8.0),
+                                child: CustomText(
+                                  text: authController.genderError.value,
+                                  color: ColorConstants.errorColor,
+                                  fontSize: 10,
+                                  weight: FontWeight.w400,
+                                ),
+                              )
+                            : SizedBox(height: 1.h),
+                      ),
                       SizedBox(
                         height: 4.h,
                       ),
@@ -317,9 +385,10 @@ class UserDetail extends StatelessWidget {
                         fontSize: 14,
                         weight: FontWeight.w500,
                         action: () {
-                          Get.toNamed(
-                            AppRoutes.addressScreen,
-                          );
+                          authController.submitUserDetails();
+                          // Get.toNamed(
+                          //   AppRoutes.addressScreen,
+                          // );
                         },
                       ),
                     ],

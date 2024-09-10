@@ -1,6 +1,9 @@
+import 'dart:io';
+
 import 'package:ecommerce/Utils/Constants/string_constant.dart';
 import 'package:email_validator/email_validator.dart';
 import 'package:get/get.dart';
+import 'package:image_picker/image_picker.dart';
 
 class AuthController extends GetxController {
   var obscureText = false.obs;
@@ -8,8 +11,12 @@ class AuthController extends GetxController {
   var isCnfPasswordVisible = true.obs;
   var agreeToTerms = false.obs;
 
+  // Profile Image
+  var profileImage = Rxn<File>(null); // To store selected image
+
   //Gender Dropdown
-  var selectedDropdownItem = StringConstants.select.obs;
+  var selectedDropdownItem =
+      StringConstants.select.obs; //default select dropdown
   var genderDropdownValues = const [
     StringConstants.select,
     StringConstants.male,
@@ -19,7 +26,8 @@ class AuthController extends GetxController {
 
   //phone number dropdown
   var phoneNumber = ''.obs;
-  var selectedCountrycode = StringConstants.country1.obs;
+  var selectedCountrycode =
+      StringConstants.country1.obs; //default country code dropdown
   var countryCode = const [
     StringConstants.country1,
     StringConstants.country2,
@@ -57,6 +65,7 @@ class AuthController extends GetxController {
 // Method to update the selected dropdown value
   void setSelectedDropdownItem(String value) {
     selectedDropdownItem.value = value;
+    validateGender(value); // to validate
   }
 
   // Method to update the selected country code
@@ -67,6 +76,7 @@ class AuthController extends GetxController {
   // Method to update the phone number
   void setPhoneNumber(String value) {
     phoneNumber.value = value;
+    validatePhone(value); // to validate
   }
 
   //Validations
@@ -76,6 +86,10 @@ class AuthController extends GetxController {
   var emailError = ''.obs;
   var passwordError = ''.obs;
   var confirmPasswordError = ''.obs;
+  //for user_details screen validations
+  var imageError = ''.obs;
+  var phoneError = ''.obs;
+  var genderError = ''.obs;
 
   //address validations
   var addressError = ''.obs;
@@ -84,10 +98,35 @@ class AuthController extends GetxController {
   var stateError = ''.obs;
   var pinError = ''.obs;
 
+  var userName = ''.obs; //to store username from signUp screen
+
   final dummyEmail = 'test@gmail.com'.obs; // Dummy email
   final dummyPassword = 'Test@1234'.obs; // Dummy password
 
   var fullAddress = ''.obs; // to store full address
+
+  // Image Picker instance
+  final ImagePicker _picker = ImagePicker();
+
+  // Method to pick image from gallery
+  Future<void> pickImageFromGallery() async {
+    final XFile? pickedFile =
+        await _picker.pickImage(source: ImageSource.gallery);
+    if (pickedFile != null) {
+      profileImage.value = File(pickedFile.path);
+      imageError.value = '';
+    }
+  }
+
+  // Method to pick image from camera
+  Future<void> pickImageFromCamera() async {
+    final XFile? pickedFile =
+        await _picker.pickImage(source: ImageSource.camera);
+    if (pickedFile != null) {
+      profileImage.value = File(pickedFile.path);
+      imageError.value = '';
+    }
+  }
 
   void validateName(String value) {
     if (value.isEmpty) {
@@ -106,6 +145,35 @@ class AuthController extends GetxController {
       emailError.value = 'Please enter a valid email';
     } else {
       emailError.value = '';
+    }
+  }
+
+  // Method to validate phone number
+  void validatePhone(String value) {
+    if (value == '+1' || value.isEmpty) {
+      phoneError.value = 'Phone number cannot be empty || select country code';
+    } else if (!RegExp(r'^\d{10,15}$').hasMatch(value)) {
+      phoneError.value = 'Please enter a valid phone number';
+    } else {
+      phoneError.value = '';
+    }
+  }
+
+  // Method to validate gender
+  void validateGender(String value) {
+    if (value == 'Select' || value.isEmpty) {
+      genderError.value = 'Please select a gender';
+    } else {
+      genderError.value = '';
+    }
+  }
+
+  // Method to validate image
+  void validateImage() {
+    if (profileImage.value == null) {
+      imageError.value = 'Profile image is required';
+    } else {
+      imageError.value = '';
     }
   }
 
@@ -197,6 +265,35 @@ class AuthController extends GetxController {
         pinError.isEmpty) {
       print('Full Address: $fullAddress');
     }
+  }
+
+  // Method to submit user details
+  void submitUserDetails() {
+    // Perform validations
+    validateImage();
+    validateGender(selectedDropdownItem.value);
+    validatePhone(phoneNumber.value);
+
+    // Check for errors
+    if (imageError.value.isEmpty &&
+        genderError.value.isEmpty &&
+        phoneError.value.isEmpty) {
+      // All validations passed
+      // Proceed to save the details or navigate
+      print('User Details:');
+      print('Name: ${userName.value}');
+      print('Phone: ${selectedCountrycode.value} ${phoneNumber.value}');
+      print('Gender: ${selectedDropdownItem.value}');
+      print('Profile Image Path: ${profileImage.value?.path}');
+
+      // Navigate to Address Screen or perform desired action
+      Get.toNamed('/addressScreen');
+    }
+  }
+
+  // Optionally, set the user name from sign-up
+  void setUserName(String name) {
+    userName.value = name;
   }
 
   // Form validation

@@ -19,6 +19,7 @@ class CustomField extends StatelessWidget {
   final String? selectedCountryCode;
   final Function(String)? onCountryCodeChanged;
   final List<String>? countryCodes;
+  final bool readonly;
 
   const CustomField({
     super.key,
@@ -38,6 +39,7 @@ class CustomField extends StatelessWidget {
     this.selectedCountryCode,
     this.onCountryCodeChanged,
     this.countryCodes,
+    this.readonly = true,
   });
 
   @override
@@ -146,6 +148,7 @@ class CustomField extends StatelessWidget {
         obscuringCharacter: obscuringCharacter,
         controller: controller,
         onChanged: onChanged,
+        enabled: readonly,
         // cursorRadius: const Radius.circular(8),
         decoration: InputDecoration(
           contentPadding: EdgeInsets.only(
