@@ -1,4 +1,5 @@
 import 'package:ecommerce/Modules/Auth/auth_controller.dart';
+import 'package:ecommerce/Modules/Home/home_controller.dart';
 import 'package:get/get.dart';
 
 import 'network_connectivity_controller.dart';
@@ -18,6 +19,9 @@ class GlobalControllerBindings extends Bindings {
 
     Get.put(
       AuthController(),
+    );
+    Get.put(
+      HomeController(),
     );
   }
 }
