@@ -122,6 +122,7 @@ class Address extends StatelessWidget {
                             text: authController.addressError.value,
                             color: ColorConstants.errorColor,
                             fontSize: 10,
+                            weight: FontWeight.w400,
                           )),
                       SizedBox(
                         height: 1.h,
@@ -147,6 +148,7 @@ class Address extends StatelessWidget {
                             text: authController.address1Error.value,
                             color: ColorConstants.errorColor,
                             fontSize: 10,
+                            weight: FontWeight.w400,
                           )),
                       SizedBox(
                         height: 1.h,
@@ -172,6 +174,7 @@ class Address extends StatelessWidget {
                             text: authController.cityError.value,
                             color: ColorConstants.errorColor,
                             fontSize: 10,
+                            weight: FontWeight.w400,
                           )),
                       SizedBox(
                         height: 1.h,
@@ -197,6 +200,7 @@ class Address extends StatelessWidget {
                             text: authController.stateError.value,
                             color: ColorConstants.errorColor,
                             fontSize: 10,
+                            weight: FontWeight.w400,
                           )),
                       SizedBox(
                         height: 1.h,
@@ -222,6 +226,7 @@ class Address extends StatelessWidget {
                             text: authController.pinError.value,
                             color: ColorConstants.errorColor,
                             fontSize: 10,
+                            weight: FontWeight.w400,
                           )),
                       SizedBox(
                         height: 4.h,

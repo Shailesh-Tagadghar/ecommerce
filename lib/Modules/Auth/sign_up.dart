@@ -84,11 +84,22 @@ class Signup extends StatelessWidget {
                       keyboardType: TextInputType.name,
                       // onChanged: (value) => authController.validateName(value),
                     ),
+                    // Obx(
+                    //   () => authController.nameError.value.isNotEmpty
+                    //       ? Text(
+                    //           authController.nameError.value,
+                    //           style: const TextStyle(color: Colors.red),
+                    //         )
+                    //       : const SizedBox.shrink(),
+                    // ),
+
                     Obx(
                       () => authController.nameError.value.isNotEmpty
-                          ? Text(
-                              authController.nameError.value,
-                              style: const TextStyle(color: Colors.red),
+                          ? CustomText(
+                              text: authController.nameError.value,
+                              color: ColorConstants.errorColor,
+                              fontSize: 10,
+                              weight: FontWeight.w400,
                             )
                           : const SizedBox.shrink(),
                     ),
@@ -112,11 +123,22 @@ class Signup extends StatelessWidget {
                       keyboardType: TextInputType.emailAddress,
                       // onChanged: (value) => authController.validateEmail(value),
                     ),
+                    // Obx(
+                    //   () => authController.emailError.value.isNotEmpty
+                    //       ? Text(
+                    //           authController.emailError.value,
+                    //           style: const TextStyle(color: Colors.red),
+                    //         )
+                    //       : const SizedBox.shrink(),
+                    // ),
+
                     Obx(
                       () => authController.emailError.value.isNotEmpty
-                          ? Text(
-                              authController.emailError.value,
-                              style: const TextStyle(color: Colors.red),
+                          ? CustomText(
+                              text: authController.emailError.value,
+                              color: ColorConstants.errorColor,
+                              fontSize: 10,
+                              weight: FontWeight.w400,
                             )
                           : const SizedBox.shrink(),
                     ),
@@ -146,11 +168,21 @@ class Signup extends StatelessWidget {
                         onIconPressed: authController.togglePasswordVisibility,
                       ),
                     ),
+                    // Obx(
+                    //   () => authController.passwordError.value.isNotEmpty
+                    //       ? Text(
+                    //           authController.passwordError.value,
+                    //           style: const TextStyle(color: Colors.red),
+                    //         )
+                    //       : const SizedBox.shrink(),
+                    // ),
                     Obx(
                       () => authController.passwordError.value.isNotEmpty
-                          ? Text(
-                              authController.passwordError.value,
-                              style: const TextStyle(color: Colors.red),
+                          ? CustomText(
+                              text: authController.passwordError.value,
+                              color: ColorConstants.errorColor,
+                              fontSize: 10,
+                              weight: FontWeight.w400,
                             )
                           : const SizedBox.shrink(),
                     ),
