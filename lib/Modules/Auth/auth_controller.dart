@@ -1,4 +1,5 @@
 import 'package:ecommerce/Utils/Constants/string_constant.dart';
+import 'package:email_validator/email_validator.dart';
 import 'package:get/get.dart';
 
 class AuthController extends GetxController {
@@ -88,34 +89,46 @@ class AuthController extends GetxController {
   final dummyPassword = 'Test@1234'.obs; // Dummy password
 
   // Validation Methods
-  String? validateField(String value, String emptyError,
-      {bool Function(String)? condition, String? conditionError}) {
-    if (value.isEmpty) return emptyError;
-    if (condition != null && !condition(value)) return conditionError;
-    return null;
-  }
+  // String? validateField(String value, String emptyError,
+  //     {bool Function(String)? condition, String? conditionError}) {
+  //   if (value.isEmpty) return emptyError;
+  //   if (condition != null && !condition(value)) return conditionError;
+  //   return null;
+  // }
 
-  // Reusable validation methods
   void validateName(String value) {
-    nameError.value = validateField(value, "Please enter your name") ?? '';
+    if (value.isEmpty) {
+      nameError.value = 'Name cannot be empty';
+    } else if (value.length < 3) {
+      nameError.value = 'Name must be at least 3 characters long';
+    } else {
+      nameError.value = '';
+    }
   }
 
   void validateEmail(String value) {
-    emailError.value = validateField(value, "Please enter a valid email",
-            condition: GetUtils.isEmail,
-            conditionError: "Invalid email format") ??
-        '';
+    if (value.isEmpty) {
+      emailError.value = 'Email cannot be empty';
+    } else if (!EmailValidator.validate(value)) {
+      emailError.value = 'Please enter a valid email';
+    } else {
+      emailError.value = '';
+    }
   }
 
   void validatePassword(String value) {
-    passwordError.value = validateField(
-            value, "Password should be at least 6 characters",
-            condition: (val) =>
-                RegExp(r"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*\W)")
-                    .hasMatch(val),
-            conditionError:
-                "Password must include 1 lowercase, 1 uppercase, 1 number, and 1 special character") ??
-        '';
+    if (value.isEmpty) {
+      passwordError.value = 'Password cannot be empty';
+    } else if (value.length < 6) {
+      passwordError.value = 'Password must be at least 6 characters long';
+    } else if (!RegExp(
+            r'^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,}$')
+        .hasMatch(value)) {
+      passwordError.value =
+          'Please enter a password with at least 6 characters, including 1 lowercase, 1 uppercase, 1 number, and 1 special character';
+    } else {
+      passwordError.value = '';
+    }
   }
 
   void validateConfirmPassword(String password, String confirmPassword) {
