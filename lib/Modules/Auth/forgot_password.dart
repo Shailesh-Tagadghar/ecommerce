@@ -167,21 +167,7 @@ class ForgotPassword extends StatelessWidget {
                         fontSize: 14,
                         weight: FontWeight.w500,
                         action: () {
-                          // authController
-                          //     .validatePassword(passwordController.text);
-                          // authController.validateConfirmPassword(
-                          //   passwordController.text,
-                          //   cnfpasswordController.text,
-                          // );
-
-                          // if (authController.passwordError.value.isEmpty &&
-                          //     authController
-                          //         .confirmPasswordError.value.isEmpty) {
-                          //   // Handle password change
-                          //   print('Passwords are valid and match.');
-
-                          //   // Call the method to save new password here
-                          // }
+                          
                           // Retrieve passwords from controllers
                           String password = passwordController.text;
                           String confirmPassword = cnfpasswordController.text;
