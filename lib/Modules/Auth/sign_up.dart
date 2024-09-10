@@ -15,6 +15,8 @@ class Signup extends StatelessWidget {
 
   final AuthController authController = Get.put(AuthController());
 
+  final TextEditingController nameController = TextEditingController();
+  final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
 
   @override
@@ -74,11 +76,21 @@ class Signup extends StatelessWidget {
                     SizedBox(
                       height: 0.2.h,
                     ),
-                    const CustomField(
+                    CustomField(
+                      controller: nameController,
                       hintText: StringConstants.name,
                       fontSize: 11,
                       hintTextColor: ColorConstants.greyColor,
                       keyboardType: TextInputType.name,
+                      onChanged: (value) => authController.validateName(value),
+                    ),
+                    Obx(
+                      () => authController.nameError.value.isNotEmpty
+                          ? Text(
+                              authController.nameError.value,
+                              style: const TextStyle(color: Colors.red),
+                            )
+                          : const SizedBox.shrink(),
                     ),
                     SizedBox(
                       height: 2.h,
@@ -92,11 +104,21 @@ class Signup extends StatelessWidget {
                     SizedBox(
                       height: 0.2.h,
                     ),
-                    const CustomField(
+                    CustomField(
+                      controller: emailController,
                       hintText: StringConstants.email,
                       fontSize: 11,
                       hintTextColor: ColorConstants.greyColor,
                       keyboardType: TextInputType.emailAddress,
+                      onChanged: (value) => authController.validateEmail(value),
+                    ),
+                    Obx(
+                      () => authController.emailError.value.isNotEmpty
+                          ? Text(
+                              authController.emailError.value,
+                              style: const TextStyle(color: Colors.red),
+                            )
+                          : const SizedBox.shrink(),
                     ),
                     SizedBox(
                       height: 2.h,
@@ -119,8 +141,18 @@ class Signup extends StatelessWidget {
                         showPasswordIcon: true,
                         hintText: StringConstants.password,
                         hintTextColor: ColorConstants.greyColor,
+                        onChanged: (value) =>
+                            authController.validatePassword(value),
                         onIconPressed: authController.togglePasswordVisibility,
                       ),
+                    ),
+                    Obx(
+                      () => authController.passwordError.value.isNotEmpty
+                          ? Text(
+                              authController.passwordError.value,
+                              style: const TextStyle(color: Colors.red),
+                            )
+                          : const SizedBox.shrink(),
                     ),
                     SizedBox(
                       height: 2.h,
@@ -169,9 +201,16 @@ class Signup extends StatelessWidget {
                       fontSize: 14,
                       weight: FontWeight.w500,
                       action: () {
-                        Get.toNamed(
-                          AppRoutes.userDetailScreen,
-                        );
+                        authController.validateName(nameController.text);
+                        authController.validateEmail(emailController.text);
+                        authController
+                            .validatePassword(passwordController.text);
+
+                        if (authController.nameError.value.isEmpty &&
+                            authController.emailError.value.isEmpty &&
+                            authController.passwordError.value.isEmpty) {
+                          Get.toNamed(AppRoutes.userDetailScreen);
+                        }
                       },
                     ),
                     SizedBox(

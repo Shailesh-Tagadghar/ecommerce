@@ -43,7 +43,7 @@ class AuthController extends GetxController {
     isPasswordVisible.value = !isPasswordVisible.value;
   }
 
-  void togglePasswordVisibility1() {
+  void toggleCnfPasswordVisibility() {
     isCnfPasswordVisible.value = !isCnfPasswordVisible.value;
   }
 
@@ -69,5 +69,50 @@ class AuthController extends GetxController {
   //to change navbar index
   void onItemTapped(int index) {
     selectedIndex.value = index;
+  }
+
+  //Validations
+
+  // Error messages for validation
+  var nameError = ''.obs;
+  var emailError = ''.obs;
+  var passwordError = ''.obs;
+  var confirmPasswordError = ''.obs;
+
+  // Validation Methods
+  void validateName(String value) {
+    if (value.isEmpty) {
+      nameError.value = "Please enter your name";
+    } else {
+      nameError.value = '';
+    }
+  }
+
+  void validateEmail(String value) {
+    if (!GetUtils.isEmail(value)) {
+      emailError.value = "Please enter a valid email";
+    } else {
+      emailError.value = '';
+    }
+  }
+
+  void validatePassword(String value) {
+    if (value.length < 6) {
+      passwordError.value = "Password should be at least 6 characters";
+    } else if (!RegExp(r"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*\W)")
+        .hasMatch(value)) {
+      passwordError.value =
+          "Password must include 1 lowercase, 1 uppercase, 1 number, and 1 special character";
+    } else {
+      passwordError.value = '';
+    }
+  }
+
+  void validateConfirmPassword(String password, String confirmPassword) {
+    if (password != confirmPassword) {
+      confirmPasswordError.value = "Passwords do not match";
+    } else {
+      confirmPasswordError.value = '';
+    }
   }
 }

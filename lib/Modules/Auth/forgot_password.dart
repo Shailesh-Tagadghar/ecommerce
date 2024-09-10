@@ -138,7 +138,7 @@ class ForgotPassword extends StatelessWidget {
                           fontSize: 11,
                           hintTextColor: ColorConstants.greyColor,
                           onIconPressed:
-                              authController.togglePasswordVisibility1,
+                              authController.toggleCnfPasswordVisibility,
                         ),
                       ),
                       SizedBox(
