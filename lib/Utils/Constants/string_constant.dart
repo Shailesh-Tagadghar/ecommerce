@@ -45,8 +45,8 @@ class StringConstants {
 
   //Gender option //country Code
   static const String select = 'Select';
-  static const String mail = 'Mail';
-  static const String femail = 'Femail';
+  static const String male = 'Male';
+  static const String female = 'Female';
   static const String other = 'Other';
   static const String country1 = '+1';
   static const String country2 = '+91';

@@ -12,8 +12,8 @@ class AuthController extends GetxController {
   var selectedDropdownItem = StringConstants.select.obs;
   var genderDropdownValues = const [
     StringConstants.select,
-    StringConstants.mail,
-    StringConstants.femail,
+    StringConstants.male,
+    StringConstants.female,
     StringConstants.other
   ];
 
