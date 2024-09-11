@@ -72,7 +72,7 @@ class AppPages {
         name: AppRoutes.cartScreen, page: () => Cart(), transition: transition),
     GetPage(
         name: AppRoutes.wishlistScreen,
-        page: () => const Wishlist(),
+        page: () => Wishlist(),
         transition: transition),
     GetPage(
         name: AppRoutes.couponScreen,

@@ -6,23 +6,24 @@ import 'package:sizer/sizer.dart';
 class CustomButton extends StatelessWidget {
   final String label;
   final void Function()? action;
-  final Color? btnColor, textColor, iconColor;
+  final Color? btnColor, labelColor;
   final double? width;
   final FontWeight? weight;
   final double fontSize;
   final double? height;
+  final bool isSelected;
 
   const CustomButton({
     super.key,
     required this.label,
     this.action,
     this.btnColor,
+    this.labelColor,
     this.weight,
     this.fontSize = 14,
-    this.textColor,
-    this.iconColor,
     this.width,
     this.height,
+    this.isSelected = false,
   });
 
   @override
@@ -31,31 +32,39 @@ class CustomButton extends StatelessWidget {
       height: height ?? Get.height,
       width: width ?? Get.width,
       child: ElevatedButton(
-          style: ButtonStyle(
-            fixedSize: WidgetStatePropertyAll(
-              Size(Get.width, 40),
-            ),
-            maximumSize: WidgetStatePropertyAll(
-              Size(Get.width, 40),
-            ),
-            backgroundColor:
-                WidgetStatePropertyAll(btnColor ?? ColorConstants.primary),
+        style: ButtonStyle(
+          backgroundColor: WidgetStateProperty.all(
+            isSelected
+                ? ColorConstants.rich
+                : (btnColor ?? ColorConstants.rich),
           ),
-          onPressed: action,
-          child: Row(
-            mainAxisSize: MainAxisSize.min,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text(
-                label,
-                style: TextStyle(
-                  color: ColorConstants.whiteColor,
-                  fontSize: fontSize.sp,
-                  fontWeight: weight ?? FontWeight.bold,
-                ),
+          shape: WidgetStateProperty.all(
+            RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(100),
+              side: BorderSide(
+                color: isSelected
+                    ? ColorConstants.rich
+                    : ColorConstants
+                        .lightGrayColor, // Border color for non-selected buttons
+                width: 1,
               ),
-            ],
-          )),
+            ),
+          ),
+        ),
+        onPressed: action,
+        child: Center(
+          child: Text(
+            label,
+            style: TextStyle(
+              fontSize: fontSize.sp,
+              fontWeight: weight ?? FontWeight.bold,
+              color: isSelected
+                  ? ColorConstants.whiteColor
+                  : ColorConstants.whiteColor,
+            ),
+          ),
+        ),
+      ),
     );
   }
 }

@@ -148,7 +148,6 @@ class SignIn extends StatelessWidget {
                     ),
                     CustomButton(
                       label: StringConstants.signIn,
-                      btnColor: ColorConstants.rich,
                       height: 6.h,
                       fontSize: 14,
                       weight: FontWeight.w500,

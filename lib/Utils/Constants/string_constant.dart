@@ -101,14 +101,22 @@ class StringConstants {
   static const String totalcost = '397.94';
   static const String checkoutbtn = 'Proceed to Checkout';
   static const String checkout = 'Checkout';
-
   static const String productname = 'Brown Jacket';
   static const String size = 'XL';
   static const String productprice = '83.97';
-
   static const String productname1 = 'Brown Suite';
   static const String size1 = 'XL';
   static const String productprice1 = '120';
+
+  //Wishlist Screen
+  static const String wishlist = 'My Wishlist';
+  static const String category1 = 'All';
+  static const String category2 = 'Jacket';
+  static const String category3 = 'Shirt';
+  static const String category4 = 'Pant';
+  static const String category5 = 'T-Shirt';
+  static const String category6 = 'Specs';
+  static const String rating = '5.0';
 
   //Coupon Screen
   static const String coupon = 'Coupon';
