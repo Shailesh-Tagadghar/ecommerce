@@ -1,4 +1,5 @@
 import 'package:ecommerce/Modules/Auth/Widget/custom_text.dart';
+import 'package:ecommerce/Modules/Auth/auth_controller.dart';
 import 'package:ecommerce/Routes/app_routes.dart';
 import 'package:ecommerce/Utils/Constants/asset_constant.dart';
 import 'package:ecommerce/Utils/Constants/color_constant.dart';
@@ -9,10 +10,15 @@ import 'package:icons_plus/icons_plus.dart';
 import 'package:sizer/sizer.dart';
 
 class Profile extends StatelessWidget {
-  const Profile({super.key});
+  Profile({super.key});
+
+  final AuthController authController = Get.put(AuthController());
+  final TextEditingController nameController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
+    nameController.text = authController.userName.value;
+
     return Scaffold(
         backgroundColor: ColorConstants.whiteColor,
         appBar: AppBar(
@@ -124,8 +130,9 @@ class Profile extends StatelessWidget {
                 SizedBox(
                   height: 2.h,
                 ),
-                const CustomText(
-                  text: StringConstants.profileName,
+                CustomText(
+                  // text: StringConstants.profileName,
+                  text: authController.userName.value,
                   color: ColorConstants.blackColor,
                   fontSize: 14,
                   weight: FontWeight.w500,

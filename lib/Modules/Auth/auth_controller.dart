@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:ecommerce/Routes/app_routes.dart';
 import 'package:ecommerce/Utils/Constants/string_constant.dart';
 import 'package:email_validator/email_validator.dart';
 import 'package:get/get.dart';
@@ -287,7 +288,10 @@ class AuthController extends GetxController {
       print('Profile Image Path: ${profileImage.value?.path}');
 
       // Navigate to Address Screen or perform desired action
-      Get.toNamed('/addressScreen');
+      // Get.toNamed(AppRoutes());
+      Get.toNamed(
+        AppRoutes.addressScreen,
+      );
     }
   }
 

@@ -57,7 +57,7 @@ class AppPages {
         transition: transition),
     GetPage(
         name: AppRoutes.profileScreen,
-        page: () => const Profile(),
+        page: () => Profile(),
         transition: transition),
     GetPage(
         name: AppRoutes.searchScreen,
