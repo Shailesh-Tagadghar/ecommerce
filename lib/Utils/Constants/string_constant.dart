@@ -86,6 +86,23 @@ class StringConstants {
   static const String search = 'Search';
   static const String recent = 'Recent';
   static const String clear = 'Clear All';
+
+  //Cart Screen
+  static const String cart = 'My Cart';
+  static const String promo = 'Promo Code';
+  static const String apply = 'Apply';
+  static const String subtotal = 'Sub-Total';
+  static const String subtotalprice = '407.94';
+  static const String delivery = 'Delivery Fee';
+  static const String deliveryfee = '25.00';
+  static const String discount = 'Discount';
+  static const String discountcharge = '35.00';
+  static const String total = 'Total Cost';
+  static const String totalcost = '397.94';
+  static const String checkoutbtn = 'Proceed to Checkout';
+
+  //Coupon Screen
+  static const String coupon = 'Coupon';
 }
 
 ///

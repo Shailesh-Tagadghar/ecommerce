@@ -14,4 +14,6 @@ class AppRoutes {
   static const homeScreen = '/home';
   static const cartScreen = '/cart';
   static const wishlistScreen = '/wishlist';
+  static const couponScreen = '/coupon';
+
 }

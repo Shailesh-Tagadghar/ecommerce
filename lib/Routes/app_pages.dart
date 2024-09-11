@@ -3,6 +3,7 @@
 import 'package:ecommerce/Modules/Auth/address.dart';
 import 'package:ecommerce/Modules/Auth/forgot_password.dart';
 import 'package:ecommerce/Modules/Home/cart.dart';
+import 'package:ecommerce/Modules/Home/coupon.dart';
 import 'package:ecommerce/Modules/Home/home.dart';
 import 'package:ecommerce/Modules/Home/navbar.dart';
 import 'package:ecommerce/Modules/Home/profile.dart';
@@ -74,6 +75,10 @@ class AppPages {
     GetPage(
         name: AppRoutes.wishlistScreen,
         page: () => const Wishlist(),
+        transition: transition),
+    GetPage(
+        name: AppRoutes.couponScreen,
+        page: () => const Coupon(),
         transition: transition),
   ];
 }
