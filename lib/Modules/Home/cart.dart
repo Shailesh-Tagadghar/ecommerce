@@ -1,7 +1,9 @@
 import 'package:dotted_line/dotted_line.dart';
 import 'package:ecommerce/Modules/Auth/Widget/custom_button.dart';
 import 'package:ecommerce/Modules/Auth/Widget/custom_text.dart';
+import 'package:ecommerce/Modules/Home/Widget/cart_item_widget.dart';
 import 'package:ecommerce/Routes/app_routes.dart';
+import 'package:ecommerce/Utils/Constants/asset_constant.dart';
 import 'package:ecommerce/Utils/Constants/color_constant.dart';
 import 'package:ecommerce/Utils/Constants/string_constant.dart';
 import 'package:flutter/material.dart';
@@ -20,15 +22,10 @@ class Cart extends StatelessWidget {
         backgroundColor: ColorConstants.whiteColor,
         toolbarHeight: 10.h,
         leadingWidth: 15.w,
-        title: GestureDetector(
-          onTap: () {
-            showCheckout(context);
-          },
-          child: const CustomText(
-            text: StringConstants.cart,
-            weight: FontWeight.w500,
-            fontSize: 13,
-          ),
+        title: const CustomText(
+          text: StringConstants.cart,
+          weight: FontWeight.w500,
+          fontSize: 13,
         ),
         centerTitle: true,
         leading: Container(
@@ -52,6 +49,61 @@ class Cart extends StatelessWidget {
             onPressed: () {
               Get.back();
             },
+          ),
+        ),
+      ),
+      body: Padding(
+        padding: EdgeInsets.only(
+          left: 3.w,
+          right: 3.w,
+          bottom: 2.h,
+        ),
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              const CartItemWidget(
+                image: AssetConstant.pd1,
+                title: StringConstants.productname,
+                size: StringConstants.size,
+                price: StringConstants.productprice,
+              ),
+              SizedBox(
+                height: 1.5.h,
+              ),
+              Divider(
+                height: 1.h,
+                color: ColorConstants.lightGrayColor,
+                thickness: 1,
+              ),
+              SizedBox(
+                height: 0.5.h,
+              ),
+              const CartItemWidget(
+                image: AssetConstant.pd2,
+                title: StringConstants.productname,
+                size: StringConstants.size,
+                price: StringConstants.productprice,
+              ),
+              SizedBox(
+                height: 2.h,
+              ),
+              Padding(
+                padding: EdgeInsets.symmetric(
+                  horizontal: 5.w,
+                  vertical: 2.h,
+                ),
+                child: CustomButton(
+                  label: StringConstants.checkout,
+                  btnColor: ColorConstants.rich,
+                  action: () {
+                    showCheckout(context);
+                  },
+                  height: 6.h,
+                  fontSize: 14,
+                  weight: FontWeight.w500,
+                ),
+              ),
+            ],
           ),
         ),
       ),

@@ -100,6 +100,11 @@ class StringConstants {
   static const String total = 'Total Cost';
   static const String totalcost = '397.94';
   static const String checkoutbtn = 'Proceed to Checkout';
+  static const String checkout = 'Checkout';
+
+  static const String productname = 'Brown Jacket';
+  static const String size = 'XL';
+  static const String productprice = '83.97';
 
   //Coupon Screen
   static const String coupon = 'Coupon';
