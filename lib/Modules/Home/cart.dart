@@ -33,6 +33,9 @@ class Cart extends StatelessWidget {
       backgroundColor: ColorConstants.whiteColor,
       appBar: AppBar(
         backgroundColor: ColorConstants.whiteColor,
+        foregroundColor: ColorConstants.whiteColor,
+        shadowColor: ColorConstants.whiteColor,
+        surfaceTintColor: ColorConstants.whiteColor,
         toolbarHeight: 10.h,
         leadingWidth: 15.w,
         title: const CustomText(
@@ -97,9 +100,9 @@ class Cart extends StatelessWidget {
                 },
               ),
             ),
-            SizedBox(
-              height: 2.h,
-            ),
+            // SizedBox(
+            //   height: 2.h,
+            // ),
             Padding(
               // padding: EdgeInsets.symmetric(
               //   horizontal: 5.w,
@@ -117,6 +120,7 @@ class Cart extends StatelessWidget {
                 height: 6.h,
                 fontSize: 14,
                 weight: FontWeight.w500,
+                width: 85.w,
               ),
             ),
           ],
