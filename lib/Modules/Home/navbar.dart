@@ -20,7 +20,7 @@ class Navbar extends StatelessWidget {
 
     final List<Widget> pages = [
       const Home(),
-      const Cart(),
+      Cart(),
       const Wishlist(),
       const Search(),
       Profile(),

@@ -12,8 +12,21 @@ import 'package:icons_plus/icons_plus.dart';
 import 'package:sizer/sizer.dart';
 
 class Cart extends StatelessWidget {
-  const Cart({super.key});
-
+  Cart({super.key});
+  final List<Map<String, String>> cartItems = [
+    {
+      'image': AssetConstant.pd1,
+      'title': StringConstants.productname,
+      'size': StringConstants.size,
+      'price': StringConstants.productprice,
+    },
+    {
+      'image': AssetConstant.pd2,
+      'title': StringConstants.productname1,
+      'size': StringConstants.size1,
+      'price': StringConstants.productprice1,
+    },
+  ];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -58,53 +71,55 @@ class Cart extends StatelessWidget {
           right: 3.w,
           bottom: 2.h,
         ),
-        child: SingleChildScrollView(
-          child: Column(
-            children: [
-              const CartItemWidget(
-                image: AssetConstant.pd1,
-                title: StringConstants.productname,
-                size: StringConstants.size,
-                price: StringConstants.productprice,
+        child: Column(
+          children: [
+            Expanded(
+              child: ListView.builder(
+                itemCount: cartItems.length,
+                itemBuilder: (context, index) {
+                  final item = cartItems[index];
+                  return Column(
+                    children: [
+                      CartItemWidget(
+                        image: item['image']!,
+                        title: item['title']!,
+                        size: item['size']!,
+                        price: item['price']!,
+                      ),
+                      SizedBox(height: 1.5.h),
+                      Divider(
+                        height: 1.h,
+                        color: ColorConstants.lightGrayColor,
+                        thickness: 1,
+                      ),
+                    ],
+                  );
+                },
               ),
-              SizedBox(
-                height: 1.5.h,
+            ),
+            SizedBox(
+              height: 2.h,
+            ),
+            Padding(
+              // padding: EdgeInsets.symmetric(
+              //   horizontal: 5.w,
+              //   vertical: 2.h,
+              // ),
+              padding: EdgeInsets.only(
+                bottom: 10.h,
               ),
-              Divider(
-                height: 1.h,
-                color: ColorConstants.lightGrayColor,
-                thickness: 1,
+              child: CustomButton(
+                label: StringConstants.checkout,
+                btnColor: ColorConstants.rich,
+                action: () {
+                  showCheckout(context);
+                },
+                height: 6.h,
+                fontSize: 14,
+                weight: FontWeight.w500,
               ),
-              SizedBox(
-                height: 0.5.h,
-              ),
-              const CartItemWidget(
-                image: AssetConstant.pd2,
-                title: StringConstants.productname,
-                size: StringConstants.size,
-                price: StringConstants.productprice,
-              ),
-              SizedBox(
-                height: 2.h,
-              ),
-              Padding(
-                padding: EdgeInsets.symmetric(
-                  horizontal: 5.w,
-                  vertical: 2.h,
-                ),
-                child: CustomButton(
-                  label: StringConstants.checkout,
-                  btnColor: ColorConstants.rich,
-                  action: () {
-                    showCheckout(context);
-                  },
-                  height: 6.h,
-                  fontSize: 14,
-                  weight: FontWeight.w500,
-                ),
-              ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );

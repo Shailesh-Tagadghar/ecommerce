@@ -69,9 +69,7 @@ class AppPages {
         page: () => const Home(),
         transition: transition),
     GetPage(
-        name: AppRoutes.cartScreen,
-        page: () => const Cart(),
-        transition: transition),
+        name: AppRoutes.cartScreen, page: () => Cart(), transition: transition),
     GetPage(
         name: AppRoutes.wishlistScreen,
         page: () => const Wishlist(),

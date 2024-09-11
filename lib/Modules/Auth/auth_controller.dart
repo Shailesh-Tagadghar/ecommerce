@@ -103,7 +103,7 @@ class AuthController extends GetxController {
   var userName = ''.obs; //to store username from signUp screen
 
   final dummyEmail = 'test@gmail.com'.obs; // Dummy email
-  final dummyPassword = 'Test@1234'.obs; // Dummy password
+  final dummyPassword = 'Test@1'.obs; // Dummy password
 
   var fullAddress = ''.obs; // to store full address
 

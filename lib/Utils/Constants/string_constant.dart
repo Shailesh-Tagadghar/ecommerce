@@ -106,6 +106,10 @@ class StringConstants {
   static const String size = 'XL';
   static const String productprice = '83.97';
 
+  static const String productname1 = 'Brown Suite';
+  static const String size1 = 'XL';
+  static const String productprice1 = '120';
+
   //Coupon Screen
   static const String coupon = 'Coupon';
 }
