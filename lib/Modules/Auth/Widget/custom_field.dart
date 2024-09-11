@@ -149,6 +149,11 @@ class CustomField extends StatelessWidget {
         controller: controller,
         onChanged: onChanged,
         enabled: readonly,
+        style: TextStyle(
+          color: ColorConstants.blackColor,
+          fontSize: fontSize.sp,
+          fontWeight: FontWeight.w400,
+        ),
         // cursorRadius: const Radius.circular(8),
         decoration: InputDecoration(
           contentPadding: EdgeInsets.only(
@@ -174,6 +179,12 @@ class CustomField extends StatelessWidget {
                   onPressed: onIconPressed,
                 )
               : null,
+          border: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(25),
+            borderSide: const BorderSide(
+              color: ColorConstants.lightGrayColor,
+            ),
+          ),
           enabledBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(25),
             borderSide: const BorderSide(

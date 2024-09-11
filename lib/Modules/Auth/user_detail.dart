@@ -273,11 +273,8 @@ class UserDetail extends StatelessWidget {
                       // ),
                       CustomField(
                         controller: nameController,
-                        // hintText: StringConstants.name,
-                        fontSize: 11,
-                        // hintTextColor: ColorConstants.blackColor,
+                        fontSize: 13,
                         keyboardType: TextInputType.name,
-                        // readonly: true,
                         readonly: false,
                       ),
 

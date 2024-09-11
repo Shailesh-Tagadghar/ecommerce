@@ -87,6 +87,7 @@ class AuthController extends GetxController {
   var emailError = ''.obs;
   var passwordError = ''.obs;
   var confirmPasswordError = ''.obs;
+  var checkboxError = ''.obs;
   //for user_details screen validations
   var imageError = ''.obs;
   var phoneError = ''.obs;
@@ -146,6 +147,15 @@ class AuthController extends GetxController {
       emailError.value = 'Please enter a valid email';
     } else {
       emailError.value = '';
+    }
+  }
+
+  void validateCheckbox() {
+    if (!agreeToTerms.value) {
+      checkboxError.value =
+          'You can\'t proceed please, Accept Terms & Condition first';
+    } else {
+      checkboxError.value = '';
     }
   }
 

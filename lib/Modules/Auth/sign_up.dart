@@ -171,10 +171,11 @@ class Signup extends StatelessWidget {
                             width: 5.w,
                             child: Checkbox.adaptive(
                               value: authController.agreeToTerms.value,
-                              onChanged: (bool? val) {
-                                authController.agreeToTerms.value =
-                                    !authController.agreeToTerms.value;
-                              },
+                              // onChanged: (bool? val) {
+                              //   authController.agreeToTerms.value =
+                              //       !authController.agreeToTerms.value;
+                              // },
+                              onChanged: (value) => authController.checkBox(),
                               activeColor: ColorConstants.primary,
                             ),
                           ),
@@ -197,6 +198,16 @@ class Signup extends StatelessWidget {
                         ),
                       ],
                     ),
+                    Obx(
+                      () => authController.checkboxError.value.isNotEmpty
+                          ? CustomText(
+                              text: authController.checkboxError.value,
+                              color: ColorConstants.errorColor,
+                              fontSize: 10,
+                              weight: FontWeight.w400,
+                            )
+                          : const SizedBox.shrink(),
+                    ),
                     SizedBox(
                       height: 4.h,
                     ),
@@ -211,10 +222,12 @@ class Signup extends StatelessWidget {
                         authController.validateEmail(emailController.text);
                         authController
                             .validatePassword(passwordController.text);
+                        authController.validateCheckbox();
 
                         if (authController.nameError.value.isEmpty &&
                             authController.emailError.value.isEmpty &&
-                            authController.passwordError.value.isEmpty) {
+                            authController.passwordError.value.isEmpty &&
+                            authController.checkboxError.value.isEmpty) {
                           authController.setUserName(nameController.text);
                           Get.toNamed(AppRoutes.userDetailScreen);
                         }
