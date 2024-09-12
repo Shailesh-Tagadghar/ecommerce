@@ -1,5 +1,5 @@
 import 'package:ecommerce/Modules/Auth/Widget/custom_text.dart';
-import 'package:ecommerce/Modules/Auth/auth_controller.dart';
+import 'package:ecommerce/Modules/Auth/controllers/auth_controller.dart';
 import 'package:ecommerce/Modules/Home/Widget/profile_widget.dart';
 import 'package:ecommerce/Routes/app_routes.dart';
 import 'package:ecommerce/Utils/Constants/asset_constant.dart';

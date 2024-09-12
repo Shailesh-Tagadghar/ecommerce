@@ -1,4 +1,4 @@
-import 'package:ecommerce/Modules/Auth/auth_controller.dart';
+import 'package:ecommerce/Modules/Auth/controllers/auth_controller.dart';
 import 'package:ecommerce/Modules/Home/home_controller.dart';
 import 'package:get/get.dart';
 
