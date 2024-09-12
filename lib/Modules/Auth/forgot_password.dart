@@ -163,11 +163,12 @@ class ForgotPassword extends StatelessWidget {
                       CustomButton(
                         label: StringConstants.btntext,
                         btnColor: ColorConstants.rich,
+                        labelColor: ColorConstants.whiteColor,
+                        isSelected: true,
                         height: 6.h,
                         fontSize: 14,
                         weight: FontWeight.w500,
                         action: () {
-                          
                           // Retrieve passwords from controllers
                           String password = passwordController.text;
                           String confirmPassword = cnfpasswordController.text;

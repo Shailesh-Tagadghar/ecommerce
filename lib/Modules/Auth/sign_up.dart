@@ -214,6 +214,8 @@ class Signup extends StatelessWidget {
                     CustomButton(
                       label: StringConstants.signUp,
                       btnColor: ColorConstants.rich,
+                      labelColor: ColorConstants.whiteColor,
+                      isSelected: true,
                       height: 6.h,
                       fontSize: 14,
                       weight: FontWeight.w500,

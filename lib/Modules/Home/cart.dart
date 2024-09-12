@@ -114,6 +114,8 @@ class Cart extends StatelessWidget {
               child: CustomButton(
                 label: StringConstants.checkout,
                 btnColor: ColorConstants.rich,
+                labelColor: ColorConstants.whiteColor,
+                isSelected: true,
                 action: () {
                   showCheckout(context);
                 },

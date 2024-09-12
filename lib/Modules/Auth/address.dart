@@ -237,9 +237,9 @@ class Address extends StatelessWidget {
                         height: 6.h,
                         fontSize: 14,
                         weight: FontWeight.w500,
+                        labelColor: ColorConstants.whiteColor,
+                        isSelected: true,
                         action: () {
-                          
-
                           authController
                               .validateAddress(addressController.text);
                           authController

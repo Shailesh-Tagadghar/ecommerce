@@ -56,12 +56,11 @@ class CustomButton extends StatelessWidget {
           child: Text(
             label,
             style: TextStyle(
-              fontSize: fontSize.sp,
-              fontWeight: weight ?? FontWeight.bold,
-              color: isSelected
-                  ? ColorConstants.whiteColor
-                  : ColorConstants.whiteColor,
-            ),
+                fontSize: fontSize.sp,
+                fontWeight: weight ?? FontWeight.bold,
+                color: isSelected
+                    ? ColorConstants.whiteColor
+                    : ColorConstants.blackColor),
           ),
         ),
       ),

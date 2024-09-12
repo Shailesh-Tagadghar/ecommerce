@@ -151,6 +151,9 @@ class SignIn extends StatelessWidget {
                       height: 6.h,
                       fontSize: 14,
                       weight: FontWeight.w500,
+                      labelColor: ColorConstants.whiteColor,
+                      btnColor: ColorConstants.rich,
+                      isSelected: true,
                       action: () {
                         if (authController.validateForm(
                             emailController.text, passwordController.text)) {

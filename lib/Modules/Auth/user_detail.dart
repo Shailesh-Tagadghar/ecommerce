@@ -378,6 +378,8 @@ class UserDetail extends StatelessWidget {
                       CustomButton(
                         label: StringConstants.userBtntext,
                         btnColor: ColorConstants.rich,
+                        labelColor: ColorConstants.whiteColor,
+                        isSelected: true,
                         height: 6.h,
                         fontSize: 14,
                         weight: FontWeight.w500,
