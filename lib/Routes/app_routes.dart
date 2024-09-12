@@ -10,10 +10,10 @@ class AppRoutes {
   static const addressScreen = '/address';
   static const navbarScreen = '/navbar';
   static const profileScreen = '/profile';
+  static const profilewidgetScreen = '/profile_widget';
   static const searchScreen = '/search';
   static const homeScreen = '/home';
   static const cartScreen = '/cart';
   static const wishlistScreen = '/wishlist';
   static const couponScreen = '/coupon';
-
 }

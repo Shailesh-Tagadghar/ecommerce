@@ -2,6 +2,7 @@
 
 import 'package:ecommerce/Modules/Auth/address.dart';
 import 'package:ecommerce/Modules/Auth/forgot_password.dart';
+import 'package:ecommerce/Modules/Home/Widget/profile_widget.dart';
 import 'package:ecommerce/Modules/Home/cart.dart';
 import 'package:ecommerce/Modules/Home/coupon.dart';
 import 'package:ecommerce/Modules/Home/home.dart';
@@ -59,6 +60,10 @@ class AppPages {
     GetPage(
         name: AppRoutes.profileScreen,
         page: () => Profile(),
+        transition: transition),
+    GetPage(
+        name: AppRoutes.profilewidgetScreen,
+        page: () => const ProfileWidget(),
         transition: transition),
     GetPage(
         name: AppRoutes.searchScreen,

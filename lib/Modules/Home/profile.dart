@@ -1,5 +1,6 @@
 import 'package:ecommerce/Modules/Auth/Widget/custom_text.dart';
 import 'package:ecommerce/Modules/Auth/auth_controller.dart';
+import 'package:ecommerce/Modules/Home/Widget/profile_widget.dart';
 import 'package:ecommerce/Routes/app_routes.dart';
 import 'package:ecommerce/Utils/Constants/asset_constant.dart';
 import 'package:ecommerce/Utils/Constants/color_constant.dart';
@@ -78,12 +79,20 @@ class Profile extends StatelessWidget {
                               ListTile(
                                 leading: const Icon(Icons.photo_library),
                                 title: const Text('Gallery'),
-                                onTap: () {},
+                                onTap: () {
+                                  authController.pickImageFromGallery();
+                                  // Get.back();
+                                  Navigator.pop(context);
+                                },
                               ),
                               ListTile(
                                 leading: const Icon(Icons.camera_alt),
                                 title: const Text('Camera'),
-                                onTap: () {},
+                                onTap: () {
+                                  authController.pickImageFromCamera();
+                                  // Get.back();
+                                  Navigator.pop(context);
+                                },
                               ),
                             ],
                           ),
@@ -93,27 +102,35 @@ class Profile extends StatelessWidget {
                     child: Stack(
                       alignment: Alignment.center,
                       children: [
-                        CircleAvatar(
-                          radius: 60,
-                          backgroundImage: const AssetImage(AssetConstant.pd1),
-                          backgroundColor: ColorConstants.background,
-                          child: Align(
-                            alignment: Alignment.bottomRight,
-                            child: Container(
-                              height: 4.h,
-                              width: 8.w,
-                              decoration: BoxDecoration(
-                                color: ColorConstants.rich,
-                                borderRadius: BorderRadius.circular(100),
-                                border: Border.all(
-                                  width: 2,
-                                  color: ColorConstants.whiteColor,
+                        Obx(
+                          () => CircleAvatar(
+                            radius: 60,
+                            // backgroundImage: const AssetImage(AssetConstant.pd1),
+                            backgroundImage: authController
+                                        .profileImage.value !=
+                                    null
+                                ? FileImage(authController.profileImage.value!)
+                                    as ImageProvider
+                                : const AssetImage(AssetConstant.pd1),
+                            backgroundColor: ColorConstants.background,
+                            child: Align(
+                              alignment: Alignment.bottomRight,
+                              child: Container(
+                                height: 4.h,
+                                width: 8.w,
+                                decoration: BoxDecoration(
+                                  color: ColorConstants.rich,
+                                  borderRadius: BorderRadius.circular(100),
+                                  border: Border.all(
+                                    width: 2,
+                                    color: ColorConstants.whiteColor,
+                                  ),
                                 ),
-                              ),
-                              child: const Icon(
-                                AntDesign.edit_outline,
-                                color: ColorConstants.whiteColor,
-                                size: 20,
+                                child: const Icon(
+                                  AntDesign.edit_outline,
+                                  color: ColorConstants.whiteColor,
+                                  size: 20,
+                                ),
                               ),
                             ),
                           ),
@@ -128,358 +145,77 @@ class Profile extends StatelessWidget {
                   ),
                 ),
                 SizedBox(
-                  height: 2.h,
+                  height: 1.5.h,
                 ),
                 CustomText(
                   // text: StringConstants.profileName,
                   text: authController.userName.value,
                   color: ColorConstants.blackColor,
-                  fontSize: 14,
+                  fontSize: 15,
                   weight: FontWeight.w500,
                 ),
                 SizedBox(
-                  height: 2.h,
+                  height: 1.h,
                 ),
 
                 //1st Row
-                GestureDetector(
+                ProfileWidget(
+                  name: StringConstants.row1,
+                  icon: Bootstrap.person,
                   onTap: () {
                     Get.toNamed(
                       AppRoutes.userDetailScreen,
                     );
                   },
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          const Icon(
-                            Bootstrap.person,
-                            color: ColorConstants.rich,
-                            size: 30,
-                          ),
-                          SizedBox(
-                            width: 3.w,
-                          ),
-                          const CustomText(
-                            text: StringConstants.row1,
-                            color: ColorConstants.blackColor,
-                            fontSize: 14,
-                            weight: FontWeight.w400,
-                          ),
-                        ],
-                      ),
-                      const Icon(
-                        Icons.arrow_forward_ios_rounded,
-                        color: ColorConstants.rich,
-                        size: 24,
-                      ),
-                    ],
-                  ),
-                ),
-                SizedBox(
-                  height: 1.h,
-                ),
-                Divider(
-                  color: ColorConstants.background,
-                  height: 1.h,
-                  thickness: 1,
-                ),
-                SizedBox(
-                  height: 1.5.h,
                 ),
 
                 //2nd Row
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        const Icon(
-                          Bootstrap.credit_card,
-                          color: ColorConstants.rich,
-                          size: 30,
-                        ),
-                        SizedBox(
-                          width: 3.w,
-                        ),
-                        const CustomText(
-                          text: StringConstants.row2,
-                          color: ColorConstants.blackColor,
-                          fontSize: 14,
-                          weight: FontWeight.w400,
-                        ),
-                      ],
-                    ),
-                    const Icon(
-                      Icons.arrow_forward_ios_rounded,
-                      color: ColorConstants.rich,
-                      size: 24,
-                    ),
-                  ],
-                ),
-                SizedBox(
-                  height: 1.h,
-                ),
-                Divider(
-                  color: ColorConstants.background,
-                  height: 1.h,
-                  thickness: 1,
-                ),
-                SizedBox(
-                  height: 1.5.h,
+                const ProfileWidget(
+                  name: StringConstants.row2,
+                  icon: Bootstrap.credit_card,
                 ),
 
                 //3rd Row
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        const Icon(
-                          Icons.shopping_bag_outlined,
-                          color: ColorConstants.rich,
-                          size: 30,
-                        ),
-                        SizedBox(
-                          width: 3.w,
-                        ),
-                        const CustomText(
-                          text: StringConstants.row3,
-                          color: ColorConstants.blackColor,
-                          fontSize: 14,
-                          weight: FontWeight.w400,
-                        ),
-                      ],
-                    ),
-                    const Icon(
-                      Icons.arrow_forward_ios_rounded,
-                      color: ColorConstants.rich,
-                      size: 24,
-                    ),
-                  ],
-                ),
-                SizedBox(
-                  height: 1.h,
-                ),
-                Divider(
-                  color: ColorConstants.background,
-                  height: 1.h,
-                  thickness: 1,
-                ),
-                SizedBox(
-                  height: 1.5.h,
+                const ProfileWidget(
+                  name: StringConstants.row3,
+                  icon: Icons.shopping_bag_outlined,
                 ),
 
                 //4th Row
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        const Icon(
-                          Icons.settings_outlined,
-                          color: ColorConstants.rich,
-                          size: 30,
-                        ),
-                        SizedBox(
-                          width: 3.w,
-                        ),
-                        const CustomText(
-                          text: StringConstants.row4,
-                          color: ColorConstants.blackColor,
-                          fontSize: 14,
-                          weight: FontWeight.w400,
-                        ),
-                      ],
-                    ),
-                    const Icon(
-                      Icons.arrow_forward_ios_rounded,
-                      color: ColorConstants.rich,
-                      size: 24,
-                    ),
-                  ],
-                ),
-                SizedBox(
-                  height: 1.h,
-                ),
-                Divider(
-                  color: ColorConstants.background,
-                  height: 1.h,
-                  thickness: 1,
-                ),
-                SizedBox(
-                  height: 1.5.h,
+                const ProfileWidget(
+                  name: StringConstants.row4,
+                  icon: Icons.settings_outlined,
                 ),
 
                 //5th Row
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        const Icon(
-                          Icons.info_outline_rounded,
-                          color: ColorConstants.rich,
-                          size: 30,
-                        ),
-                        SizedBox(
-                          width: 3.w,
-                        ),
-                        const CustomText(
-                          text: StringConstants.row5,
-                          color: ColorConstants.blackColor,
-                          fontSize: 14,
-                          weight: FontWeight.w400,
-                        ),
-                      ],
-                    ),
-                    const Icon(
-                      Icons.arrow_forward_ios_rounded,
-                      color: ColorConstants.rich,
-                      size: 24,
-                    ),
-                  ],
-                ),
-                SizedBox(
-                  height: 1.h,
-                ),
-                Divider(
-                  color: ColorConstants.background,
-                  height: 1.h,
-                  thickness: 1,
-                ),
-                SizedBox(
-                  height: 1.5.h,
+                const ProfileWidget(
+                  name: StringConstants.row5,
+                  icon: Icons.info_outline_rounded,
                 ),
 
                 //6th Row
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        const Icon(
-                          Icons.lock_outline_rounded,
-                          color: ColorConstants.rich,
-                          size: 30,
-                        ),
-                        SizedBox(
-                          width: 3.w,
-                        ),
-                        const CustomText(
-                          text: StringConstants.row6,
-                          color: ColorConstants.blackColor,
-                          fontSize: 14,
-                          weight: FontWeight.w400,
-                        ),
-                      ],
-                    ),
-                    const Icon(
-                      Icons.arrow_forward_ios_rounded,
-                      color: ColorConstants.rich,
-                      size: 24,
-                    ),
-                  ],
-                ),
-                SizedBox(
-                  height: 1.h,
-                ),
-                Divider(
-                  color: ColorConstants.background,
-                  height: 1.h,
-                  thickness: 1,
-                ),
-                SizedBox(
-                  height: 1.5.h,
+                const ProfileWidget(
+                  name: StringConstants.row6,
+                  icon: Icons.lock_outline_rounded,
                 ),
 
                 //7th Row
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        const Icon(
-                          Bootstrap.person_add,
-                          color: ColorConstants.rich,
-                          size: 30,
-                        ),
-                        SizedBox(
-                          width: 3.w,
-                        ),
-                        const CustomText(
-                          text: StringConstants.row7,
-                          color: ColorConstants.blackColor,
-                          fontSize: 14,
-                          weight: FontWeight.w400,
-                        ),
-                      ],
-                    ),
-                    const Icon(
-                      Icons.arrow_forward_ios_rounded,
-                      color: ColorConstants.rich,
-                      size: 24,
-                    ),
-                  ],
-                ),
-                SizedBox(
-                  height: 1.h,
-                ),
-                Divider(
-                  color: ColorConstants.background,
-                  height: 1.h,
-                  thickness: 1,
-                ),
-                SizedBox(
-                  height: 1.5.h,
+                const ProfileWidget(
+                  name: StringConstants.row7,
+                  icon: Bootstrap.person_add,
                 ),
 
                 //8th Row -- LOgout
-                GestureDetector(
+                ProfileWidget(
+                  name: StringConstants.logout,
+                  icon: Icons.logout_outlined,
                   onTap: () {
-                    // _showLogoutDialog(context);
                     _showLogoutBottomSheet(context);
                   },
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          const Icon(
-                            Icons.logout_outlined,
-                            color: ColorConstants.rich,
-                            size: 30,
-                          ),
-                          SizedBox(
-                            width: 3.w,
-                          ),
-                          const CustomText(
-                            text: StringConstants.logout,
-                            color: ColorConstants.blackColor,
-                            fontSize: 14,
-                            weight: FontWeight.w400,
-                          ),
-                        ],
-                      ),
-                      const Icon(
-                        Icons.arrow_forward_ios_rounded,
-                        color: ColorConstants.rich,
-                        size: 24,
-                      ),
-                    ],
-                  ),
                 ),
+
                 SizedBox(
-                  height: 1.h,
+                  height: 2.h,
                 ),
               ],
             ),
