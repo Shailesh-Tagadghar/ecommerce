@@ -13,8 +13,7 @@ import 'package:sizer/sizer.dart';
 class SignIn extends StatelessWidget {
   SignIn({super.key});
 
-  // final AuthController authController = Get.put(AuthController());
-  final AuthController authController = Get.find<AuthController>();
+  final AuthController authController = Get.put(AuthController());
 
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
@@ -156,21 +155,17 @@ class SignIn extends StatelessWidget {
                       btnColor: ColorConstants.rich,
                       isSelected: true,
                       action: () {
-                        // if (authController.validateForm(
-                        //     emailController.text, passwordController.text)) {
-                        //   bool isAuthenticated =
-                        //       authController.authenticateUser(
-                        //           emailController.text,
-                        //           passwordController.text);
-                        //   if (isAuthenticated) {
-                        //     // Navigate to Home screen
-                        //     Get.offNamed(AppRoutes.navbarScreen);
-                        //   }
-                        // }
-                        final email = emailController.text;
-                        final password = passwordController.text;
-                        
-                        authController.login(email, password,);
+                        if (authController.validateForm(
+                            emailController.text, passwordController.text)) {
+                          bool isAuthenticated =
+                              authController.authenticateUser(
+                                  emailController.text,
+                                  passwordController.text);
+                          if (isAuthenticated) {
+                            // Navigate to Home screen
+                            Get.offNamed(AppRoutes.navbarScreen);
+                          }
+                        }
                       },
                     ),
                     SizedBox(

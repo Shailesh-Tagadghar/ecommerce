@@ -2,7 +2,7 @@ import 'package:ecommerce/Modules/Auth/Widget/custom_button.dart';
 import 'package:ecommerce/Modules/Auth/Widget/custom_field.dart';
 import 'package:ecommerce/Modules/Auth/Widget/custom_text.dart';
 import 'package:ecommerce/Modules/Auth/controllers/auth_controller.dart';
-// import 'package:ecommerce/Routes/app_routes.dart';
+import 'package:ecommerce/Routes/app_routes.dart';
 import 'package:ecommerce/Utils/Constants/color_constant.dart';
 import 'package:ecommerce/Utils/Constants/string_constant.dart';
 import 'package:flutter/material.dart';
@@ -21,7 +21,6 @@ class Address extends StatelessWidget {
   final TextEditingController pinController = TextEditingController();
   @override
   Widget build(BuildContext context) {
-    final Map<String, dynamic> userData = Get.arguments;
     return Scaffold(
       backgroundColor: ColorConstants.whiteColor,
       appBar: AppBar(
@@ -232,51 +231,6 @@ class Address extends StatelessWidget {
                       SizedBox(
                         height: 4.h,
                       ),
-                      // CustomButton(
-                      //   label: StringConstants.saveAddress,
-                      //   btnColor: ColorConstants.rich,
-                      //   height: 6.h,
-                      //   fontSize: 14,
-                      //   weight: FontWeight.w500,
-                      //   labelColor: ColorConstants.whiteColor,
-                      //   isSelected: true,
-                      //   action: () {
-                      //     authController
-                      //         .validateAddress(addressController.text);
-                      //     authController
-                      //         .validateAddress1(address1Controller.text);
-                      //     authController.validateCity(cityController.text);
-                      //     authController.validateState(stateController.text);
-                      //     authController.validatePin(pinController.text);
-
-                      //     if (authController.addressError.value.isEmpty &&
-                      //         authController.address1Error.value.isEmpty &&
-                      //         authController.cityError.value.isEmpty &&
-                      //         authController.stateError.value.isEmpty &&
-                      //         authController.pinError.value.isEmpty) {
-                      //       // authController.saveAddress(
-                      //       //   addressController.text,
-                      //       //   address1Controller.text,
-                      //       //   cityController.text,
-                      //       //   stateController.text,
-                      //       //   pinController.text,
-                      //       // );
-                      //       // Get.toNamed(AppRoutes.navbarScreen);
-                      //       final completeAddress =
-                      //           '${addressController.text}${address1Controller.text.isNotEmpty ? ', ${address1Controller.text}' : ''}, ${cityController.text}, ${stateController.text}, ${pinController.text}';
-
-                      //       final finalData = {
-                      //         ...userData,
-                      //         'address': completeAddress,
-                      //       };
-
-                      //       final authController = Get.find<AuthController>();
-                      //       print('Address data with all data : $finalData');
-                      //       authController.register(finalData);
-                      //     }
-                      //   },
-                      // ),
-
                       CustomButton(
                         label: StringConstants.saveAddress,
                         btnColor: ColorConstants.rich,
@@ -299,20 +253,14 @@ class Address extends StatelessWidget {
                               authController.cityError.value.isEmpty &&
                               authController.stateError.value.isEmpty &&
                               authController.pinError.value.isEmpty) {
-                            final completeAddress =
-                                '${addressController.text}${address1Controller.text.isNotEmpty ? ', ${address1Controller.text}' : ''}, ${cityController.text}, ${stateController.text}, ${pinController.text}';
-
-                            final userData = Get.arguments as Map<String,
-                                dynamic>; // Retrieve userData from previous screen
-
-                            final finalData = {
-                              ...userData,
-                              'address': completeAddress,
-                            };
-
-                            print('Address data with all data : $finalData');
-                            authController.register(
-                                finalData); // Ensure register method uses `finalData`
+                            authController.saveAddress(
+                              addressController.text,
+                              address1Controller.text,
+                              cityController.text,
+                              stateController.text,
+                              pinController.text,
+                            );
+                            Get.toNamed(AppRoutes.navbarScreen);
                           }
                         },
                       ),

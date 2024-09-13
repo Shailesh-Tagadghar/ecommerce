@@ -1,10 +1,7 @@
-import 'dart:io';
-
 import 'package:ecommerce/Modules/Auth/Widget/custom_button.dart';
 import 'package:ecommerce/Modules/Auth/Widget/custom_field.dart';
 import 'package:ecommerce/Modules/Auth/Widget/custom_text.dart';
 import 'package:ecommerce/Modules/Auth/controllers/auth_controller.dart';
-import 'package:ecommerce/Routes/app_routes.dart';
 import 'package:ecommerce/Utils/Constants/asset_constant.dart';
 import 'package:ecommerce/Utils/Constants/color_constant.dart';
 import 'package:ecommerce/Utils/Constants/string_constant.dart';
@@ -18,26 +15,12 @@ class UserDetail extends StatelessWidget {
 
   final AuthController authController = Get.put(AuthController());
   final TextEditingController nameController = TextEditingController();
-  final TextEditingController emailController = TextEditingController();
-  final TextEditingController passwordController = TextEditingController();
-  // final TextEditingController genderController = TextEditingController();
+  final TextEditingController genderController = TextEditingController();
   final TextEditingController phoneController = TextEditingController();
-  // final TextEditingController imageController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
-    final Map<String, dynamic> arguments =
-        Get.arguments as Map<String, dynamic>;
-    final String name = arguments['name'] ?? '';
-    final String email = arguments['email'] ?? '';
-    final String password = arguments['password'] ?? '';
-    final String profileImagePath = arguments['image'] ?? '';
-    // nameController.text = authController.userName.value;
-
-    nameController.text = name;
-    emailController.text = email;
-    passwordController.text = password;
-
+    nameController.text = authController.userName.value;
     return Scaffold(
       backgroundColor: ColorConstants.whiteColor,
       appBar: AppBar(
@@ -220,22 +203,6 @@ class UserDetail extends StatelessWidget {
                                   radius: 60,
                                   // backgroundImage:
                                   //     const AssetImage(AssetConstant.image),
-                                  // backgroundImage: authController
-                                  //             .profileImage.value !=
-                                  //         null
-                                  //     ? FileImage(authController
-                                  //         .profileImage.value!) as ImageProvider
-                                  //     : const AssetImage(AssetConstant.image),
-                                  // backgroundImage: authController
-                                  //             .profileImage.value !=
-                                  //         null
-                                  //     ? FileImage(authController
-                                  //         .profileImage.value!) as ImageProvider
-                                  //     : profileImagePath.isNotEmpty
-                                  //         ? FileImage(File(profileImagePath))
-                                  //             as ImageProvider
-                                  //         : const AssetImage(
-                                  //             AssetConstant.image),
                                   backgroundImage: authController
                                               .profileImage.value !=
                                           null
@@ -408,30 +375,6 @@ class UserDetail extends StatelessWidget {
                       SizedBox(
                         height: 4.h,
                       ),
-                      // CustomButton(
-                      //   label: StringConstants.userBtntext,
-                      //   btnColor: ColorConstants.rich,
-                      //   labelColor: ColorConstants.whiteColor,
-                      //   isSelected: true,
-                      //   height: 6.h,
-                      //   fontSize: 14,
-                      //   weight: FontWeight.w500,
-                      //   action: () {
-                      //     authController.submitUserDetails();
-                      //     final addressData = {
-                      //       'signup_data': userData,
-                      //       'image': imageController.text,
-                      //       'name': nameController.text,
-                      //       'gender': genderController.text,
-                      //       'phone': phoneController.text,
-                      //     };
-                      //     print('user_details Fields Data : $addressData');
-                      //     Get.toNamed(
-                      //       AppRoutes.addressScreen,
-                      //       arguments: addressData,
-                      //     );
-                      //   },
-                      // ),
                       CustomButton(
                         label: StringConstants.userBtntext,
                         btnColor: ColorConstants.rich,
@@ -442,31 +385,9 @@ class UserDetail extends StatelessWidget {
                         weight: FontWeight.w500,
                         action: () {
                           authController.submitUserDetails();
-
-                          final addressData = {
-                            // 'signup_data': {
-                            //   'name': nameController.text,
-                            //   'email': emailController.text,
-                            //   'password': passwordController.text,
-                            // },
-                            'name': nameController.text,
-                            'email': emailController.text,
-                            'password': passwordController.text,
-                            'image': authController.profileImage.value?.path ??
-                                '', // Ensure this path is not empty
-                            // 'name': nameController.text,
-                            'gender': authController.selectedDropdownItem.value,
-                            // 'phone': authController.phoneNumber.value,
-                            'phone':
-                                '${authController.selectedCountrycode.value}-${authController.phoneNumber.value}',
-                            // 'address': authController.fullAddress,
-                            // 'address': arguments['address'] ?? '',
-                          };
-                          print('user_details Fields Data : $addressData');
-                          Get.toNamed(
-                            AppRoutes.addressScreen,
-                            arguments: addressData,
-                          );
+                          // Get.toNamed(
+                          //   AppRoutes.addressScreen,
+                          // );
                         },
                       ),
                     ],
