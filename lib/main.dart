@@ -1,6 +1,6 @@
 import 'package:ecommerce/Controllers/global_controller_binding.dart';
+import 'package:ecommerce/Modules/Auth/services/fcm_service.dart';
 import 'package:ecommerce/Routes/app_pages.dart';
-
 import 'package:ecommerce/Utils/Constants/string_constant.dart';
 import 'package:ecommerce/firebase_options.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -14,7 +14,10 @@ Future<void> main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+  final fcmService = FcmService();
+  await fcmService.initialize();
   await GetStorage.init();
+
   runApp(const EcommerceApp());
 }
 

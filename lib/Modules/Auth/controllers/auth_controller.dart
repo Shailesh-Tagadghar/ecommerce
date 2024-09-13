@@ -1,11 +1,13 @@
 import 'dart:io';
 
 import 'package:ecommerce/Modules/Auth/services/api_service.dart';
-import 'package:ecommerce/Modules/Auth/services/storage_util.dart';
+// import 'package:ecommerce/Modules/Auth/services/storage_util.dart';
 import 'package:ecommerce/Routes/app_routes.dart';
 import 'package:ecommerce/Utils/Constants/string_constant.dart';
 import 'package:email_validator/email_validator.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:image_picker/image_picker.dart';
 
 class AuthController extends GetxController {
@@ -15,7 +17,7 @@ class AuthController extends GetxController {
   var agreeToTerms = false.obs;
 
   // Profile Image
-  var profileImage = Rxn<File>(null); // To store selected image
+  var profileImage = Rxn<File?>(null); // To store selected image
 
   //Gender Dropdown
   var selectedDropdownItem =
@@ -91,7 +93,8 @@ class AuthController extends GetxController {
   var confirmPasswordError = ''.obs;
   var checkboxError = ''.obs;
   //for user_details screen validations
-  var imageError = ''.obs;
+  // var imageError = ''.obs;
+  var imageError = RxString('');
   var phoneError = ''.obs;
   var genderError = ''.obs;
 
@@ -113,22 +116,54 @@ class AuthController extends GetxController {
   final ImagePicker _picker = ImagePicker();
 
   // Method to pick image from gallery
+  // Future<void> pickImageFromGallery() async {
+  //   final XFile? pickedFile =
+  //       await _picker.pickImage(source: ImageSource.gallery);
+  //   if (pickedFile != null) {
+  //     profileImage.value = File(pickedFile.path);
+  //     imageError.value = '';
+  //   }
+  // }
   Future<void> pickImageFromGallery() async {
-    final XFile? pickedFile =
-        await _picker.pickImage(source: ImageSource.gallery);
-    if (pickedFile != null) {
-      profileImage.value = File(pickedFile.path);
-      imageError.value = '';
+    try {
+      // final pickedFile = await _picker.pickImage(source: ImageSource.gallery);
+      final pickedFile =
+          await ImagePicker().pickImage(source: ImageSource.gallery);
+
+      if (pickedFile != null) {
+        profileImage.value = File(pickedFile.path);
+        imageError.value = ''; // Clear any previous error
+      } else {
+        imageError.value = 'No image selected.';
+      }
+    } catch (e) {
+      imageError.value = 'Failed to pick image: $e';
     }
   }
 
   // Method to pick image from camera
+  // Future<void> pickImageFromCamera() async {
+  //   final XFile? pickedFile =
+  //       await _picker.pickImage(source: ImageSource.camera);
+  //   if (pickedFile != null) {
+  //     profileImage.value = File(pickedFile.path);
+  //     imageError.value = '';
+  //   }
+  // }
   Future<void> pickImageFromCamera() async {
-    final XFile? pickedFile =
-        await _picker.pickImage(source: ImageSource.camera);
-    if (pickedFile != null) {
-      profileImage.value = File(pickedFile.path);
-      imageError.value = '';
+    try {
+      // final pickedFile = await _picker.pickImage(source: ImageSource.camera);
+      final pickedFile =
+          await ImagePicker().pickImage(source: ImageSource.camera);
+
+      if (pickedFile != null) {
+        profileImage.value = File(pickedFile.path);
+        imageError.value = ''; // Clear any previous error
+      } else {
+        imageError.value = 'No image selected.';
+      }
+    } catch (e) {
+      imageError.value = 'Failed to pick image: $e';
     }
   }
 
@@ -280,6 +315,10 @@ class AuthController extends GetxController {
     }
   }
 
+  final TextEditingController nameController = TextEditingController();
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
+
   // Method to submit user details
   void submitUserDetails() {
     // Perform validations
@@ -299,11 +338,32 @@ class AuthController extends GetxController {
       print('Gender: ${selectedDropdownItem.value}');
       print('Profile Image Path: ${profileImage.value?.path}');
 
+      if (nameController.text.isEmpty ||
+          emailController.text.isEmpty ||
+          passwordController.text.isEmpty) {
+        Get.snackbar('Validation Error', 'Please fill in all fields.');
+        return;
+      }
+
+      final addressData = {
+        'signup_data': {
+          'name': nameController.text,
+          'email': emailController.text,
+          'password': passwordController.text,
+        },
+        'image': profileImage.value?.path ?? '',
+        'name': nameController.text,
+        'gender': selectedDropdownItem.value,
+        'phone': '${selectedCountrycode.value}-${phoneNumber.value}',
+        'address': fullAddress,
+      };
+      print('user_details Fields Data : $addressData');
+
       // Navigate to Address Screen or perform desired action
       // Get.toNamed(AppRoutes());
-      Get.toNamed(
-        AppRoutes.addressScreen,
-      );
+      // Get.toNamed(
+      //   AppRoutes.addressScreen,
+      // );
     }
   }
 
@@ -337,16 +397,68 @@ class AuthController extends GetxController {
   ///////////////////
   // API Integration
   final ApiService _apiService = ApiService();
-  final _fcmToken = StorageUtil.read('fcm_token');
+  // final _fcmToken = StorageUtil.read('fcm_token');
+  final _fcmToken = GetStorage().read('fcm_token');
+  // final TextEditingController nameController = TextEditingController();
+  // final TextEditingController emailController = TextEditingController();
+  // final TextEditingController passwordController = TextEditingController();
+
+  // Future<void> register(Map<String, dynamic> userData) async {
+  //   try {
+  //     await _apiService.registerUser(userData);
+  //     print('fcm_token : $_fcmToken');
+  //     Get.toNamed(
+  //       AppRoutes.navbarScreen,
+  //     );
+  //   } catch (e) {
+  //     print(e);
+  //   }
+  // }
+  // Future<void> register() async {
+  //   // Prepare user data
+  //   Map<String, dynamic> userData = {
+  //     'name': userName.value,
+  //     'email': emailController.text, // Assume you have a TextEditingController
+  //     'password':
+  //         passwordController.text, // Assume you have a TextEditingController
+  //   };
+
+  //   try {
+  //     // Ensure image is picked
+  //     if (profileImage.value == null) {
+  //       throw Exception('No image selected.');
+  //     }
+
+  //     // Register user
+  //     await _apiService.registerUser(userData, profileImage.value);
+
+  //     print('fcm_token : $_fcmToken');
+  //     Get.toNamed(AppRoutes.navbarScreen);
+  //   } catch (e) {
+  //     print('Error registering user: $e');
+  //     Get.snackbar('Registration Failed', e.toString());
+  //   }
+  // }
 
   Future<void> register(Map<String, dynamic> userData) async {
     try {
-      await _apiService.registerUser(userData);
-      Get.toNamed(
-        AppRoutes.navbarScreen,
-      );
+      // if (profileImage.value == null) {
+      //   throw Exception('No image selected.');
+      // }
+      final imageFile = profileImage.value;
+      if (imageFile == null) {
+        throw Exception('No image selected.');
+      }
+
+      // Ensure userData contains the correct information
+      // await _apiService.registerUser(userData, profileImage.value);
+      await _apiService.registerUser(userData, imageFile);
+
+      print('fcm_token : $_fcmToken');
+      Get.toNamed(AppRoutes.navbarScreen);
     } catch (e) {
-      print(e);
+      print('Error registering user: $e');
+      Get.snackbar('Registration Failed', e.toString());
     }
   }
 

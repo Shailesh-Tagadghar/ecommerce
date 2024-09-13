@@ -10,6 +10,8 @@ class FcmService {
     if (token != null) {
       _storage.write('fcm_token', token);
       print("FCM Token: $token");
+    } else {
+      print("Failed to get FCM Token");
     }
   }
 }

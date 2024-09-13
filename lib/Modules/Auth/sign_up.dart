@@ -231,7 +231,16 @@ class Signup extends StatelessWidget {
                             authController.passwordError.value.isEmpty &&
                             authController.checkboxError.value.isEmpty) {
                           authController.setUserName(nameController.text);
-                          Get.toNamed(AppRoutes.userDetailScreen);
+                          final userData = {
+                            'name': nameController.text,
+                            'email': emailController.text,
+                            'password': passwordController.text,
+                          };
+                          print('Sign_Up Fields Data : $userData');
+                          Get.toNamed(
+                            AppRoutes.userDetailScreen,
+                            arguments: userData,
+                          );
                         }
                       },
                     ),
