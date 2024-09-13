@@ -1,5 +1,7 @@
 import 'dart:io';
 
+import 'package:ecommerce/Modules/Auth/services/api_service.dart';
+import 'package:ecommerce/Modules/Auth/services/storage_util.dart';
 import 'package:ecommerce/Routes/app_routes.dart';
 import 'package:ecommerce/Utils/Constants/string_constant.dart';
 import 'package:email_validator/email_validator.dart';
@@ -329,6 +331,33 @@ class AuthController extends GetxController {
         passwordError.value = 'Incorrect password';
       }
       return false; // Authentication failed
+    }
+  }
+
+  ///////////////////
+  // API Integration
+  final ApiService _apiService = ApiService();
+  final _fcmToken = StorageUtil.read('fcm_token');
+
+  Future<void> register(Map<String, dynamic> userData) async {
+    try {
+      await _apiService.registerUser(userData);
+      Get.toNamed(
+        AppRoutes.navbarScreen,
+      );
+    } catch (e) {
+      print(e);
+    }
+  }
+
+  Future<void> login(String email, String password) async {
+    try {
+      await _apiService.loginUser(email, password, _fcmToken);
+      Get.toNamed(
+        AppRoutes.navbarScreen,
+      );
+    } catch (e) {
+      print(e);
     }
   }
 }

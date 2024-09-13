@@ -1,4 +1,6 @@
 class ApiConstants {
+  static const String baseUrl = 'http://fashionapp.idealake.com/api/';
+
   static const String register = "/user/signup";
   static const String login = "/user/login";
 

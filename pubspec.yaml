@@ -54,6 +54,7 @@ dependencies:
   email_validator: ^3.0.0
   image_picker: ^1.1.2
   dotted_line: ^3.2.2
+  firebase_messaging: ^14.7.10
 
 dev_dependencies:
   flutter_test:
