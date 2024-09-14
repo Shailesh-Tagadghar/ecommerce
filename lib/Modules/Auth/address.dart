@@ -30,7 +30,7 @@ class Address extends StatelessWidget {
     final email = args['email'];
     final password = args['password'];
     final image = args['image'];
-    final phone = args['phone'];
+    final number = args['number'];
     final gender = args['gender'];
     return Scaffold(
       backgroundColor: ColorConstants.whiteColor,
@@ -275,20 +275,21 @@ class Address extends StatelessWidget {
                               pinController.text,
                             ].join(', ');
 
-                            final fcmToken =
-                                GetStorage().read<String>('fcm_token') ??
-                                    'default_fcm_token';
+                            // final fcmToken =
+                            //     GetStorage().read<String>('fcm_token') ??
+                            //         'default_fcm_token';
 
                             final registrationData = {
                               'name': name,
                               'email': email,
                               'password': password,
                               'image': image,
-                              'phone': phone,
+                              'number': number,
                               'gender': gender,
                               'address': address,
-                              'fcm_token': fcmToken,
-                              'loginType': 'Email', // Set your login type
+                              'fcm_token': GetStorage().read('fcm_token') ??
+                                  'dummy_fcm_token',
+                              'login_type': 'Email', // Set your login type
                             };
                             try {
                               await ApiService.registerUser(

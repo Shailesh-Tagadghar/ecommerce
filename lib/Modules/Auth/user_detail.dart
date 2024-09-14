@@ -326,7 +326,7 @@ class UserDetail extends StatelessWidget {
                               'password': password,
                               'image':
                                   validationController.profileImage.value?.path,
-                              'phone':
+                              'number':
                                   '${validationController.selectedCountrycode.value}-${validationController.phoneNumber.value}',
                               'gender': validationController
                                   .selectedDropdownItem.value,
