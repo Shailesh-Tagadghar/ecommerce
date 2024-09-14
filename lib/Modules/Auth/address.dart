@@ -267,14 +267,6 @@ class Address extends StatelessWidget {
                               validationController.cityError.value.isEmpty &&
                               validationController.stateError.value.isEmpty &&
                               validationController.pinError.value.isEmpty) {
-                            // validationController.saveAddress(
-                            //   addressController.text,
-                            //   address1Controller.text,
-                            //   cityController.text,
-                            //   stateController.text,
-                            //   pinController.text,
-                            // );
-                            // Get.toNamed(AppRoutes.navbarScreen);
                             final address = [
                               addressController.text,
                               address1Controller.text,

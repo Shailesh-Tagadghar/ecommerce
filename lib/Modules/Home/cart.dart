@@ -100,14 +100,7 @@ class Cart extends StatelessWidget {
                 },
               ),
             ),
-            // SizedBox(
-            //   height: 2.h,
-            // ),
             Padding(
-              // padding: EdgeInsets.symmetric(
-              //   horizontal: 5.w,
-              //   vertical: 2.h,
-              // ),
               padding: EdgeInsets.only(
                 bottom: 10.h,
               ),

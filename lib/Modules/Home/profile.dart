@@ -135,11 +135,6 @@ class Profile extends StatelessWidget {
                             ),
                           ),
                         ),
-                        // const Icon(
-                        //   Icons.person_rounded,
-                        //   color: ColorConstants.greyColor,
-                        //   size: 60,
-                        // ),
                       ],
                     ),
                   ),

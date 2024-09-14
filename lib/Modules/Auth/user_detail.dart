@@ -108,66 +108,6 @@ class UserDetail extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      // Align(
-                      //   child: GestureDetector(
-                      //     onTap: () {
-                      //       showModalBottomSheet(
-                      //         context: context,
-                      //         builder: (context) => SizedBox(
-                      //           height: 150,
-                      //           child: Column(
-                      //             children: [
-                      //               ListTile(
-                      //                 leading: const Icon(Icons.photo_library),
-                      //                 title: const Text('Gallery'),
-                      //                 onTap: () {},
-                      //               ),
-                      //               ListTile(
-                      //                 leading: const Icon(Icons.camera_alt),
-                      //                 title: const Text('Camera'),
-                      //                 onTap: () {},
-                      //               ),
-                      //             ],
-                      //           ),
-                      //         ),
-                      //       );
-                      //     },
-                      //     child: Stack(
-                      //       alignment: Alignment.center,
-                      //       children: [
-                      //         CircleAvatar(
-                      //           radius: 60,
-                      //           backgroundColor: ColorConstants.background,
-                      //           child: Align(
-                      //             alignment: Alignment.bottomRight,
-                      //             child: Container(
-                      //               height: 4.h,
-                      //               width: 8.w,
-                      //               decoration: BoxDecoration(
-                      //                 color: ColorConstants.rich,
-                      //                 borderRadius: BorderRadius.circular(100),
-                      //                 border: Border.all(
-                      //                   width: 2,
-                      //                   color: ColorConstants.whiteColor,
-                      //                 ),
-                      //               ),
-                      //               child: const Icon(
-                      //                 AntDesign.edit_outline,
-                      //                 color: ColorConstants.whiteColor,
-                      //                 size: 20,
-                      //               ),
-                      //             ),
-                      //           ),
-                      //         ),
-                      //         const Icon(
-                      //           Icons.person_rounded,
-                      //           color: ColorConstants.greyColor,
-                      //           size: 60,
-                      //         ),
-                      //       ],
-                      //     ),
-                      //   ),
-                      // ),
                       Align(
                         child: GestureDetector(
                           onTap: () {
@@ -242,11 +182,6 @@ class UserDetail extends StatelessWidget {
                                   ),
                                 ),
                               ),
-                              // const Icon(
-                              //   Icons.person_rounded,
-                              //   color: ColorConstants.greyColor,
-                              //   size: 60,
-                              // ),
                             ],
                           ),
                         ),
@@ -274,19 +209,12 @@ class UserDetail extends StatelessWidget {
                       SizedBox(
                         height: 0.2.h,
                       ),
-                      // const CustomField(
-                      //   hintText: StringConstants.name,
-                      //   fontSize: 11,
-                      //   hintTextColor: ColorConstants.greyColor,
-                      //   keyboardType: TextInputType.name,
-                      // ),
                       CustomField(
                         controller: nameController,
                         fontSize: 13,
                         keyboardType: TextInputType.name,
                         readonly: false,
                       ),
-
                       SizedBox(
                         height: 1.5.h,
                       ),
@@ -299,13 +227,6 @@ class UserDetail extends StatelessWidget {
                       SizedBox(
                         height: 0.2.h,
                       ),
-                      // const CustomField(
-                      //   hintText: StringConstants.phone,
-                      //   fontSize: 11,
-                      //   isPhoneNumber: true,
-                      //   hintTextColor: ColorConstants.greyColor,
-                      //   keyboardType: TextInputType.phone,
-                      // ),
                       Obx(
                         () => CustomField(
                           hintText: StringConstants

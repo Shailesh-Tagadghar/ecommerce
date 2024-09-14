@@ -253,8 +253,6 @@ class ValidationController extends GetxController {
       print('Gender: ${selectedDropdownItem.value}');
       print('Profile Image Path: ${profileImage.value?.path}');
 
-      // Navigate to Address Screen or perform desired action
-      // Get.toNamed(AppRoutes());
       Get.toNamed(
         AppRoutes.addressScreen,
       );
