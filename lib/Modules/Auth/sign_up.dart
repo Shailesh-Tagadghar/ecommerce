@@ -2,6 +2,7 @@ import 'package:ecommerce/Modules/Auth/Widget/custom_button.dart';
 import 'package:ecommerce/Modules/Auth/Widget/custom_field.dart';
 import 'package:ecommerce/Modules/Auth/Widget/custom_text.dart';
 import 'package:ecommerce/Modules/Auth/controllers/auth_controller.dart';
+import 'package:ecommerce/Modules/Auth/controllers/validation.dart';
 import 'package:ecommerce/Routes/app_routes.dart';
 import 'package:ecommerce/Utils/Constants/asset_constant.dart';
 import 'package:ecommerce/Utils/Constants/color_constant.dart';
@@ -14,6 +15,9 @@ class Signup extends StatelessWidget {
   Signup({super.key});
 
   final AuthController authController = Get.put(AuthController());
+
+  final ValidationController validationController =
+      Get.put(ValidationController());
 
   final TextEditingController nameController = TextEditingController();
   final TextEditingController emailController = TextEditingController();
@@ -82,12 +86,12 @@ class Signup extends StatelessWidget {
                       fontSize: 11,
                       hintTextColor: ColorConstants.greyColor,
                       keyboardType: TextInputType.name,
-                      // onChanged: (value) => authController.validateName(value),
+                      // onChanged: (value) => validationController.validateName(value),
                     ),
                     Obx(
-                      () => authController.nameError.value.isNotEmpty
+                      () => validationController.nameError.value.isNotEmpty
                           ? CustomText(
-                              text: authController.nameError.value,
+                              text: validationController.nameError.value,
                               color: ColorConstants.errorColor,
                               fontSize: 10,
                               weight: FontWeight.w400,
@@ -112,12 +116,12 @@ class Signup extends StatelessWidget {
                       fontSize: 11,
                       hintTextColor: ColorConstants.greyColor,
                       keyboardType: TextInputType.emailAddress,
-                      // onChanged: (value) => authController.validateEmail(value),
+                      // onChanged: (value) => validationController.validateEmail(value),
                     ),
                     Obx(
-                      () => authController.emailError.value.isNotEmpty
+                      () => validationController.emailError.value.isNotEmpty
                           ? CustomText(
-                              text: authController.emailError.value,
+                              text: validationController.emailError.value,
                               color: ColorConstants.errorColor,
                               fontSize: 10,
                               weight: FontWeight.w400,
@@ -146,14 +150,14 @@ class Signup extends StatelessWidget {
                         hintText: StringConstants.password,
                         hintTextColor: ColorConstants.greyColor,
                         // onChanged: (value) =>
-                        //     authController.validatePassword(value),
+                        //     validationController.validatePassword(value),
                         onIconPressed: authController.togglePasswordVisibility,
                       ),
                     ),
                     Obx(
-                      () => authController.passwordError.value.isNotEmpty
+                      () => validationController.passwordError.value.isNotEmpty
                           ? CustomText(
-                              text: authController.passwordError.value,
+                              text: validationController.passwordError.value,
                               color: ColorConstants.errorColor,
                               fontSize: 10,
                               weight: FontWeight.w400,
@@ -170,12 +174,13 @@ class Signup extends StatelessWidget {
                             height: 2.h,
                             width: 5.w,
                             child: Checkbox.adaptive(
-                              value: authController.agreeToTerms.value,
+                              value: validationController.agreeToTerms.value,
                               // onChanged: (bool? val) {
-                              //   authController.agreeToTerms.value =
-                              //       !authController.agreeToTerms.value;
+                              //   validationController.agreeToTerms.value =
+                              //       !validationController.agreeToTerms.value;
                               // },
-                              onChanged: (value) => authController.checkBox(),
+                              onChanged: (value) =>
+                                  validationController.checkBox(),
                               activeColor: ColorConstants.primary,
                             ),
                           ),
@@ -199,9 +204,9 @@ class Signup extends StatelessWidget {
                       ],
                     ),
                     Obx(
-                      () => authController.checkboxError.value.isNotEmpty
+                      () => validationController.checkboxError.value.isNotEmpty
                           ? CustomText(
-                              text: authController.checkboxError.value,
+                              text: validationController.checkboxError.value,
                               color: ColorConstants.errorColor,
                               fontSize: 10,
                               weight: FontWeight.w400,
@@ -220,17 +225,18 @@ class Signup extends StatelessWidget {
                       fontSize: 14,
                       weight: FontWeight.w500,
                       action: () {
-                        authController.validateName(nameController.text);
-                        authController.validateEmail(emailController.text);
-                        authController
+                        validationController.validateName(nameController.text);
+                        validationController
+                            .validateEmail(emailController.text);
+                        validationController
                             .validatePassword(passwordController.text);
-                        authController.validateCheckbox();
+                        validationController.validateCheckbox();
 
-                        if (authController.nameError.value.isEmpty &&
-                            authController.emailError.value.isEmpty &&
-                            authController.passwordError.value.isEmpty &&
-                            authController.checkboxError.value.isEmpty) {
-                          authController.setUserName(nameController.text);
+                        if (validationController.nameError.value.isEmpty &&
+                            validationController.emailError.value.isEmpty &&
+                            validationController.passwordError.value.isEmpty &&
+                            validationController.checkboxError.value.isEmpty) {
+                          validationController.setUserName(nameController.text);
                           Get.toNamed(AppRoutes.userDetailScreen);
                         }
                       },

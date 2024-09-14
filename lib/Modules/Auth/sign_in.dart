@@ -2,6 +2,7 @@ import 'package:ecommerce/Modules/Auth/Widget/custom_button.dart';
 import 'package:ecommerce/Modules/Auth/Widget/custom_field.dart';
 import 'package:ecommerce/Modules/Auth/Widget/custom_text.dart';
 import 'package:ecommerce/Modules/Auth/controllers/auth_controller.dart';
+import 'package:ecommerce/Modules/Auth/controllers/validation.dart';
 import 'package:ecommerce/Routes/app_routes.dart';
 import 'package:ecommerce/Utils/Constants/asset_constant.dart';
 import 'package:ecommerce/Utils/Constants/color_constant.dart';
@@ -14,6 +15,9 @@ class SignIn extends StatelessWidget {
   SignIn({super.key});
 
   final AuthController authController = Get.put(AuthController());
+
+  final ValidationController validationController =
+      Get.put(ValidationController());
 
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
@@ -83,9 +87,9 @@ class SignIn extends StatelessWidget {
                       keyboardType: TextInputType.emailAddress,
                     ),
                     Obx(
-                      () => authController.emailError.isNotEmpty
+                      () => validationController.emailError.isNotEmpty
                           ? CustomText(
-                              text: authController.emailError.value,
+                              text: validationController.emailError.value,
                               color: Colors.red,
                               fontSize: 10,
                               weight: FontWeight.w400,
@@ -116,9 +120,9 @@ class SignIn extends StatelessWidget {
                         onIconPressed: authController.togglePasswordVisibility,
                       ),
                     ),
-                    Obx(() => authController.passwordError.isNotEmpty
+                    Obx(() => validationController.passwordError.isNotEmpty
                         ? CustomText(
-                            text: authController.passwordError.value,
+                            text: validationController.passwordError.value,
                             color: Colors.red,
                             fontSize: 10,
                             weight: FontWeight.w400,
@@ -155,10 +159,10 @@ class SignIn extends StatelessWidget {
                       btnColor: ColorConstants.rich,
                       isSelected: true,
                       action: () {
-                        if (authController.validateForm(
+                        if (validationController.validateForm(
                             emailController.text, passwordController.text)) {
                           bool isAuthenticated =
-                              authController.authenticateUser(
+                              validationController.authenticateUser(
                                   emailController.text,
                                   passwordController.text);
                           if (isAuthenticated) {

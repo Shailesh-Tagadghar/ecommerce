@@ -1,7 +1,7 @@
 import 'package:ecommerce/Modules/Auth/Widget/custom_button.dart';
 import 'package:ecommerce/Modules/Auth/Widget/custom_field.dart';
 import 'package:ecommerce/Modules/Auth/Widget/custom_text.dart';
-import 'package:ecommerce/Modules/Auth/controllers/auth_controller.dart';
+import 'package:ecommerce/Modules/Auth/controllers/validation.dart';
 import 'package:ecommerce/Routes/app_routes.dart';
 import 'package:ecommerce/Utils/Constants/color_constant.dart';
 import 'package:ecommerce/Utils/Constants/string_constant.dart';
@@ -13,7 +13,9 @@ import 'package:sizer/sizer.dart';
 class Address extends StatelessWidget {
   Address({super.key});
 
-  final AuthController authController = Get.put(AuthController());
+  final ValidationController validationController =
+      Get.put(ValidationController());
+
   final TextEditingController addressController = TextEditingController();
   final TextEditingController address1Controller = TextEditingController();
   final TextEditingController cityController = TextEditingController();
@@ -116,10 +118,10 @@ class Address extends StatelessWidget {
                         fontSize: 11,
                         hintTextColor: ColorConstants.greyColor,
                         keyboardType: TextInputType.name,
-                        // onChanged: (value) => authController.validateAddress(value),
+                        // onChanged: (value) => validationController.validateAddress(value),
                       ),
                       Obx(() => CustomText(
-                            text: authController.addressError.value,
+                            text: validationController.addressError.value,
                             color: ColorConstants.errorColor,
                             fontSize: 10,
                             weight: FontWeight.w400,
@@ -142,10 +144,10 @@ class Address extends StatelessWidget {
                         fontSize: 11,
                         hintTextColor: ColorConstants.greyColor,
                         keyboardType: TextInputType.name,
-                        // onChanged: (value) => authController.validateAddress1(value),
+                        // onChanged: (value) => validationController.validateAddress1(value),
                       ),
                       Obx(() => CustomText(
-                            text: authController.address1Error.value,
+                            text: validationController.address1Error.value,
                             color: ColorConstants.errorColor,
                             fontSize: 10,
                             weight: FontWeight.w400,
@@ -168,10 +170,10 @@ class Address extends StatelessWidget {
                         fontSize: 11,
                         hintTextColor: ColorConstants.greyColor,
                         keyboardType: TextInputType.name,
-                        // onChanged: (value) => authController.validateCity(value),
+                        // onChanged: (value) => validationController.validateCity(value),
                       ),
                       Obx(() => CustomText(
-                            text: authController.cityError.value,
+                            text: validationController.cityError.value,
                             color: ColorConstants.errorColor,
                             fontSize: 10,
                             weight: FontWeight.w400,
@@ -194,10 +196,10 @@ class Address extends StatelessWidget {
                         fontSize: 11,
                         hintTextColor: ColorConstants.greyColor,
                         keyboardType: TextInputType.name,
-                        //  onChanged: (value) => authController.validateState(value),
+                        //  onChanged: (value) => validationController.validateState(value),
                       ),
                       Obx(() => CustomText(
-                            text: authController.stateError.value,
+                            text: validationController.stateError.value,
                             color: ColorConstants.errorColor,
                             fontSize: 10,
                             weight: FontWeight.w400,
@@ -220,10 +222,10 @@ class Address extends StatelessWidget {
                         fontSize: 11,
                         hintTextColor: ColorConstants.greyColor,
                         keyboardType: TextInputType.number,
-                        //  onChanged: (value) => authController.validatePin(value),
+                        //  onChanged: (value) => validationController.validatePin(value),
                       ),
                       Obx(() => CustomText(
-                            text: authController.pinError.value,
+                            text: validationController.pinError.value,
                             color: ColorConstants.errorColor,
                             fontSize: 10,
                             weight: FontWeight.w400,
@@ -240,20 +242,23 @@ class Address extends StatelessWidget {
                         labelColor: ColorConstants.whiteColor,
                         isSelected: true,
                         action: () {
-                          authController
+                          validationController
                               .validateAddress(addressController.text);
-                          authController
+                          validationController
                               .validateAddress1(address1Controller.text);
-                          authController.validateCity(cityController.text);
-                          authController.validateState(stateController.text);
-                          authController.validatePin(pinController.text);
+                          validationController
+                              .validateCity(cityController.text);
+                          validationController
+                              .validateState(stateController.text);
+                          validationController.validatePin(pinController.text);
 
-                          if (authController.addressError.value.isEmpty &&
-                              authController.address1Error.value.isEmpty &&
-                              authController.cityError.value.isEmpty &&
-                              authController.stateError.value.isEmpty &&
-                              authController.pinError.value.isEmpty) {
-                            authController.saveAddress(
+                          if (validationController.addressError.value.isEmpty &&
+                              validationController
+                                  .address1Error.value.isEmpty &&
+                              validationController.cityError.value.isEmpty &&
+                              validationController.stateError.value.isEmpty &&
+                              validationController.pinError.value.isEmpty) {
+                            validationController.saveAddress(
                               addressController.text,
                               address1Controller.text,
                               cityController.text,

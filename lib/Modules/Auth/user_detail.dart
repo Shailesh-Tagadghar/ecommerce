@@ -1,7 +1,7 @@
 import 'package:ecommerce/Modules/Auth/Widget/custom_button.dart';
 import 'package:ecommerce/Modules/Auth/Widget/custom_field.dart';
 import 'package:ecommerce/Modules/Auth/Widget/custom_text.dart';
-import 'package:ecommerce/Modules/Auth/controllers/auth_controller.dart';
+import 'package:ecommerce/Modules/Auth/controllers/validation.dart';
 import 'package:ecommerce/Utils/Constants/asset_constant.dart';
 import 'package:ecommerce/Utils/Constants/color_constant.dart';
 import 'package:ecommerce/Utils/Constants/string_constant.dart';
@@ -13,14 +13,16 @@ import 'package:sizer/sizer.dart';
 class UserDetail extends StatelessWidget {
   UserDetail({super.key});
 
-  final AuthController authController = Get.put(AuthController());
+  final ValidationController validationController =
+      Get.put(ValidationController());
+
   final TextEditingController nameController = TextEditingController();
   final TextEditingController genderController = TextEditingController();
   final TextEditingController phoneController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
-    nameController.text = authController.userName.value;
+    nameController.text = validationController.userName.value;
     return Scaffold(
       backgroundColor: ColorConstants.whiteColor,
       appBar: AppBar(
@@ -174,7 +176,8 @@ class UserDetail extends StatelessWidget {
                                       leading: const Icon(Icons.photo_library),
                                       title: const Text('Gallery'),
                                       onTap: () {
-                                        authController.pickImageFromGallery();
+                                        validationController
+                                            .pickImageFromGallery();
                                         // Get.back();
                                         Navigator.pop(context);
                                       },
@@ -183,7 +186,8 @@ class UserDetail extends StatelessWidget {
                                       leading: const Icon(Icons.camera_alt),
                                       title: const Text('Camera'),
                                       onTap: () {
-                                        authController.pickImageFromCamera();
+                                        validationController
+                                            .pickImageFromCamera();
                                         // Get.back();
                                         Navigator.pop(context);
                                       },
@@ -203,10 +207,10 @@ class UserDetail extends StatelessWidget {
                                   radius: 60,
                                   // backgroundImage:
                                   //     const AssetImage(AssetConstant.image),
-                                  backgroundImage: authController
+                                  backgroundImage: validationController
                                               .profileImage.value !=
                                           null
-                                      ? FileImage(authController
+                                      ? FileImage(validationController
                                           .profileImage.value!) as ImageProvider
                                       : const AssetImage(AssetConstant.image),
                                   backgroundColor: ColorConstants.background,
@@ -242,11 +246,11 @@ class UserDetail extends StatelessWidget {
                           ),
                         ),
                       ),
-                      Obx(() => authController.imageError.value.isNotEmpty
+                      Obx(() => validationController.imageError.value.isNotEmpty
                           ? Padding(
                               padding: const EdgeInsets.only(top: 8.0),
                               child: CustomText(
-                                text: authController.imageError.value,
+                                text: validationController.imageError.value,
                                 color: ColorConstants.errorColor,
                                 fontSize: 10,
                                 weight: FontWeight.w400,
@@ -305,24 +309,24 @@ class UserDetail extends StatelessWidget {
                           isPhoneNumber: true,
                           hintTextColor: ColorConstants.greyColor,
                           selectedCountryCode:
-                              authController.selectedCountrycode.value,
-                          countryCodes: authController.countryCode,
+                              validationController.selectedCountrycode.value,
+                          countryCodes: validationController.countryCode,
                           onCountryCodeChanged: (newValue) {
-                            authController.setSelectedCountryCode(
+                            validationController.setSelectedCountryCode(
                                 newValue); // Update country code
                           },
                           onChanged: (newValue) {
-                            authController.setPhoneNumber(
+                            validationController.setPhoneNumber(
                                 newValue); // Update phone number
                           },
                           controller: phoneController,
                         ),
                       ),
-                      Obx(() => authController.phoneError.value.isNotEmpty
+                      Obx(() => validationController.phoneError.value.isNotEmpty
                           ? Padding(
                               padding: const EdgeInsets.only(top: 8.0),
                               child: CustomText(
-                                text: authController.phoneError.value,
+                                text: validationController.phoneError.value,
                                 color: ColorConstants.errorColor,
                                 fontSize: 10,
                                 weight: FontWeight.w400,
@@ -350,21 +354,24 @@ class UserDetail extends StatelessWidget {
                           fontSize: 11,
                           isDropdown: true,
                           hintTextColor: ColorConstants.greyColor,
-                          genderdropdown: authController.genderDropdownValues,
+                          genderdropdown:
+                              validationController.genderDropdownValues,
                           onChanged: (newValue) {
-                            authController.setSelectedDropdownItem(newValue);
+                            validationController
+                                .setSelectedDropdownItem(newValue);
                           },
                           controller: TextEditingController(
-                            text: authController.selectedDropdownItem.value,
+                            text:
+                                validationController.selectedDropdownItem.value,
                           ),
                         ),
                       ),
                       Obx(
-                        () => authController.genderError.value.isNotEmpty
+                        () => validationController.genderError.value.isNotEmpty
                             ? Padding(
                                 padding: const EdgeInsets.only(top: 8.0),
                                 child: CustomText(
-                                  text: authController.genderError.value,
+                                  text: validationController.genderError.value,
                                   color: ColorConstants.errorColor,
                                   fontSize: 10,
                                   weight: FontWeight.w400,
@@ -384,7 +391,7 @@ class UserDetail extends StatelessWidget {
                         fontSize: 14,
                         weight: FontWeight.w500,
                         action: () {
-                          authController.submitUserDetails();
+                          validationController.submitUserDetails();
                           // Get.toNamed(
                           //   AppRoutes.addressScreen,
                           // );

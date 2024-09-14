@@ -2,6 +2,7 @@ import 'package:ecommerce/Modules/Auth/Widget/custom_button.dart';
 import 'package:ecommerce/Modules/Auth/Widget/custom_field.dart';
 import 'package:ecommerce/Modules/Auth/Widget/custom_text.dart';
 import 'package:ecommerce/Modules/Auth/controllers/auth_controller.dart';
+import 'package:ecommerce/Modules/Auth/controllers/validation.dart';
 import 'package:ecommerce/Utils/Constants/color_constant.dart';
 import 'package:ecommerce/Utils/Constants/string_constant.dart';
 import 'package:flutter/material.dart';
@@ -13,6 +14,8 @@ class ForgotPassword extends StatelessWidget {
   ForgotPassword({super.key});
 
   final AuthController authController = Get.put(AuthController());
+  final ValidationController validationController =
+      Get.put(ValidationController());
 
   final TextEditingController passwordController = TextEditingController();
   final TextEditingController cnfpasswordController = TextEditingController();
@@ -115,9 +118,9 @@ class ForgotPassword extends StatelessWidget {
                               authController.togglePasswordVisibility,
                         ),
                       ),
-                      Obx(() => authController.passwordError.isNotEmpty
+                      Obx(() => validationController.passwordError.isNotEmpty
                           ? CustomText(
-                              text: authController.passwordError.value,
+                              text: validationController.passwordError.value,
                               color: Colors.red,
                               fontSize: 10,
                               weight: FontWeight.w400,
@@ -149,14 +152,16 @@ class ForgotPassword extends StatelessWidget {
                               authController.toggleCnfPasswordVisibility,
                         ),
                       ),
-                      Obx(() => authController.confirmPasswordError.isNotEmpty
-                          ? CustomText(
-                              text: authController.confirmPasswordError.value,
-                              color: Colors.red,
-                              fontSize: 10,
-                              weight: FontWeight.w400,
-                            )
-                          : Container()),
+                      Obx(() =>
+                          validationController.confirmPasswordError.isNotEmpty
+                              ? CustomText(
+                                  text: validationController
+                                      .confirmPasswordError.value,
+                                  color: Colors.red,
+                                  fontSize: 10,
+                                  weight: FontWeight.w400,
+                                )
+                              : Container()),
                       SizedBox(
                         height: 5.h,
                       ),
@@ -174,14 +179,15 @@ class ForgotPassword extends StatelessWidget {
                           String confirmPassword = cnfpasswordController.text;
 
                           // Validate the passwords
-                          authController.validatePassword(password);
-                          authController.validateConfirmPassword(
+                          validationController.validatePassword(password);
+                          validationController.validateConfirmPassword(
                               password, confirmPassword);
 
-                          if (authController.passwordError.isEmpty &&
-                              authController.confirmPasswordError.isEmpty) {
+                          if (validationController.passwordError.isEmpty &&
+                              validationController
+                                  .confirmPasswordError.isEmpty) {
                             // Store and print the new password
-                            authController.saveNewPassword(password);
+                            validationController.saveNewPassword(password);
                           }
                         },
                       ),

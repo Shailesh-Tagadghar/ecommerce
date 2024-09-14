@@ -1,5 +1,5 @@
 import 'package:ecommerce/Modules/Auth/Widget/custom_text.dart';
-import 'package:ecommerce/Modules/Auth/controllers/auth_controller.dart';
+import 'package:ecommerce/Modules/Auth/controllers/validation.dart';
 import 'package:ecommerce/Modules/Home/Widget/profile_widget.dart';
 import 'package:ecommerce/Routes/app_routes.dart';
 import 'package:ecommerce/Utils/Constants/asset_constant.dart';
@@ -13,12 +13,13 @@ import 'package:sizer/sizer.dart';
 class Profile extends StatelessWidget {
   Profile({super.key});
 
-  final AuthController authController = Get.put(AuthController());
+  final ValidationController validationController =
+      Get.put(ValidationController());
   final TextEditingController nameController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
-    nameController.text = authController.userName.value;
+    nameController.text = validationController.userName.value;
 
     return Scaffold(
         backgroundColor: ColorConstants.whiteColor,
@@ -80,7 +81,7 @@ class Profile extends StatelessWidget {
                                 leading: const Icon(Icons.photo_library),
                                 title: const Text('Gallery'),
                                 onTap: () {
-                                  authController.pickImageFromGallery();
+                                  validationController.pickImageFromGallery();
                                   // Get.back();
                                   Navigator.pop(context);
                                 },
@@ -89,7 +90,7 @@ class Profile extends StatelessWidget {
                                 leading: const Icon(Icons.camera_alt),
                                 title: const Text('Camera'),
                                 onTap: () {
-                                  authController.pickImageFromCamera();
+                                  validationController.pickImageFromCamera();
                                   // Get.back();
                                   Navigator.pop(context);
                                 },
@@ -106,12 +107,11 @@ class Profile extends StatelessWidget {
                           () => CircleAvatar(
                             radius: 60,
                             // backgroundImage: const AssetImage(AssetConstant.pd1),
-                            backgroundImage: authController
-                                        .profileImage.value !=
-                                    null
-                                ? FileImage(authController.profileImage.value!)
-                                    as ImageProvider
-                                : const AssetImage(AssetConstant.pd1),
+                            backgroundImage:
+                                validationController.profileImage.value != null
+                                    ? FileImage(validationController
+                                        .profileImage.value!) as ImageProvider
+                                    : const AssetImage(AssetConstant.pd1),
                             backgroundColor: ColorConstants.background,
                             child: Align(
                               alignment: Alignment.bottomRight,
@@ -149,7 +149,7 @@ class Profile extends StatelessWidget {
                 ),
                 CustomText(
                   // text: StringConstants.profileName,
-                  text: authController.userName.value,
+                  text: validationController.userName.value,
                   color: ColorConstants.blackColor,
                   fontSize: 15,
                   weight: FontWeight.w500,
