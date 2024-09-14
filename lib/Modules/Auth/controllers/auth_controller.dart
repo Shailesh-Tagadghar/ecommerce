@@ -1,11 +1,6 @@
-import 'package:ecommerce/Modules/Auth/controllers/validation.dart';
-
 import 'package:get/get.dart';
 
 class AuthController extends GetxController {
-  final ValidationController validationController =
-      Get.put(ValidationController());
-
   var obscureText = false.obs;
   var isPasswordVisible = true.obs;
   var isCnfPasswordVisible = true.obs;
