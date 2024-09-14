@@ -2,6 +2,7 @@ import 'package:ecommerce/Modules/Auth/Widget/custom_button.dart';
 import 'package:ecommerce/Modules/Auth/Widget/custom_field.dart';
 import 'package:ecommerce/Modules/Auth/Widget/custom_text.dart';
 import 'package:ecommerce/Modules/Auth/controllers/validation.dart';
+import 'package:ecommerce/Routes/app_routes.dart';
 import 'package:ecommerce/Utils/Constants/asset_constant.dart';
 import 'package:ecommerce/Utils/Constants/color_constant.dart';
 import 'package:ecommerce/Utils/Constants/string_constant.dart';
@@ -22,7 +23,11 @@ class UserDetail extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    nameController.text = validationController.userName.value;
+    // nameController.text = validationController.userName.value;
+    final Map<String, String> args = Get.arguments;
+    nameController.text = args['name'] ?? '';
+    final email = args['email'];
+    final password = args['password'];
     return Scaffold(
       backgroundColor: ColorConstants.whiteColor,
       appBar: AppBar(
@@ -391,10 +396,21 @@ class UserDetail extends StatelessWidget {
                         fontSize: 14,
                         weight: FontWeight.w500,
                         action: () {
-                          validationController.submitUserDetails();
-                          // Get.toNamed(
-                          //   AppRoutes.addressScreen,
-                          // );
+                          // validationController.submitUserDetails();
+                          Get.toNamed(
+                            AppRoutes.addressScreen,
+                            arguments: {
+                              'name': nameController.text,
+                              'email': email,
+                              'password': password,
+                              'image':
+                                  validationController.profileImage.value?.path,
+                              'phone':
+                                  '${validationController.selectedCountrycode.value}-${validationController.phoneNumber.value}',
+                              'gender': validationController
+                                  .selectedDropdownItem.value,
+                            },
+                          );
                         },
                       ),
                     ],

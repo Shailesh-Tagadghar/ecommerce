@@ -1,4 +1,5 @@
 import 'package:ecommerce/Modules/Auth/controllers/auth_controller.dart';
+import 'package:ecommerce/Modules/Auth/services/fcm_service.dart';
 import 'package:ecommerce/Modules/Home/home_controller.dart';
 import 'package:get/get.dart';
 
@@ -22,6 +23,10 @@ class GlobalControllerBindings extends Bindings {
     );
     Get.put(
       HomeController(),
+    );
+
+    Get.put(
+      FcmService(),
     );
   }
 }

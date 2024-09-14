@@ -2,11 +2,13 @@ import 'package:ecommerce/Modules/Auth/Widget/custom_button.dart';
 import 'package:ecommerce/Modules/Auth/Widget/custom_field.dart';
 import 'package:ecommerce/Modules/Auth/Widget/custom_text.dart';
 import 'package:ecommerce/Modules/Auth/controllers/validation.dart';
+import 'package:ecommerce/Modules/Auth/services/api_service.dart';
 import 'package:ecommerce/Routes/app_routes.dart';
 import 'package:ecommerce/Utils/Constants/color_constant.dart';
 import 'package:ecommerce/Utils/Constants/string_constant.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:icons_plus/icons_plus.dart';
 import 'package:sizer/sizer.dart';
 
@@ -23,6 +25,13 @@ class Address extends StatelessWidget {
   final TextEditingController pinController = TextEditingController();
   @override
   Widget build(BuildContext context) {
+    final Map<String, dynamic> args = Get.arguments;
+    final name = args['name'];
+    final email = args['email'];
+    final password = args['password'];
+    final image = args['image'];
+    final phone = args['phone'];
+    final gender = args['gender'];
     return Scaffold(
       backgroundColor: ColorConstants.whiteColor,
       appBar: AppBar(
@@ -241,7 +250,7 @@ class Address extends StatelessWidget {
                         weight: FontWeight.w500,
                         labelColor: ColorConstants.whiteColor,
                         isSelected: true,
-                        action: () {
+                        action: () async {
                           validationController
                               .validateAddress(addressController.text);
                           validationController
@@ -258,14 +267,46 @@ class Address extends StatelessWidget {
                               validationController.cityError.value.isEmpty &&
                               validationController.stateError.value.isEmpty &&
                               validationController.pinError.value.isEmpty) {
-                            validationController.saveAddress(
+                            // validationController.saveAddress(
+                            //   addressController.text,
+                            //   address1Controller.text,
+                            //   cityController.text,
+                            //   stateController.text,
+                            //   pinController.text,
+                            // );
+                            // Get.toNamed(AppRoutes.navbarScreen);
+                            final address = [
                               addressController.text,
                               address1Controller.text,
                               cityController.text,
                               stateController.text,
                               pinController.text,
-                            );
-                            Get.toNamed(AppRoutes.navbarScreen);
+                            ].join(', ');
+
+                            final fcmToken =
+                                GetStorage().read<String>('fcm_token') ??
+                                    'default_fcm_token';
+
+                            final registrationData = {
+                              'name': name,
+                              'email': email,
+                              'password': password,
+                              'image': image,
+                              'phone': phone,
+                              'gender': gender,
+                              'address': address,
+                              'fcm_token': fcmToken,
+                              'loginType': 'Email', // Set your login type
+                            };
+                            try {
+                              await ApiService.registerUser(
+                                  registrationData); // Register user
+                              Get.toNamed(AppRoutes
+                                  .navbarScreen); // Navigate to the next screen on success
+                            } catch (e) {
+                              // Handle registration errors, show error messages, etc.
+                              print('Registration error: $e');
+                            }
                           }
                         },
                       ),
