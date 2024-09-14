@@ -4,9 +4,10 @@ class AuthModel {
   String? password;
   String? fcmToken;
   String? gender;
-  String? phone;
+  String? number;
   String? image;
   String? address;
+  String? loginType = 'Email';
 
   AuthModel({
     this.name,
@@ -14,9 +15,10 @@ class AuthModel {
     this.password,
     this.fcmToken,
     this.gender,
-    this.phone,
+    this.number,
     this.image,
     this.address,
+    this.loginType,
   });
 
   Map<String, dynamic> toJson() {
@@ -26,9 +28,10 @@ class AuthModel {
       'password': password,
       'fcm_token': fcmToken,
       'gender': gender,
-      'phone': phone,
+      'number': number,
       'image': image,
       'address': address,
+      'login_type': loginType,
     };
   }
 }
