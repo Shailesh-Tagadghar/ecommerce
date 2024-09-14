@@ -5,6 +5,7 @@ import 'package:ecommerce/Routes/app_routes.dart';
 import 'package:ecommerce/Utils/Constants/asset_constant.dart';
 import 'package:ecommerce/Utils/Constants/color_constant.dart';
 import 'package:ecommerce/Utils/Constants/string_constant.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:icons_plus/icons_plus.dart';
@@ -144,6 +145,7 @@ class Profile extends StatelessWidget {
                 ),
                 CustomText(
                   // text: StringConstants.profileName,
+                  
                   text: validationController.userName.value,
                   color: ColorConstants.blackColor,
                   fontSize: 15,
@@ -327,7 +329,8 @@ class Profile extends StatelessWidget {
                         weight: FontWeight.w500,
                       ),
                       onPressed: () {
-                        Get.offAllNamed(AppRoutes.signInScreen);
+                        // Get.offAllNamed(AppRoutes.signInScreen);
+                        _logout();
                       },
                     ),
                   ),
@@ -341,5 +344,15 @@ class Profile extends StatelessWidget {
         );
       },
     );
+  }
+
+  void _logout() async {
+    try {
+      await FirebaseAuth.instance.signOut();
+      Get.offAllNamed(AppRoutes.signInScreen);
+    } catch (e) {
+      // Handle any errors here
+      print("Error signing out: $e");
+    }
   }
 }

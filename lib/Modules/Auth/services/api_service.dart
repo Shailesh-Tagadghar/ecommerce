@@ -80,20 +80,41 @@ class ApiService {
     return await fcmService.getFcmToken();
   }
 
-  Future<void> loginUser(
-      String email, String password, String? fcmToken) async {
-    final response = await http.post(
-      Uri.parse('$baseUrl/${ApiConstants.login}'),
-      headers: {'Content-Type': 'application/json'},
-      body: jsonEncode({
-        'email': email,
-        'password': password,
-        'fcm_token': fcmToken,
-      }),
-    );
+  static Future<void> loginUser(Map<String, dynamic> loginData) async {
+    final url = Uri.parse(
+        '$baseUrl/${ApiConstants.login}'); // Adjust the endpoint if needed
+    final fcmToken = GetStorage().read('fcm_token');
 
-    if (response.statusCode != 200) {
-      throw Exception('Failed to login: ${response.statusCode}');
+    try {
+      print('Sending login request to $url with data: $loginData');
+
+      final response = await http
+          .post(
+            url,
+            headers: {'Content-Type': 'application/json'},
+            body: jsonEncode({
+              'email': loginData['email'],
+              'password': loginData['password'],
+              'fcm_token': fcmToken ?? 'dummy_fcm_token',
+              'login_type': loginData['login_type'],
+            }),
+          )
+          .timeout(
+              Duration(seconds: 30)); // Adding a timeout for network requests
+
+      if (response.statusCode == 200) {
+        print('User logged in successfully');
+        // Store the user information in GetStorage for persistence
+        final data = jsonDecode(response.body);
+        final storage = GetStorage();
+        storage.write('user_data', data);
+      } else {
+        print('Server returned an error: ${response.statusCode}');
+        throw Exception('Failed to log in');
+      }
+    } catch (e) {
+      print('Error during login: $e');
+      throw Exception('Failed to log in');
     }
   }
 }

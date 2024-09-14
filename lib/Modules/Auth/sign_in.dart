@@ -3,12 +3,14 @@ import 'package:ecommerce/Modules/Auth/Widget/custom_field.dart';
 import 'package:ecommerce/Modules/Auth/Widget/custom_text.dart';
 import 'package:ecommerce/Modules/Auth/controllers/auth_controller.dart';
 import 'package:ecommerce/Modules/Auth/controllers/validation.dart';
+import 'package:ecommerce/Modules/Auth/services/api_service.dart';
 import 'package:ecommerce/Routes/app_routes.dart';
 import 'package:ecommerce/Utils/Constants/asset_constant.dart';
 import 'package:ecommerce/Utils/Constants/color_constant.dart';
 import 'package:ecommerce/Utils/Constants/string_constant.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:sizer/sizer.dart';
 
 class SignIn extends StatelessWidget {
@@ -158,16 +160,28 @@ class SignIn extends StatelessWidget {
                       labelColor: ColorConstants.whiteColor,
                       btnColor: ColorConstants.rich,
                       isSelected: true,
-                      action: () {
-                        if (validationController.validateForm(
-                            emailController.text, passwordController.text)) {
-                          bool isAuthenticated =
-                              validationController.authenticateUser(
-                                  emailController.text,
-                                  passwordController.text);
-                          if (isAuthenticated) {
-                            // Navigate to Home screen
-                            Get.offNamed(AppRoutes.navbarScreen);
+                      action: () async {
+                        validationController
+                            .validateEmail(emailController.text);
+                        validationController
+                            .validatePassword(passwordController.text);
+
+                        if (validationController.emailError.value.isEmpty &&
+                            validationController.passwordError.value.isEmpty) {
+                          final loginData = {
+                            'email': emailController.text,
+                            'password': passwordController.text,
+                            'fcm_token': GetStorage().read('fcm_token') ??
+                                'dummy_fcm_token',
+                            'login_type': 'Email',
+                          };
+                          try {
+                            await ApiService.loginUser(loginData);
+                            Get.offAllNamed(
+                                AppRoutes.navbarScreen); // Navigate on success
+                          } catch (e) {
+                            print('Login error: $e');
+                            // Handle login errors
                           }
                         }
                       },
