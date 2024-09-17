@@ -145,7 +145,6 @@ class Profile extends StatelessWidget {
                 ),
                 CustomText(
                   // text: StringConstants.profileName,
-                  
                   text: validationController.userName.value,
                   color: ColorConstants.blackColor,
                   fontSize: 15,

@@ -21,6 +21,7 @@ class AuthModel {
     this.loginType,
   });
 
+  // Convert the object to JSON
   Map<String, dynamic> toJson() {
     return {
       'name': name,
@@ -33,5 +34,20 @@ class AuthModel {
       'address': address,
       'login_type': loginType,
     };
+  }
+
+  // Create an object from JSON
+  factory AuthModel.fromJson(Map<String, dynamic> json) {
+    return AuthModel(
+      name: json['name'],
+      email: json['email'],
+      password: json['password'],
+      fcmToken: json['fcm_token'],
+      gender: json['gender'],
+      number: json['number'],
+      image: json['image'],
+      address: json['address'],
+      loginType: json['login_type'],
+    );
   }
 }
