@@ -25,16 +25,6 @@ class HomeController extends GetxController {
     }
   }
 
-  // void cartincrement2() {
-  //   quantity2++;
-  // }
-
-  // void cartdecrement2() {
-  //   if (quantity2 > 0) {
-  //     quantity2--;
-  //   }
-  // }
-
   //Wishlist page list view -- list
   final List<String> wishlistCategory = <String>[
     StringConstants.category1,

@@ -1,8 +1,8 @@
 import 'package:crystal_navigation_bar/crystal_navigation_bar.dart';
 import 'package:ecommerce/Modules/Home/cart.dart';
+import 'package:ecommerce/Modules/Home/controllers/home_controller.dart';
 import 'package:ecommerce/Modules/Home/home.dart';
 import 'package:ecommerce/Modules/Home/profile.dart';
-import 'package:ecommerce/Modules/Home/home_controller.dart';
 import 'package:ecommerce/Modules/Home/search.dart';
 import 'package:ecommerce/Modules/Home/wishlist.dart';
 import 'package:ecommerce/Utils/Constants/color_constant.dart';

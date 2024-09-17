@@ -8,6 +8,7 @@ import 'package:ecommerce/Utils/Constants/string_constant.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:icons_plus/icons_plus.dart';
 import 'package:sizer/sizer.dart';
 
@@ -107,7 +108,6 @@ class Profile extends StatelessWidget {
                         Obx(
                           () => CircleAvatar(
                             radius: 60,
-                            // backgroundImage: const AssetImage(AssetConstant.pd1),
                             backgroundImage:
                                 validationController.profileImage.value != null
                                     ? FileImage(validationController
@@ -144,7 +144,6 @@ class Profile extends StatelessWidget {
                   height: 1.5.h,
                 ),
                 CustomText(
-                  // text: StringConstants.profileName,
                   text: validationController.userName.value,
                   color: ColorConstants.blackColor,
                   fontSize: 15,
@@ -348,6 +347,8 @@ class Profile extends StatelessWidget {
   void _logout() async {
     try {
       await FirebaseAuth.instance.signOut();
+      final storage = GetStorage();
+      storage.remove('user_data');
       Get.offAllNamed(AppRoutes.signInScreen);
     } catch (e) {
       // Handle any errors here

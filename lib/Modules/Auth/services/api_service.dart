@@ -29,12 +29,6 @@ class ApiService {
         ..fields['fcm_token'] = fcmToken ?? 'dummy_fcm_token'
         ..fields['login_type'] = registrationData['login_type'];
 
-      // Attach the image file
-      // if (registrationData['image'] != null) {
-      //   var imageFile = File(registrationData['image']);
-      //   request.files
-      //       .add(await http.MultipartFile.fromPath('image', imageFile.path));
-      // }
       if (registrationData['image'] != null) {
         var imageFile = File(registrationData['image']);
         var imageExtension = imageFile.path.split('.').last.toLowerCase();
@@ -57,12 +51,16 @@ class ApiService {
       }
 
       var response = await request.send().timeout(
-          Duration(seconds: 30)); // Adding a timeout for network requests
+          const Duration(seconds: 30)); // Adding a timeout for network requests
 
       response.stream.transform(utf8.decoder).listen((value) {
         print('Response body: $value');
         if (response.statusCode == 200) {
+          final data = jsonDecode(value);
           print('User registered successfully');
+          // Store user data in GetStorage
+          final storage = GetStorage();
+          storage.write('user_data', data);
         } else {
           print('Server returned an error: ${response.statusCode}');
           throw Exception('Failed to register user');
@@ -99,13 +97,14 @@ class ApiService {
               'login_type': loginData['login_type'],
             }),
           )
-          .timeout(
-              Duration(seconds: 30)); // Adding a timeout for network requests
+          .timeout(const Duration(
+              seconds: 30)); // Adding a timeout for network requests
 
       if (response.statusCode == 200) {
+        final data = jsonDecode(response.body);
+
         print('User logged in successfully');
         // Store the user information in GetStorage for persistence
-        final data = jsonDecode(response.body);
         final storage = GetStorage();
         storage.write('user_data', data);
       } else {
