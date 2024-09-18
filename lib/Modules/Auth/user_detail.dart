@@ -316,20 +316,33 @@ class UserDetail extends StatelessWidget {
                         fontSize: 14,
                         weight: FontWeight.w500,
                         action: () {
-                          Get.toNamed(
-                            AppRoutes.addressScreen,
-                            arguments: {
-                              'name': nameController.text,
-                              'email': email,
-                              'password': password,
-                              'image':
-                                  validationController.profileImage.value?.path,
-                              'number':
-                                  '${validationController.selectedCountrycode.value}-${validationController.phoneNumber.value}',
-                              'gender': validationController
-                                  .selectedDropdownItem.value,
-                            },
-                          );
+                          validationController
+                              .validateImage(); // Validate image
+                          validationController
+                              .validateName(nameController.text);
+                          validationController
+                              .validatePhone(phoneController.text);
+                          validationController.validateGender(
+                              validationController.selectedDropdownItem.value);
+                          if (validationController.nameError.value.isEmpty &&
+                              validationController.imageError.value.isEmpty &&
+                              validationController.phoneError.value.isEmpty &&
+                              validationController.genderError.value.isEmpty) {
+                            Get.toNamed(
+                              AppRoutes.addressScreen,
+                              arguments: {
+                                'name': nameController.text,
+                                'email': email,
+                                'password': password,
+                                'image': validationController
+                                    .profileImage.value?.path,
+                                'number':
+                                    '${validationController.selectedCountrycode.value}-${validationController.phoneNumber.value}',
+                                'gender': validationController
+                                    .selectedDropdownItem.value,
+                              },
+                            );
+                          }
                         },
                       ),
                     ],
