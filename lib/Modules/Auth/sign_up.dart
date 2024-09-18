@@ -175,10 +175,7 @@ class Signup extends StatelessWidget {
                             width: 5.w,
                             child: Checkbox.adaptive(
                               value: validationController.agreeToTerms.value,
-                              // onChanged: (bool? val) {
-                              //   validationController.agreeToTerms.value =
-                              //       !validationController.agreeToTerms.value;
-                              // },
+                             
                               onChanged: (value) =>
                                   validationController.checkBox(),
                               activeColor: ColorConstants.primary,

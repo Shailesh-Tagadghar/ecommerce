@@ -14,15 +14,4 @@ class FcmService {
       print("Failed to get FCM Token");
     }
   }
-
-  // Future<String> getFcmToken() async {
-  //   // Retrieve the FCM token from GetStorage
-  //   final token = _storage.read('fcm_token');
-  //   if (token != null) {
-  //     return token;
-  //   } else {
-  //     // If no token is found, return a placeholder or handle the case as needed
-  //     return 'no_fcm_token_found';
-  //   }
-  // }
 }

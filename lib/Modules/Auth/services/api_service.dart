@@ -1,6 +1,5 @@
 import 'dart:convert';
 import 'dart:io';
-import 'package:ecommerce/Modules/Auth/services/fcm_service.dart';
 import 'package:ecommerce/Utils/Constants/api_constants.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:http/http.dart' as http;
@@ -71,12 +70,6 @@ class ApiService {
       throw Exception('Failed to register user');
     }
   }
-
-  // Get FCM token using FcmService
-  // static Future<String> getFcmToken() async {
-  //   final fcmService = FcmService();
-  //   return await fcmService.getFcmToken();
-  // }
 
   static Future<void> loginUser(Map<String, dynamic> loginData) async {
     final url = Uri.parse(

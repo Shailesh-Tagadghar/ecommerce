@@ -111,11 +111,6 @@ class Profile extends StatelessWidget {
                         Obx(
                           () => CircleAvatar(
                             radius: 60,
-                            // backgroundImage:
-                            //     validationController.profileImage.value != null
-                            //         ? FileImage(validationController
-                            //             .profileImage.value!) as ImageProvider
-                            //         : const AssetImage(AssetConstant.pd1),
                             backgroundImage: homeController
                                         .profileImage.value !=
                                     null

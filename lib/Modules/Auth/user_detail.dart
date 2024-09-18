@@ -317,7 +317,6 @@ class UserDetail extends StatelessWidget {
                         fontSize: 14,
                         weight: FontWeight.w500,
                         action: () {
-                          // validationController.submitUserDetails();
                           Get.toNamed(
                             AppRoutes.addressScreen,
                             arguments: {

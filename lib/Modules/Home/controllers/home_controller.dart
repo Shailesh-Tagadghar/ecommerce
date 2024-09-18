@@ -45,40 +45,5 @@ class HomeController extends GetxController {
   var profileImage = Rxn<File>(); // Rxn to allow nullability
   var userName = ''.obs; // Reactive variable for username
 
-  // @override
-  // void onInit() {
-  //   super.onInit();
-  //   _loadUserData();
-  // }
-
-  // // Method to load user data from GetStorage
-  // void _loadUserData() {
-  //   final userData = GetStorage().read<Map<String, dynamic>>('user_data');
-  //   if (userData != null) {
-  //     final storedUserName = userData['name'];
-  //     final storedUserImagePath = userData['image'];
-
-  //     if (storedUserName != null) {
-  //       userName.value = storedUserName;
-  //     }
-  //     if (storedUserImagePath != null) {
-  //       updateProfileImage(File(storedUserImagePath));
-  //     }
-  //   }
-  // }
-
-  // Method to update profileImage
-  // void updateProfileImage(File? image) {
-  //   profileImage.value = image;
-  // }
-
-  // // Method to update username
-  // void updateUserName(String name) {
-  //   userName.value = name;
-  //   // Save username to storage as well
-  //   final storage = GetStorage();
-  //   final userData = storage.read<Map<String, dynamic>>('user_data') ?? {};
-  //   userData['name'] = name;
-  //   storage.write('user_data', userData);
-  // }
+  
 }
