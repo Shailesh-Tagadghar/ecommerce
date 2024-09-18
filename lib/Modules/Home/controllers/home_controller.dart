@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:ecommerce/Utils/Constants/string_constant.dart';
 import 'package:get/get.dart';
 
@@ -10,7 +8,6 @@ class HomeController extends GetxController {
   var quantity = 1.obs;
   //Wishlist Category
   var selectedCategoryIndex = (-1).obs;
-  // var quantity2 = 1.obs;
 
   //to change navbar index
   void onItemTapped(int index) {
@@ -40,10 +37,4 @@ class HomeController extends GetxController {
   void setSelectedCategory(int index) {
     selectedCategoryIndex.value = index;
   }
-
-  // Reactive variable for profile image
-  var profileImage = Rxn<File>(); // Rxn to allow nullability
-  var userName = ''.obs; // Reactive variable for username
-
-  
 }

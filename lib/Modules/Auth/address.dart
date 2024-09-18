@@ -275,10 +275,6 @@ class Address extends StatelessWidget {
                               pinController.text,
                             ].join(', ');
 
-                            // final fcmToken =
-                            //     GetStorage().read<String>('fcm_token') ??
-                            //         'default_fcm_token';
-
                             final registrationData = {
                               'name': name,
                               'email': email,

@@ -23,7 +23,6 @@ class UserDetail extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // nameController.text = validationController.userName.value;
     final Map<String, String> args = Get.arguments;
     nameController.text = args['name'] ?? '';
     final email = args['email'];
@@ -317,7 +316,6 @@ class UserDetail extends StatelessWidget {
                         fontSize: 14,
                         weight: FontWeight.w500,
                         action: () {
-                          // validationController.submitUserDetails();
                           Get.toNamed(
                             AppRoutes.addressScreen,
                             arguments: {

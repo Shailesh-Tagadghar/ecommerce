@@ -74,12 +74,6 @@ class ApiService {
     }
   }
 
-  // // Get FCM token using FcmService
-  // static Future<String> getFcmToken() async {
-  //   final fcmService = FcmService();
-  //   return await fcmService.getFcmToken();
-  // }
-
   static Future<void> loginUser(Map<String, dynamic> loginData) async {
     final url = Uri.parse(
         '$baseUrl/${ApiConstants.login}'); // Adjust the endpoint if needed

@@ -140,11 +140,6 @@ class _ProfileState extends State<Profile> {
                         //   () =>
                         CircleAvatar(
                           radius: 60,
-                          // backgroundImage:
-                          //     validationController.profileImage.value != null
-                          //         ? FileImage(validationController
-                          //             .profileImage.value!) as ImageProvider
-                          //         : const AssetImage(AssetConstant.pd1),
                           backgroundImage: userImage.isNotEmpty
                               ? NetworkImage(imageUrl)
                               : const AssetImage(AssetConstant.pd1)
@@ -180,7 +175,6 @@ class _ProfileState extends State<Profile> {
                   height: 1.5.h,
                 ),
                 CustomText(
-                  // text: validationController.userName.value,
                   text: userName,
                   color: ColorConstants.blackColor,
                   fontSize: 15,
