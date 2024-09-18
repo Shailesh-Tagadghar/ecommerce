@@ -175,6 +175,7 @@ class SignIn extends StatelessWidget {
                                 'dummy_fcm_token',
                             'login_type': 'Email',
                           };
+
                           try {
                             await ApiService.loginUser(loginData);
                             Get.offAllNamed(

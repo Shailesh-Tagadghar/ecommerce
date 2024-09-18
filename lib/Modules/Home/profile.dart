@@ -1,8 +1,9 @@
+import 'dart:convert';
 import 'package:ecommerce/Modules/Auth/Widget/custom_text.dart';
 import 'package:ecommerce/Modules/Auth/controllers/validation.dart';
 import 'package:ecommerce/Modules/Home/Widget/profile_widget.dart';
-import 'package:ecommerce/Modules/Home/controllers/home_controller.dart';
 import 'package:ecommerce/Routes/app_routes.dart';
+import 'package:ecommerce/Utils/Constants/api_constants.dart';
 import 'package:ecommerce/Utils/Constants/asset_constant.dart';
 import 'package:ecommerce/Utils/Constants/color_constant.dart';
 import 'package:ecommerce/Utils/Constants/string_constant.dart';
@@ -13,18 +14,45 @@ import 'package:get_storage/get_storage.dart';
 import 'package:icons_plus/icons_plus.dart';
 import 'package:sizer/sizer.dart';
 
-class Profile extends StatelessWidget {
+class Profile extends StatefulWidget {
   Profile({super.key});
 
+  @override
+  State<Profile> createState() => _ProfileState();
+}
+
+class _ProfileState extends State<Profile> {
   final ValidationController validationController =
-      Get.find<ValidationController>();
-  final HomeController homeController = Get.find<HomeController>();
+      Get.put(ValidationController());
 
   final TextEditingController nameController = TextEditingController();
+  Map<String, dynamic>? dataStorage;
+
+  @override
+  void initState() {
+    super.initState();
+    final userData = GetStorage().read('user_data');
+    if (userData != null) {
+      if (userData is String) {
+        // If data is stored as a JSON string, decode it
+        dataStorage = jsonDecode(userData);
+      } else if (userData is Map<String, dynamic>) {
+        // If data is already a Map
+        dataStorage = userData;
+      }
+      // Update state to ensure the UI reflects the loaded data
+      setState(() {});
+    }
+
+    print('Data after Login / Register / Restart -- : $dataStorage');
+  }
 
   @override
   Widget build(BuildContext context) {
-    nameController.text = homeController.userName.value;
+    final String userName = dataStorage?['data']['name'] ?? 'User Name';
+    final String userImage = dataStorage?['data']['image'] ?? AssetConstant.pd1;
+    final imageUrl = '${ApiConstants.imageBaseUrl}$userImage';
+    nameController.text = validationController.userName.value;
 
     return Scaffold(
         backgroundColor: ColorConstants.whiteColor,
@@ -108,37 +136,42 @@ class Profile extends StatelessWidget {
                     child: Stack(
                       alignment: Alignment.center,
                       children: [
-                        Obx(
-                          () => CircleAvatar(
-                            radius: 60,
-                            backgroundImage: homeController
-                                        .profileImage.value !=
-                                    null
-                                ? FileImage(homeController.profileImage.value!)
-                                : const AssetImage(AssetConstant.pd1),
-                            backgroundColor: ColorConstants.background,
-                            child: Align(
-                              alignment: Alignment.bottomRight,
-                              child: Container(
-                                height: 4.h,
-                                width: 8.w,
-                                decoration: BoxDecoration(
-                                  color: ColorConstants.rich,
-                                  borderRadius: BorderRadius.circular(100),
-                                  border: Border.all(
-                                    width: 2,
-                                    color: ColorConstants.whiteColor,
-                                  ),
-                                ),
-                                child: const Icon(
-                                  AntDesign.edit_outline,
+                        // Obx(
+                        //   () =>
+                        CircleAvatar(
+                          radius: 60,
+                          // backgroundImage:
+                          //     validationController.profileImage.value != null
+                          //         ? FileImage(validationController
+                          //             .profileImage.value!) as ImageProvider
+                          //         : const AssetImage(AssetConstant.pd1),
+                          backgroundImage: userImage.isNotEmpty
+                              ? NetworkImage(imageUrl)
+                              : const AssetImage(AssetConstant.pd1)
+                                  as ImageProvider,
+                          backgroundColor: ColorConstants.background,
+                          child: Align(
+                            alignment: Alignment.bottomRight,
+                            child: Container(
+                              height: 4.h,
+                              width: 8.w,
+                              decoration: BoxDecoration(
+                                color: ColorConstants.rich,
+                                borderRadius: BorderRadius.circular(100),
+                                border: Border.all(
+                                  width: 2,
                                   color: ColorConstants.whiteColor,
-                                  size: 20,
                                 ),
+                              ),
+                              child: const Icon(
+                                AntDesign.edit_outline,
+                                color: ColorConstants.whiteColor,
+                                size: 20,
                               ),
                             ),
                           ),
                         ),
+                        // ),
                       ],
                     ),
                   ),
@@ -147,8 +180,8 @@ class Profile extends StatelessWidget {
                   height: 1.5.h,
                 ),
                 CustomText(
-                  text: homeController.userName.value,
-                  // text: userName,
+                  // text: validationController.userName.value,
+                  text: userName,
                   color: ColorConstants.blackColor,
                   fontSize: 15,
                   weight: FontWeight.w500,
