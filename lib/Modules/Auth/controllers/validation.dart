@@ -1,6 +1,4 @@
 // lib/Utils/validations.dart
-
-import 'package:ecommerce/Routes/app_routes.dart';
 import 'package:ecommerce/Utils/Constants/string_constant.dart';
 import 'package:email_validator/email_validator.dart';
 import 'package:get/get.dart';
@@ -199,28 +197,28 @@ class ValidationController extends GetxController {
     }
   }
 
-  void saveAddress(
-      String address, String address1, String city, String state, String pin) {
-    validateAddress(address);
-    validateAddress1(address1);
-    validateCity(city);
-    validateState(state);
-    validatePin(pin);
+  // void saveAddress(
+  //     String address, String address1, String city, String state, String pin) {
+  //   validateAddress(address);
+  //   validateAddress1(address1);
+  //   validateCity(city);
+  //   validateState(state);
+  //   validatePin(pin);
 
-    String fullAddress = address;
-    if (address1.isNotEmpty) {
-      fullAddress += ', $address1';
-    }
-    fullAddress += ', $city, $state, $pin';
+  //   String fullAddress = address;
+  //   if (address1.isNotEmpty) {
+  //     fullAddress += ', $address1';
+  //   }
+  //   fullAddress += ', $city, $state, $pin';
 
-    if (addressError.isEmpty &&
-        address1Error.isEmpty &&
-        cityError.isEmpty &&
-        stateError.isEmpty &&
-        pinError.isEmpty) {
-      print('Full Address: $fullAddress');
-    }
-  }
+  //   if (addressError.isEmpty &&
+  //       address1Error.isEmpty &&
+  //       cityError.isEmpty &&
+  //       stateError.isEmpty &&
+  //       pinError.isEmpty) {
+  //     print('Full Address: $fullAddress');
+  //   }
+  // }
 
   void validateConfirmPassword(String password, String confirmPassword) {
     confirmPasswordError.value =
@@ -235,29 +233,29 @@ class ValidationController extends GetxController {
   }
 
   // Method to submit user details
-  void submitUserDetails() {
-    // Perform validations
-    validateImage();
-    validateGender(selectedDropdownItem.value);
-    validatePhone(phoneNumber.value);
+  // void submitUserDetails() {
+  //   // Perform validations
+  //   validateImage();
+  //   validateGender(selectedDropdownItem.value);
+  //   validatePhone(phoneNumber.value);
 
-    // Check for errors
-    if (imageError.value.isEmpty &&
-        genderError.value.isEmpty &&
-        phoneError.value.isEmpty) {
-      // All validations passed
-      // Proceed to save the details or navigate
-      print('User Details:');
-      print('Name: ${userName.value}');
-      print('Phone: ${selectedCountrycode.value} ${phoneNumber.value}');
-      print('Gender: ${selectedDropdownItem.value}');
-      print('Profile Image Path: ${profileImage.value?.path}');
+  //   // Check for errors
+  //   if (imageError.value.isEmpty &&
+  //       genderError.value.isEmpty &&
+  //       phoneError.value.isEmpty) {
+  //     // All validations passed
+  //     // Proceed to save the details or navigate
+  //     print('User Details:');
+  //     print('Name: ${userName.value}');
+  //     print('Phone: ${selectedCountrycode.value} ${phoneNumber.value}');
+  //     print('Gender: ${selectedDropdownItem.value}');
+  //     print('Profile Image Path: ${profileImage.value?.path}');
 
-      Get.toNamed(
-        AppRoutes.addressScreen,
-      );
-    }
-  }
+  //     Get.toNamed(
+  //       AppRoutes.addressScreen,
+  //     );
+  //   }
+  // }
 
   // Optionally, set the user name from sign-up
   void setUserName(String name) {
@@ -265,26 +263,26 @@ class ValidationController extends GetxController {
   }
 
   // Form validation
-  bool validateForm(String email, String password) {
-    validateEmail(email);
-    validatePassword(password);
+  // bool validateForm(String email, String password) {
+  //   validateEmail(email);
+  //   validatePassword(password);
 
-    return emailError.isEmpty && passwordError.isEmpty;
-  }
+  //   return emailError.isEmpty && passwordError.isEmpty;
+  // }
 
   // checking whether email and password is match or not...
-  bool authenticateUser(String email, String password) {
-    if (email == dummyEmail.value && password == dummyPassword.value) {
-      return true; // Successful authentication
-    } else {
-      if (email != dummyEmail.value) {
-        emailError.value = 'User email not found';
-      } else if (password != dummyPassword.value) {
-        passwordError.value = 'Incorrect password';
-      }
-      return false; // Authentication failed
-    }
-  }
+  // bool authenticateUser(String email, String password) {
+  //   if (email == dummyEmail.value && password == dummyPassword.value) {
+  //     return true; // Successful authentication
+  //   } else {
+  //     if (email != dummyEmail.value) {
+  //       emailError.value = 'User email not found';
+  //     } else if (password != dummyPassword.value) {
+  //       passwordError.value = 'Incorrect password';
+  //     }
+  //     return false; // Authentication failed
+  //   }
+  // }
 
   // Image Picker instance
   final ImagePicker _picker = ImagePicker();
