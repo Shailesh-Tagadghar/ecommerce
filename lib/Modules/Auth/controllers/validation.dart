@@ -214,7 +214,7 @@ class ValidationController extends GetxController {
   // Image Picker instance
   final ImagePicker _picker = ImagePicker();
 
-  // // Method to pick image from gallery
+  // Method to pick image from gallery
   Future<void> pickImageFromGallery() async {
     final XFile? pickedFile =
         await _picker.pickImage(source: ImageSource.gallery);

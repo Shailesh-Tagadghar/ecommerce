@@ -149,14 +149,13 @@ class UserDetail extends StatelessWidget {
                                     // child:
                                     CircleAvatar(
                                   radius: 60,
-                                  // backgroundImage:
-                                  //     const AssetImage(AssetConstant.image),
                                   backgroundImage: validationController
                                               .profileImage.value !=
                                           null
                                       ? FileImage(validationController
-                                          .profileImage.value!) as ImageProvider
-                                      : const AssetImage(AssetConstant.image),
+                                          .profileImage.value!)
+                                      : const AssetImage(AssetConstant.image)
+                                          as ImageProvider,
                                   backgroundColor: ColorConstants.background,
                                   child: Align(
                                     alignment: Alignment.bottomRight,

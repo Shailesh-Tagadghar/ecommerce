@@ -50,8 +50,13 @@ class _ProfileState extends State<Profile> {
   @override
   Widget build(BuildContext context) {
     final String userName = dataStorage?['data']['name'] ?? 'User Name';
-    final String userImage = dataStorage?['data']['image'] ?? AssetConstant.pd1;
-    final imageUrl = '${ApiConstants.imageBaseUrl}$userImage';
+    final String userImage = dataStorage?['data']['image'] ?? '';
+    // final imageUrl = '${ApiConstants.imageBaseUrl}$userImage';
+    // Construct image URL if available, or use default asset if empty
+    final imageUrl = userImage.isNotEmpty
+        ? '${ApiConstants.imageBaseUrl}$userImage'
+        : AssetConstant.pd1;
+
     nameController.text = validationController.userName.value;
 
     return Scaffold(
