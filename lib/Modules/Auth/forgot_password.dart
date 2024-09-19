@@ -216,12 +216,8 @@ class ForgotPassword extends StatelessWidget {
                           try {
                             // Call the API to change the password
                             await ApiService.changePassword(data, token);
-                            // Get.snackbar(
-                            //     'Success', 'Password changed successfully');
                           } catch (e) {
                             print('Failed to change password : $e');
-                            // Get.snackbar('Error',
-                            //     'Failed to change password: ${e.toString()}');
                           }
                         },
                       ),

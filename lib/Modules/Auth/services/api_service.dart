@@ -129,9 +129,6 @@ class ApiService {
       body: jsonEncode(data), // Encode the request body to JSON
     );
 
-    // print('Status code: ${response.statusCode}');
-    // print('Response body: ${response.body}');
-
     if (response.statusCode == 200) {
       // Password change successful
       print('Password changed successfully');
