@@ -205,7 +205,7 @@ class ForgotPassword extends StatelessWidget {
                                 'User not logged in || please enter valid token');
                             return;
                           }
-
+      
                           // Prepare data to send to the API
                           Map<String, dynamic> data = {
                             'email': email,
