@@ -7,6 +7,7 @@ import 'package:ecommerce/Modules/Home/cart.dart';
 import 'package:ecommerce/Modules/Home/coupon.dart';
 import 'package:ecommerce/Modules/Home/home.dart';
 import 'package:ecommerce/Modules/Home/navbar.dart';
+import 'package:ecommerce/Modules/Home/productdetails.dart';
 import 'package:ecommerce/Modules/Home/profile.dart';
 import 'package:ecommerce/Modules/Auth/sign_in.dart';
 import 'package:ecommerce/Modules/Auth/sign_up.dart';
@@ -82,6 +83,10 @@ class AppPages {
     GetPage(
         name: AppRoutes.couponScreen,
         page: () => const Coupon(),
+        transition: transition),
+    GetPage(
+        name: AppRoutes.productDetailsScreen,
+        page: () => const Productdetails(),
         transition: transition),
   ];
 }

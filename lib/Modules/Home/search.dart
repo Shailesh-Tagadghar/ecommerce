@@ -1,4 +1,5 @@
 import 'package:ecommerce/Modules/Auth/Widget/custom_text.dart';
+import 'package:ecommerce/Routes/app_routes.dart';
 import 'package:ecommerce/Utils/Constants/color_constant.dart';
 import 'package:ecommerce/Utils/Constants/string_constant.dart';
 import 'package:flutter/material.dart';
@@ -87,20 +88,25 @@ class Search extends StatelessWidget {
             SizedBox(
               height: 2.h,
             ),
-            const Row(
+            Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                CustomText(
+                const CustomText(
                   text: StringConstants.recent,
                   color: ColorConstants.blackColor,
                   fontSize: 14,
                   weight: FontWeight.w500,
                 ),
-                CustomText(
-                  text: StringConstants.clear,
-                  color: ColorConstants.rich,
-                  fontSize: 14,
-                  weight: FontWeight.w500,
+                GestureDetector(
+                  onTap: () {
+                    Get.toNamed(AppRoutes.productDetailsScreen);
+                  },
+                  child: const CustomText(
+                    text: StringConstants.clear,
+                    color: ColorConstants.rich,
+                    fontSize: 14,
+                    weight: FontWeight.w500,
+                  ),
                 ),
               ],
             ),

@@ -121,6 +121,19 @@ class StringConstants {
 
   //Coupon Screen
   static const String coupon = 'Coupon';
+
+  //Product Details
+  static const String product = 'Product Details';
+  static const String styles = 'Female\'s Style';
+  static const String productName = 'Light Brown Jacket';
+  static const String productDetailText = 'New Onepiece Collection';
+  static const String readMore = 'Read More';
+  static const String sizeText = 'Select Size';
+  static const String colorText = 'Select Color :';
+  static const String color = 'Brown';
+  static const String priceText = 'Total Price';
+  static const String price = '83.97';
+  static const String addCart = 'Add to Cart';
 }
 
 ///
