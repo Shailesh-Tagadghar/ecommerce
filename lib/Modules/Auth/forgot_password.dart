@@ -201,7 +201,8 @@ class ForgotPassword extends StatelessWidget {
                           String? token = storage.read('fcm_token');
 
                           if (token == null) {
-                            Get.snackbar('Error', 'User not logged in');
+                            Get.snackbar('Error',
+                                'User not logged in || please enter valid token');
                             return;
                           }
 
@@ -215,14 +216,12 @@ class ForgotPassword extends StatelessWidget {
                           try {
                             // Call the API to change the password
                             await ApiService.changePassword(data, token);
-                            print('Password changed successfully : $data');
-                            print('Bearer token -- $token');
-                            Get.snackbar(
-                                'Success', 'Password changed successfully');
+                            // Get.snackbar(
+                            //     'Success', 'Password changed successfully');
                           } catch (e) {
                             print('Failed to change password : $e');
-                            Get.snackbar(
-                                'Error', 'Failed to change password: $e');
+                            // Get.snackbar('Error',
+                            //     'Failed to change password: ${e.toString()}');
                           }
                         },
                       ),

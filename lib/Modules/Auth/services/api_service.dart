@@ -129,7 +129,7 @@ class ApiService {
       body: jsonEncode(data), // Encode the request body to JSON
     );
 
-    print('Status code: ${response.statusCode}');
+    // print('Status code: ${response.statusCode}');
     // print('Response body: ${response.body}');
 
     if (response.statusCode == 200) {
@@ -138,8 +138,6 @@ class ApiService {
     } else {
       // Handle failure
       throw Exception('Failed to change password: ${response.body}');
-      // throw Exception(
-      //     'Failed to change password. Status code: ${response.statusCode}');
     }
   }
 }
