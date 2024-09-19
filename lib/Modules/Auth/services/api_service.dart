@@ -113,4 +113,33 @@ class ApiService {
       throw Exception('Failed to log in');
     }
   }
+
+  // Method to change password
+  static Future<void> changePassword(
+      Map<String, dynamic> data, String token) async {
+    final String url =
+        '$baseUrl/${ApiConstants.forgetPassword}'; // Update with your actual API URL
+
+    final response = await http.post(
+      Uri.parse(url),
+      headers: {
+        'Authorization': 'Bearer $token', // Add the token in the header
+        'Content-Type': 'application/json',
+      },
+      body: jsonEncode(data), // Encode the request body to JSON
+    );
+
+    print('Status code: ${response.statusCode}');
+    // print('Response body: ${response.body}');
+
+    if (response.statusCode == 200) {
+      // Password change successful
+      print('Password changed successfully');
+    } else {
+      // Handle failure
+      throw Exception('Failed to change password: ${response.body}');
+      // throw Exception(
+      //     'Failed to change password. Status code: ${response.statusCode}');
+    }
+  }
 }

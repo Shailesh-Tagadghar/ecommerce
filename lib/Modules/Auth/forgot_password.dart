@@ -3,10 +3,12 @@ import 'package:ecommerce/Modules/Auth/Widget/custom_field.dart';
 import 'package:ecommerce/Modules/Auth/Widget/custom_text.dart';
 import 'package:ecommerce/Modules/Auth/controllers/auth_controller.dart';
 import 'package:ecommerce/Modules/Auth/controllers/validation.dart';
+import 'package:ecommerce/Modules/Auth/services/api_service.dart';
 import 'package:ecommerce/Utils/Constants/color_constant.dart';
 import 'package:ecommerce/Utils/Constants/string_constant.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:icons_plus/icons_plus.dart';
 import 'package:sizer/sizer.dart';
 
@@ -17,8 +19,9 @@ class ForgotPassword extends StatelessWidget {
   final ValidationController validationController =
       Get.put(ValidationController());
 
-  final TextEditingController passwordController = TextEditingController();
-  final TextEditingController cnfpasswordController = TextEditingController();
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController oldpasswordController = TextEditingController();
+  final TextEditingController newpasswordController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -97,7 +100,27 @@ class ForgotPassword extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       const CustomText(
-                        text: StringConstants.passwordlabel,
+                        text: StringConstants.emaillabel,
+                        color: ColorConstants.blackColor,
+                        fontSize: 11,
+                        weight: FontWeight.w400,
+                      ),
+                      SizedBox(
+                        height: 0.2.h,
+                      ),
+                      CustomField(
+                        controller: emailController,
+                        hintText: StringConstants.email,
+                        fontSize: 11,
+                        hintTextColor: ColorConstants.greyColor,
+                        keyboardType: TextInputType.emailAddress,
+                        // onChanged: (value) => validationController.validateEmail(value),
+                      ),
+                      SizedBox(
+                        height: 2.h,
+                      ),
+                      const CustomText(
+                        text: StringConstants.oldPass,
                         color: ColorConstants.blackColor,
                         fontSize: 11,
                         weight: FontWeight.w400,
@@ -107,7 +130,7 @@ class ForgotPassword extends StatelessWidget {
                       ),
                       Obx(
                         () => CustomField(
-                          controller: passwordController,
+                          controller: oldpasswordController,
                           obscureText: authController.isPasswordVisible.value,
                           obscuringCharacter: '*',
                           showPasswordIcon: true,
@@ -118,19 +141,11 @@ class ForgotPassword extends StatelessWidget {
                               authController.togglePasswordVisibility,
                         ),
                       ),
-                      Obx(() => validationController.passwordError.isNotEmpty
-                          ? CustomText(
-                              text: validationController.passwordError.value,
-                              color: Colors.red,
-                              fontSize: 10,
-                              weight: FontWeight.w400,
-                            )
-                          : Container()),
                       SizedBox(
                         height: 2.h,
                       ),
                       const CustomText(
-                        text: StringConstants.cnfpasswordlabel,
+                        text: StringConstants.newPass,
                         color: ColorConstants.blackColor,
                         fontSize: 11,
                         weight: FontWeight.w400,
@@ -140,7 +155,7 @@ class ForgotPassword extends StatelessWidget {
                       ),
                       Obx(
                         () => CustomField(
-                          controller: cnfpasswordController,
+                          controller: newpasswordController,
                           obscureText:
                               authController.isCnfPasswordVisible.value,
                           obscuringCharacter: '*',
@@ -152,16 +167,6 @@ class ForgotPassword extends StatelessWidget {
                               authController.toggleCnfPasswordVisibility,
                         ),
                       ),
-                      Obx(() =>
-                          validationController.confirmPasswordError.isNotEmpty
-                              ? CustomText(
-                                  text: validationController
-                                      .confirmPasswordError.value,
-                                  color: Colors.red,
-                                  fontSize: 10,
-                                  weight: FontWeight.w400,
-                                )
-                              : Container()),
                       SizedBox(
                         height: 5.h,
                       ),
@@ -173,21 +178,51 @@ class ForgotPassword extends StatelessWidget {
                         height: 6.h,
                         fontSize: 14,
                         weight: FontWeight.w500,
-                        action: () {
+                        action: () async {
                           // Retrieve passwords from controllers
-                          String password = passwordController.text;
-                          String confirmPassword = cnfpasswordController.text;
+                          String email = emailController.text;
+                          String oldpassword = oldpasswordController.text;
+                          String newpassword = newpasswordController.text;
 
-                          // Validate the passwords
-                          validationController.validatePassword(password);
-                          validationController.validateConfirmPassword(
-                              password, confirmPassword);
+                          // Check if fields are not empty
+                          if (email.isEmpty ||
+                              oldpassword.isEmpty ||
+                              newpassword.isEmpty) {
+                            Get.snackbar('Error', 'All fields are required');
+                            return;
+                          }
 
-                          if (validationController.passwordError.isEmpty &&
-                              validationController
-                                  .confirmPasswordError.isEmpty) {
-                            // Store and print the new password
-                            validationController.saveNewPassword(password);
+                          // Print both passwords to the console
+                          print('Old password: $oldpassword');
+                          print('New password: $newpassword');
+
+                          // Retrieve the bearer token from GetStorage
+                          final storage = GetStorage();
+                          String? token = storage.read('fcm_token');
+
+                          if (token == null) {
+                            Get.snackbar('Error', 'User not logged in');
+                            return;
+                          }
+
+                          // Prepare data to send to the API
+                          Map<String, dynamic> data = {
+                            'email': email,
+                            'oldpassword': oldpassword,
+                            'newpassword': newpassword,
+                          };
+
+                          try {
+                            // Call the API to change the password
+                            await ApiService.changePassword(data, token);
+                            print('Password changed successfully : $data');
+                            print('Bearer token -- $token');
+                            Get.snackbar(
+                                'Success', 'Password changed successfully');
+                          } catch (e) {
+                            print('Failed to change password : $e');
+                            Get.snackbar(
+                                'Error', 'Failed to change password: $e');
                           }
                         },
                       ),

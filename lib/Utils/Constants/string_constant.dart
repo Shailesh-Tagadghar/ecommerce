@@ -32,6 +32,7 @@ class StringConstants {
   static const String forgotdisplaytext =
       'Your new password must be different from previosly used passwords.';
   static const String btntext = 'Create New Password';
+  static const String oldPass = 'Old Password';
 
   //user detail screen
   static const String profiletext = 'Complete Your Profile';
