@@ -82,7 +82,7 @@ class AppPages {
         transition: transition),
     GetPage(
         name: AppRoutes.couponScreen,
-        page: () => const Coupon(),
+        page: () => Coupon(),
         transition: transition),
     GetPage(
         name: AppRoutes.productDetailsScreen,

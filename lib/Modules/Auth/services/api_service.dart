@@ -6,14 +6,16 @@ import 'package:http/http.dart' as http;
 import 'package:http_parser/http_parser.dart';
 
 class ApiService {
-  static const String baseUrl = 'http://fashionapp.idealake.com/api';
-  static const String imageBaseUrl =
-      'https://fashionapp.idealake.com/'; // Base URL for images
+  // static const String baseUrl = 'http://fashionapp.idealake.com/api';
+  // static const String imageBaseUrl =
+  //     'https://fashionapp.idealake.com/'; // Base URL for images
 
   // Register a user
   static Future<void> registerUser(
       Map<String, dynamic> registrationData) async {
-    final url = Uri.parse('$baseUrl/${ApiConstants.register}');
+    // final url = Uri.parse('$baseUrl/${ApiConstants.register}');
+    final url = Uri.parse('${ApiConstants.baseUrl}${ApiConstants.register}');
+
     final storage = GetStorage();
     final fcmToken = storage.read('fcm_token');
 
@@ -75,8 +77,10 @@ class ApiService {
   }
 
   static Future<void> loginUser(Map<String, dynamic> loginData) async {
-    final url = Uri.parse(
-        '$baseUrl/${ApiConstants.login}'); // Adjust the endpoint if needed
+    // final url = Uri.parse(
+    //     '$baseUrl/${ApiConstants.login}'); // Adjust the endpoint if needed
+    final url = Uri.parse('${ApiConstants.baseUrl}${ApiConstants.login}');
+
     final fcmToken = GetStorage().read('fcm_token');
 
     try {
@@ -117,8 +121,10 @@ class ApiService {
   // Method to change password
   static Future<void> changePassword(
       Map<String, dynamic> data, String token) async {
+    // final String url =
+    //     '$baseUrl/${ApiConstants.forgetPassword}'; // Update with your actual API URL
     final String url =
-        '$baseUrl/${ApiConstants.forgetPassword}'; // Update with your actual API URL
+        '${ApiConstants.baseUrl}${ApiConstants.forgetPassword}';
 
     final response = await http.post(
       Uri.parse(url),

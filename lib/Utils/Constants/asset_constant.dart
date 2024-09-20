@@ -42,6 +42,7 @@ class AssetConstant {
 
   //profile images
   static const String image = '$globalImagePath/editImage.png';
+  static const String percent = '$globalImagePath/percent.png';
 
   ///
   /// Icons path declaration

@@ -5,7 +5,7 @@ class ApiConstants {
   static const String login = "user/login";
 
   static const String editProfile = "/user/editprofile";
-  static const String forgetPassword = "/user/forgotpassword";
+  static const String forgetPassword = "user/forgotpassword";
 
   // Favourite Api endpoints
   static const String addFavourite = "/favourite/addfavourite";
@@ -35,7 +35,7 @@ class ApiConstants {
   static const String removeProduct = "/cart/removeproduct";
 
   //Get Coupons
-  static const String getCoupons = "/coupen/getcoupens";
+  static const String getCoupons = "coupen/getcoupens";
 
   //Add Quantity
   static const String addQty = "/cart/addqty";

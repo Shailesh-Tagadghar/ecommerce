@@ -1,4 +1,5 @@
 import 'package:ecommerce/Modules/Auth/Widget/custom_text.dart';
+import 'package:ecommerce/Modules/Home/Widget/coupon_item_widget.dart';
 import 'package:ecommerce/Utils/Constants/color_constant.dart';
 import 'package:ecommerce/Utils/Constants/string_constant.dart';
 import 'package:flutter/material.dart';
@@ -7,7 +8,22 @@ import 'package:icons_plus/icons_plus.dart';
 import 'package:sizer/sizer.dart';
 
 class Coupon extends StatelessWidget {
-  const Coupon({super.key});
+  Coupon({super.key});
+
+  final List<Map<String, String>> couponItems = [
+    {
+      'code': StringConstants.code,
+      'description': StringConstants.description,
+      'offertext': StringConstants.offertext,
+      'copy': StringConstants.copy,
+    },
+    {
+      'code': StringConstants.code,
+      'description': StringConstants.description,
+      'offertext': StringConstants.offertext,
+      'copy': StringConstants.copy,
+    },
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -45,6 +61,49 @@ class Coupon extends StatelessWidget {
               Get.back();
             },
           ),
+        ),
+      ),
+      body: Padding(
+        padding: EdgeInsets.only(
+          left: 6.w,
+          right: 6.w,
+          bottom: 2.h,
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const CustomText(
+              text: StringConstants.offers,
+              fontSize: 15,
+              weight: FontWeight.w500,
+              color: ColorConstants.blackColor,
+            ),
+            SizedBox(
+              height: 1.5.h,
+            ),
+            // Place Expanded inside Column, outside of Padding
+            Expanded(
+              child: ListView.builder(
+                itemCount: couponItems.length,
+                itemBuilder: (context, index) {
+                  final item = couponItems[index];
+                  return Column(
+                    children: [
+                      CouponItemWidget(
+                        code: item['code']!,
+                        description: item['description']!,
+                        offertext: item['offertext']!,
+                        copy: item['copy']!,
+                      ),
+                      SizedBox(
+                        height: 1.5.h,
+                      ),
+                    ],
+                  );
+                },
+              ),
+            ),
+          ],
         ),
       ),
     );

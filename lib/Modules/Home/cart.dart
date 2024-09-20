@@ -165,6 +165,7 @@ class Cart extends StatelessWidget {
                             ),
                             child: CustomButton(
                               label: StringConstants.apply,
+                              isSelected: true,
                               btnColor: ColorConstants.rich,
                               height: 4.5.h,
                               width: 25.w,
@@ -294,6 +295,7 @@ class Cart extends StatelessWidget {
                     CustomButton(
                       label: StringConstants.checkoutbtn,
                       btnColor: ColorConstants.rich,
+                      isSelected: true,
                       height: 6.h,
                       weight: FontWeight.w400,
                     ),
