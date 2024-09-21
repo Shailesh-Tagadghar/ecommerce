@@ -1,7 +1,9 @@
 import 'package:ecommerce/Modules/Auth/Widget/custom_text.dart';
+import 'package:ecommerce/Modules/Home/controllers/home_controller.dart';
 import 'package:ecommerce/Utils/Constants/asset_constant.dart';
 import 'package:ecommerce/Utils/Constants/color_constant.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:sizer/sizer.dart';
 
 class CouponItemWidget extends StatelessWidget {
@@ -20,6 +22,7 @@ class CouponItemWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final homeController = Get.find<HomeController>();
     return Padding(
       padding: EdgeInsets.only(
         left: 1.5.w,
@@ -29,7 +32,7 @@ class CouponItemWidget extends StatelessWidget {
       child: Column(
         children: [
           Container(
-            height: 20.15.h,
+            // height: 24.15.h,
             decoration: BoxDecoration(
               borderRadius: const BorderRadius.all(Radius.circular(20)),
               border: Border.all(
@@ -93,22 +96,29 @@ class CouponItemWidget extends StatelessWidget {
                 SizedBox(
                   height: 2.h,
                 ),
-                Container(
-                  alignment: AlignmentDirectional.center,
-                  height: 6.h,
-                  width: 100.w,
-                  decoration: const BoxDecoration(
-                    color: ColorConstants.background,
-                    borderRadius: BorderRadius.only(
-                      bottomLeft: Radius.circular(20),
-                      bottomRight: Radius.circular(20),
+                GestureDetector(
+                  onTap: () {
+                    homeController.setCoupon(title);
+                    print('Coupon Value : $title');
+                    Get.back();
+                  },
+                  child: Container(
+                    alignment: AlignmentDirectional.center,
+                    height: 6.h,
+                    width: 100.w,
+                    decoration: const BoxDecoration(
+                      color: ColorConstants.background,
+                      borderRadius: BorderRadius.only(
+                        bottomLeft: Radius.circular(20),
+                        bottomRight: Radius.circular(20),
+                      ),
                     ),
-                  ),
-                  child: CustomText(
-                    text: copy,
-                    fontSize: 16,
-                    weight: FontWeight.w500,
-                    color: ColorConstants.rich,
+                    child: CustomText(
+                      text: copy,
+                      fontSize: 16,
+                      weight: FontWeight.w500,
+                      color: ColorConstants.rich,
+                    ),
                   ),
                 )
               ],

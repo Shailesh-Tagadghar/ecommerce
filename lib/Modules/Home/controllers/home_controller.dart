@@ -133,4 +133,11 @@ class HomeController extends GetxController {
   void updateImage(String imagePath) {
     currentImage.value = imagePath;
   }
+
+  //Coupon copy value
+  var selectedCoupon = ''.obs;
+
+  void setCoupon(String coupon) {
+    selectedCoupon.value = coupon;
+  }
 }

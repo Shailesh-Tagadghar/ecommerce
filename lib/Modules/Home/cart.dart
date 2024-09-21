@@ -2,6 +2,7 @@ import 'package:dotted_line/dotted_line.dart';
 import 'package:ecommerce/Modules/Auth/Widget/custom_button.dart';
 import 'package:ecommerce/Modules/Auth/Widget/custom_text.dart';
 import 'package:ecommerce/Modules/Home/Widget/cart_item_widget.dart';
+import 'package:ecommerce/Modules/Home/controllers/home_controller.dart';
 import 'package:ecommerce/Routes/app_routes.dart';
 import 'package:ecommerce/Utils/Constants/asset_constant.dart';
 import 'package:ecommerce/Utils/Constants/color_constant.dart';
@@ -125,6 +126,7 @@ class Cart extends StatelessWidget {
   }
 
   void showCheckout(BuildContext context) {
+    final homeController = Get.find<HomeController>();
     showModalBottomSheet(
       context: context,
       backgroundColor: ColorConstants.whiteColor,
@@ -152,48 +154,58 @@ class Cart extends StatelessWidget {
                         left: 1.w,
                         right: 1.w,
                       ),
-                      child: TextField(
-                        onTap: () {
-                          Get.toNamed(AppRoutes.couponScreen);
-                        },
-                        decoration: InputDecoration(
-                          suffixIcon: Padding(
-                            padding: EdgeInsets.only(
-                              right: 1.5.w,
-                              top: 0.5.h,
-                              bottom: 0.5.h,
+                      child: Obx(
+                        () => TextField(
+                          controller: TextEditingController(
+                              text: homeController.selectedCoupon.value),
+                          // onTap: () {
+                          //   Get.toNamed(AppRoutes.couponScreen);
+                          // },
+                          readOnly: true,
+                          decoration: InputDecoration(
+                            suffixIcon: Padding(
+                              padding: EdgeInsets.only(
+                                right: 1.5.w,
+                                top: 0.5.h,
+                                bottom: 0.5.h,
+                              ),
+                              child: GestureDetector(
+                                onTap: () {
+                                  Get.toNamed(AppRoutes.couponScreen);
+                                },
+                                child: CustomButton(
+                                  label: StringConstants.apply,
+                                  isSelected: true,
+                                  btnColor: ColorConstants.rich,
+                                  height: 4.5.h,
+                                  width: 25.w,
+                                  weight: FontWeight.w400,
+                                ),
+                              ),
                             ),
-                            child: CustomButton(
-                              label: StringConstants.apply,
-                              isSelected: true,
-                              btnColor: ColorConstants.rich,
-                              height: 4.5.h,
-                              width: 25.w,
-                              weight: FontWeight.w400,
+                            hintText: StringConstants.promo,
+                            hintStyle: const TextStyle(
+                              color: ColorConstants.greyColor,
+                              fontSize: 18,
+                              fontWeight: FontWeight.w400,
                             ),
-                          ),
-                          hintText: StringConstants.promo,
-                          hintStyle: const TextStyle(
-                            color: ColorConstants.greyColor,
-                            fontSize: 18,
-                            fontWeight: FontWeight.w400,
-                          ),
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(100),
-                            borderSide: const BorderSide(
-                              color: ColorConstants.background,
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(100),
+                              borderSide: const BorderSide(
+                                color: ColorConstants.background,
+                              ),
                             ),
-                          ),
-                          enabledBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(100),
-                            borderSide: const BorderSide(
-                              color: ColorConstants.background,
+                            enabledBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(100),
+                              borderSide: const BorderSide(
+                                color: ColorConstants.background,
+                              ),
                             ),
-                          ),
-                          focusedBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(100),
-                            borderSide: const BorderSide(
-                              color: ColorConstants.background,
+                            focusedBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(100),
+                              borderSide: const BorderSide(
+                                color: ColorConstants.background,
+                              ),
                             ),
                           ),
                         ),

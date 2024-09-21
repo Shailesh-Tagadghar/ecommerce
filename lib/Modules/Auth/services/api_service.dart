@@ -131,4 +131,49 @@ class ApiService {
       throw Exception('Failed to change password: ${response.body}');
     }
   }
+
+  // Fetch coupons
+  static Future<List<Map<String, dynamic>>> fetchCoupons() async {
+    const String url =
+        '${ApiConstants.baseUrl}${ApiConstants.getCoupons}'; // Adjust endpoint as necessary
+
+    final token = GetStorage()
+        .read('fcm_token'); // Adjust if your token storage key is different
+    print('Bearer Token : $token');
+    final headers = {
+      // 'Authorization': 'Bearer $token',
+      'Authorization':
+          'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImRvbkBnbWFpbC5jbyIsInVzZXJJZCI6IjY2ZWE4ZGU4MGZjNzMxMDhhNzI5ZTBlMyIsImZjbVRva2VuIjoiZmtJWUloSmNTTVNzRktDdW5qdEJKSzpBUEE5MWJFWW81TkFaZVRwVFpRVk9EM2xWekVkM0Y4N0N6SFZDMWJiS01uekhDS3FjZGJlTzlZMUo0QVNzY3VySnRzYWY5bUdLMlNWSEdwQU01UmpBWHNjc016RmQzZ014OXhWMC1kZTlOZUdsTWRQV0dseHduY2dyVUlZQURpNDdGTEtpMkI0WWpYQiIsImlhdCI6MTcyNjkwNjE0N30.hlDMI38QClVZb0H8w7yK_2ESBGRaeN-3-1xxGaZz9ds',
+    };
+
+    try {
+      var request = http.Request('GET', Uri.parse(url));
+      request.headers.addAll(headers);
+
+      // Send the request and await the response
+      http.StreamedResponse response = await request.send();
+
+      if (response.statusCode == 200) {
+        final responseBody = await response.stream.bytesToString();
+        print('Response body: $responseBody'); // Log the response body
+        final data = jsonDecode(responseBody);
+
+        // Check if data is a Map and contains the 'coupons' key
+        if (data is Map && data.containsKey('data')) {
+          List<dynamic> coupons = data['data'];
+          return coupons
+              .map((coupon) => coupon as Map<String, dynamic>)
+              .toList();
+        } else {
+          throw Exception('Unexpected response format');
+        }
+      } else {
+        print('Error response: ${response.reasonPhrase}');
+        throw Exception('Failed to fetch coupons: ${response.statusCode}');
+      }
+    } catch (e) {
+      print('Error fetching coupons: $e');
+      throw Exception('Failed to fetch coupons');
+    }
+  }
 }
