@@ -12,15 +12,15 @@ class Coupon extends StatelessWidget {
 
   final List<Map<String, String>> couponItems = [
     {
-      'code': StringConstants.code,
-      'description': StringConstants.description,
-      'offertext': StringConstants.offertext,
+      'title': StringConstants.title,
+      'descreption': StringConstants.descreption,
+      'amount': StringConstants.offertext,
       'copy': StringConstants.copy,
     },
     {
-      'code': StringConstants.code,
-      'description': StringConstants.description,
-      'offertext': StringConstants.offertext,
+      'title': StringConstants.title,
+      'descreption': StringConstants.descreption,
+      'amount': StringConstants.offertext,
       'copy': StringConstants.copy,
     },
   ];
@@ -90,9 +90,9 @@ class Coupon extends StatelessWidget {
                   return Column(
                     children: [
                       CouponItemWidget(
-                        code: item['code']!,
-                        description: item['description']!,
-                        offertext: item['offertext']!,
+                        title: item['title']!,
+                        descreption: item['descreption']!,
+                        amount: item['amount']!,
                         copy: item['copy']!,
                       ),
                       SizedBox(

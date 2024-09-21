@@ -122,9 +122,11 @@ class StringConstants {
   //Coupon Screen
   static const String coupon = 'Coupon';
   static const String offers = 'Best offers for you';
-  static const String code = 'WELCOME200';
-  static const String description = 'Add items worth \$2 more to unlock';
-  static const String offertext = 'Get 50% OFF';
+  static const String title = 'WELCOME200';
+  static const String descreption = 'Add items worth \$2 more to unlock';
+  static const String offertext = 'Get ';
+  static const String offertextII = ' % OFF';
+
   static const String copy = 'COPY CODE';
 
   //Product Details

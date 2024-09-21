@@ -5,16 +5,16 @@ import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
 
 class CouponItemWidget extends StatelessWidget {
-  final String code;
-  final String description;
-  final String offertext;
+  final String title;
+  final String descreption;
+  final String amount;
   final String copy;
 
   const CouponItemWidget({
     super.key,
-    required this.code,
-    required this.description,
-    required this.offertext,
+    required this.title,
+    required this.descreption,
+    required this.amount,
     required this.copy,
   });
 
@@ -51,7 +51,7 @@ class CouponItemWidget extends StatelessWidget {
                     children: [
                       CustomText(
                         // text: StringConstants.welcome,
-                        text: code,
+                        text: title,
                         fontSize: 14,
                         color: ColorConstants.blackColor,
                         weight: FontWeight.w500,
@@ -60,7 +60,7 @@ class CouponItemWidget extends StatelessWidget {
                         height: 0.5.h,
                       ),
                       CustomText(
-                        text: description,
+                        text: descreption,
                         fontSize: 12.5,
                         color: ColorConstants.greyColor,
                         weight: FontWeight.w400,
@@ -80,7 +80,7 @@ class CouponItemWidget extends StatelessWidget {
                             width: 1.w,
                           ),
                           CustomText(
-                            text: offertext,
+                            text: amount,
                             fontSize: 14,
                             color: ColorConstants.blackColor,
                             weight: FontWeight.w500,
