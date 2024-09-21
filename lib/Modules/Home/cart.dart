@@ -158,9 +158,6 @@ class Cart extends StatelessWidget {
                         () => TextField(
                           controller: TextEditingController(
                               text: homeController.selectedCoupon.value),
-                          // onTap: () {
-                          //   Get.toNamed(AppRoutes.couponScreen);
-                          // },
                           readOnly: true,
                           decoration: InputDecoration(
                             suffixIcon: Padding(
@@ -310,6 +307,10 @@ class Cart extends StatelessWidget {
                       isSelected: true,
                       height: 6.h,
                       weight: FontWeight.w400,
+                      action: () {
+                        homeController.selectedIndex.value = 1;
+                        Get.offAllNamed(AppRoutes.navbarScreen);
+                      },
                     ),
                   ],
                 ),

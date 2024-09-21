@@ -13,6 +13,7 @@ class HomeController extends GetxController {
 
   //to change navbar index
   void onItemTapped(int index) {
+    // print("Tapped index: $index");
     selectedIndex.value = index;
   }
 
