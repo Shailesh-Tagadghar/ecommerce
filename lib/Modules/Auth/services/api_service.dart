@@ -116,6 +116,7 @@ class ApiService {
         // Store the user information in GetStorage for persistence
         final storage = GetStorage();
         storage.write('user_data', data);
+        storage.write('token', data['token']); // Store token
         print('Data after Login : $data');
       } else {
         print('Server returned an error: ${response.statusCode}');
@@ -178,12 +179,12 @@ class ApiService {
         '${ApiConstants.baseUrl}${ApiConstants.getCoupons}'; // Adjust endpoint as necessary
 
     final token = GetStorage()
-        .read('fcm_token'); // Adjust if your token storage key is different
+        .read('token'); // Adjust if your token storage key is different
     print('Bearer Token : $token');
     final headers = {
-      // 'Authorization': 'Bearer $token',
-      'Authorization':
-          'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImRvbkBnbWFpbC5jbyIsInVzZXJJZCI6IjY2ZWE4ZGU4MGZjNzMxMDhhNzI5ZTBlMyIsImZjbVRva2VuIjoiZmtJWUloSmNTTVNzRktDdW5qdEJKSzpBUEE5MWJFWW81TkFaZVRwVFpRVk9EM2xWekVkM0Y4N0N6SFZDMWJiS01uekhDS3FjZGJlTzlZMUo0QVNzY3VySnRzYWY5bUdLMlNWSEdwQU01UmpBWHNjc016RmQzZ014OXhWMC1kZTlOZUdsTWRQV0dseHduY2dyVUlZQURpNDdGTEtpMkI0WWpYQiIsImlhdCI6MTcyNjkwNjE0N30.hlDMI38QClVZb0H8w7yK_2ESBGRaeN-3-1xxGaZz9ds',
+      'Authorization': 'Bearer $token',
+      // 'Authorization':
+      //     'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImRvbkBnbWFpbC5jbyIsInVzZXJJZCI6IjY2ZWE4ZGU4MGZjNzMxMDhhNzI5ZTBlMyIsImZjbVRva2VuIjoiZmtJWUloSmNTTVNzRktDdW5qdEJKSzpBUEE5MWJFWW81TkFaZVRwVFpRVk9EM2xWekVkM0Y4N0N6SFZDMWJiS01uekhDS3FjZGJlTzlZMUo0QVNzY3VySnRzYWY5bUdLMlNWSEdwQU01UmpBWHNjc016RmQzZ014OXhWMC1kZTlOZUdsTWRQV0dseHduY2dyVUlZQURpNDdGTEtpMkI0WWpYQiIsImlhdCI6MTcyNjkwNjE0N30.hlDMI38QClVZb0H8w7yK_2ESBGRaeN-3-1xxGaZz9ds',
     };
 
     try {
