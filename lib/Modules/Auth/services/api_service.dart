@@ -63,6 +63,8 @@ class ApiService {
               backgroundColor: Colors.green,
               colorText: Colors.white);
           GetStorage().write('user_data', data);
+          // storage.write('user_data', data);
+          storage.write('token', data['token']); // Store token
           print('Data after registration : $data');
         } else {
           print('Server returned an error: ${response.statusCode}');
