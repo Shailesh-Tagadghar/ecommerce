@@ -55,21 +55,26 @@ class ApiService {
 
       response.stream.transform(utf8.decoder).listen((value) {
         // print('Response body: $value');
+        final data = jsonDecode(value);
+
         if (response.statusCode == 200) {
-          final data = jsonDecode(value);
+          // final data = jsonDecode(value);
+          GetStorage().write('user_data', data);
+          storage.write('token', data['token']); // Store token
+          storage.write('message', data['message']);
           print('User registered successfully');
-          Get.snackbar("Success", "User registered successfully",
+          // Get.snackbar("Success", "User registered successfully",
+          Get.snackbar("Success", data['message'],
               snackPosition: SnackPosition.BOTTOM,
               backgroundColor: Colors.green,
               colorText: Colors.white);
-          GetStorage().write('user_data', data);
           // storage.write('user_data', data);
-          storage.write('token', data['token']); // Store token
           print('Data after registration : $data');
         } else {
           print('Server returned an error: ${response.statusCode}');
-          Get.snackbar(
-              "Error", "Failed to register user: ${response.statusCode}",
+          // Get.snackbar(
+          //     "Error", "Failed to register user: ${response.statusCode}",
+          Get.snackbar("Success", data['message'],
               snackPosition: SnackPosition.BOTTOM,
               backgroundColor: Colors.red,
               colorText: Colors.white);
@@ -107,22 +112,27 @@ class ApiService {
           )
           .timeout(const Duration(
               seconds: 30)); // Adding a timeout for network requests
+      final data = jsonDecode(response.body);
 
       if (response.statusCode == 200) {
-        final data = jsonDecode(response.body);
-        Get.snackbar("Success", "User logged in successfully",
+        // final data = jsonDecode(response.body);
+        final storage = GetStorage();
+        storage.write('user_data', data['data']);
+        storage.write('token', data['token']);
+        storage.write('message', data['message']);
+        // Get.snackbar("Success", "User logged in successfully",
+        Get.snackbar("Success", data['message'],
             snackPosition: SnackPosition.BOTTOM,
             backgroundColor: Colors.green,
             colorText: Colors.white);
         print('User logged in successfully');
         // Store the user information in GetStorage for persistence
-        final storage = GetStorage();
-        storage.write('user_data', data);
-        storage.write('token', data['token']); // Store token
+
         print('Data after Login : $data');
       } else {
         print('Server returned an error: ${response.statusCode}');
         Get.snackbar("Error", "Failed to log in: ${response.statusCode}",
+            // Get.snackbar("Error", data['message'],
             snackPosition: SnackPosition.BOTTOM,
             backgroundColor: Colors.red,
             colorText: Colors.white);
@@ -154,14 +164,16 @@ class ApiService {
 
       if (response.statusCode == 200) {
         // Password change successful
-        Get.snackbar("Success", "Password changed successfully",
+        // Get.snackbar("Success", "Password changed successfully",
+        Get.snackbar("Success", data['message'],
             snackPosition: SnackPosition.BOTTOM,
             backgroundColor: Colors.green,
             colorText: Colors.white);
         print('Password changed successfully');
       } else {
         // Handle failure
-        Get.snackbar("Error", "Failed to change password: ${response.body}",
+        // Get.snackbar("Error", "Failed to change password: ${response.body}",
+        Get.snackbar("Error", data['message'],
             snackPosition: SnackPosition.BOTTOM,
             backgroundColor: Colors.red,
             colorText: Colors.white);
@@ -202,7 +214,7 @@ class ApiService {
         // Check if data is a Map and contains the 'coupons' key
         if (data is Map && data.containsKey('data')) {
           List<dynamic> coupons = data['data'];
-          // Get.snackbar("Success", "Coupons fetched successfully",
+          // Get.snackbar("Success", data['message'],
           //     snackPosition: SnackPosition.BOTTOM,
           //     backgroundColor: Colors.green,
           //     colorText: Colors.white);
@@ -210,7 +222,8 @@ class ApiService {
               .map((coupon) => coupon as Map<String, dynamic>)
               .toList();
         } else {
-          Get.snackbar("Error", "Unexpected response format",
+          // Get.snackbar("Error", "Unexpected response format",
+          Get.snackbar("Error", data['message'],
               snackPosition: SnackPosition.BOTTOM,
               backgroundColor: Colors.red,
               colorText: Colors.white);
