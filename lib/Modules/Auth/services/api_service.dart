@@ -185,8 +185,6 @@ class ApiService {
     print('Bearer Token : $token');
     final headers = {
       'Authorization': 'Bearer $token',
-      // 'Authorization':
-      //     'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImRvbkBnbWFpbC5jbyIsInVzZXJJZCI6IjY2ZWE4ZGU4MGZjNzMxMDhhNzI5ZTBlMyIsImZjbVRva2VuIjoiZmtJWUloSmNTTVNzRktDdW5qdEJKSzpBUEE5MWJFWW81TkFaZVRwVFpRVk9EM2xWekVkM0Y4N0N6SFZDMWJiS01uekhDS3FjZGJlTzlZMUo0QVNzY3VySnRzYWY5bUdLMlNWSEdwQU01UmpBWHNjc016RmQzZ014OXhWMC1kZTlOZUdsTWRQV0dseHduY2dyVUlZQURpNDdGTEtpMkI0WWpYQiIsImlhdCI6MTcyNjkwNjE0N30.hlDMI38QClVZb0H8w7yK_2ESBGRaeN-3-1xxGaZz9ds',
     };
 
     try {
