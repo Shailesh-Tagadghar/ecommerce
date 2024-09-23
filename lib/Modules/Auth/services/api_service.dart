@@ -252,7 +252,7 @@ class ApiService {
         final responseBody = await response.stream.bytesToString();
         print('Response body: $responseBody'); // Log the response body
         final data = jsonDecode(responseBody);
-        print('carousal DATA : $data');
+        // print('carousal DATA : $data');
 
         // Check if data is a Map and contains the 'coupons' key
         if (data is Map && data.containsKey('data')) {
