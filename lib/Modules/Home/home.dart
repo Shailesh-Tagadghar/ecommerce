@@ -1,10 +1,12 @@
 import 'package:ecommerce/Modules/Auth/Widget/custom_text.dart';
 import 'package:ecommerce/Modules/Auth/services/api_service.dart';
 import 'package:ecommerce/Modules/Home/Widget/banner_widget.dart';
+import 'package:ecommerce/Modules/Home/Widget/category_widget.dart';
 import 'package:ecommerce/Modules/Home/controllers/home_controller.dart';
 import 'package:ecommerce/Utils/Constants/asset_constant.dart';
 import 'package:ecommerce/Utils/Constants/color_constant.dart';
 import 'package:ecommerce/Utils/Constants/string_constant.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:icons_plus/icons_plus.dart';
@@ -24,6 +26,8 @@ class _HomeState extends State<Home> {
 
   // List<Map<String, dynamic>> carousalItems = [];
   final carousalItems = <Map<String, dynamic>>[].obs;
+  final categoryItems = <Map<String, dynamic>>[].obs;
+
   final isLoading = true.obs;
 
   // @override
@@ -52,6 +56,7 @@ class _HomeState extends State<Home> {
     // Fetch coupons when the widget is built
     if (isLoading.value) {
       _fetchCarousal();
+      _fetchCategory();
     }
 
     return Scaffold(
@@ -252,7 +257,49 @@ class _HomeState extends State<Home> {
                           },
                         ),
                       ),
-              )
+              ),
+              SizedBox(
+                height: 2.h,
+              ),
+              const Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  CustomText(
+                    text: StringConstants.category,
+                    color: ColorConstants.blackColor,
+                    fontSize: 13,
+                    weight: FontWeight.w500,
+                  ),
+                  CustomText(
+                    text: StringConstants.seeAll,
+                    color: ColorConstants.rich,
+                    fontSize: 11,
+                    weight: FontWeight.w500,
+                  ),
+                ],
+              ),
+              SizedBox(
+                height: 1.5.h,
+              ),
+              Obx(
+                () => isLoading.value
+                    ? const Center(child: CircularProgressIndicator())
+                    : SizedBox(
+                        height: 5.h,
+                        width: 100.w,
+                        child: ListView.builder(
+                          itemCount: categoryItems.length,
+                          itemBuilder: (context, index) {
+                            final item = categoryItems[index];
+                            return CategoryWidget(
+                              image: AssetConstant.cat1,
+                              // image: item['image'] ?? AssetConstant.cat1,
+                              name: item['name'] ?? 'No name',
+                            );
+                          },
+                        ),
+                      ),
+              ),
             ],
           ),
         ),
@@ -267,6 +314,17 @@ class _HomeState extends State<Home> {
       isLoading.value = false; // Update loading state
     } catch (e) {
       print('Error fetching coupons: $e');
+      isLoading.value = false; // Stop loading even on error
+    }
+  }
+
+  Future<void> _fetchCategory() async {
+    try {
+      final category = await ApiService.fetchCategory();
+      categoryItems.assignAll(category); // Update the observable list
+      isLoading.value = false; // Update loading state
+    } catch (e) {
+      print('Error fetching Category: $e');
       isLoading.value = false; // Stop loading even on error
     }
   }
