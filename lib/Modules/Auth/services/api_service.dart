@@ -196,8 +196,9 @@ class ApiService {
 
       if (response.statusCode == 200) {
         final responseBody = await response.stream.bytesToString();
-        print('Response body: $responseBody'); // Log the response body
+        // print('Response body: $responseBody'); // Log the response body
         final data = jsonDecode(responseBody);
+        print('Coupon DATA : $data');
 
         // Check if data is a Map and contains the 'coupons' key
         if (data is Map && data.containsKey('data')) {
@@ -250,9 +251,9 @@ class ApiService {
 
       if (response.statusCode == 200) {
         final responseBody = await response.stream.bytesToString();
-        print('Response body: $responseBody'); // Log the response body
+        // print('Response body: $responseBody'); // Log the response body
         final data = jsonDecode(responseBody);
-        // print('carousal DATA : $data');
+        print('carousal DATA : $data');
 
         // Check if data is a Map and contains the 'coupons' key
         if (data is Map && data.containsKey('data')) {

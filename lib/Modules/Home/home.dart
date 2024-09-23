@@ -22,32 +22,38 @@ class _HomeState extends State<Home> {
 
   final PageController pageController = PageController();
 
-  List<Map<String, dynamic>> carousalItems = [];
-  bool isLoading = true;
+  // List<Map<String, dynamic>> carousalItems = [];
+  final carousalItems = <Map<String, dynamic>>[].obs;
+  final isLoading = true.obs;
 
-  @override
-  void initState() {
-    super.initState();
-    _fetchCarousal();
-  }
+  // @override
+  // void initState() {
+  //   super.initState();
+  //   _fetchCarousal();
+  // }
 
-  Future<void> _fetchCarousal() async {
-    try {
-      final carousal = await ApiService.fetchCarousal();
-      setState(() {
-        carousalItems = carousal;
-        isLoading = false;
-      });
-    } catch (e) {
-      print('Error fetching carousal: $e');
-      setState(() {
-        isLoading = false; // Stop loading even on error
-      });
-    }
-  }
+  // Future<void> _fetchCarousal() async {
+  //   try {
+  //     final carousal = await ApiService.fetchCarousal();
+  //     setState(() {
+  //       carousalItems = carousal;
+  //       isLoading = false;
+  //     });
+  //   } catch (e) {
+  //     print('Error fetching carousal: $e');
+  //     setState(() {
+  //       isLoading = false; // Stop loading even on error
+  //     });
+  //   }
+  // }
 
   @override
   Widget build(BuildContext context) {
+    // Fetch coupons when the widget is built
+    if (isLoading.value) {
+      _fetchCarousal();
+    }
+
     return Scaffold(
       backgroundColor: ColorConstants.whiteColor,
       body: SingleChildScrollView(
@@ -223,30 +229,45 @@ class _HomeState extends State<Home> {
               SizedBox(
                 height: 2.h,
               ),
-              SizedBox(
-                height: 16.h,
-                width: 100.w,
-                child: PageView.builder(
-                  itemCount: carousalItems.length,
-                  onPageChanged: (index) {
-                    homeController.currentPage.value = index;
-                  },
-                  itemBuilder: (context, index) {
-                    final item = carousalItems[index];
+              Obx(
+                () => isLoading.value
+                    ? const Center(child: CircularProgressIndicator())
+                    : SizedBox(
+                        height: 16.h,
+                        width: 100.w,
+                        child: PageView.builder(
+                          itemCount: carousalItems.length,
+                          onPageChanged: (index) {
+                            homeController.currentPage.value = index;
+                          },
+                          itemBuilder: (context, index) {
+                            final item = carousalItems[index];
 
-                    return BannerWidget(
-                      image: AssetConstant.banner2tp,
-                      // image: item['image'] ?? AssetConstant.banner1,
-                      title: item['title'] ?? 'No Title',
-                      subtitle: item['subtitle'] ?? 'No Subtitle',
-                    );
-                  },
-                ),
+                            return BannerWidget(
+                              image: AssetConstant.banner2tp,
+                              // image: item['image'] ?? AssetConstant.banner1,
+                              title: item['title'] ?? 'No Title',
+                              subtitle: item['subtitle'] ?? 'No Subtitle',
+                            );
+                          },
+                        ),
+                      ),
               )
             ],
           ),
         ),
       ),
     );
+  }
+
+  Future<void> _fetchCarousal() async {
+    try {
+      final carousal = await ApiService.fetchCarousal();
+      carousalItems.assignAll(carousal); // Update the observable list
+      isLoading.value = false; // Update loading state
+    } catch (e) {
+      print('Error fetching coupons: $e');
+      isLoading.value = false; // Stop loading even on error
+    }
   }
 }
