@@ -37,20 +37,20 @@ class HomeController extends GetxController {
   //for banner value
   var currentPage = 0.obs;
 
-  final List<Map<String, String>> bannerList = [
-    {
-      'title': StringConstants.collection,
-      'subtitle': StringConstants.discountText,
-    },
-    {
-      'title': StringConstants.collection,
-      'subtitle': StringConstants.discountText,
-    },
-    {
-      'title': StringConstants.collection,
-      'subtitle': StringConstants.discountText,
-    },
-  ];
+  // final List<Map<String, String>> bannerList = [
+  //   {
+  //     'title': StringConstants.collection,
+  //     'subtitle': StringConstants.discountText,
+  //   },
+  //   {
+  //     'title': StringConstants.collection,
+  //     'subtitle': StringConstants.discountText,
+  //   },
+  //   {
+  //     'title': StringConstants.collection,
+  //     'subtitle': StringConstants.discountText,
+  //   },
+  // ];
 
   //Wishlist page list view -- list
   final List<String> wishlistCategory = <String>[

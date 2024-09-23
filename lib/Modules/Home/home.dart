@@ -1,4 +1,5 @@
 import 'package:ecommerce/Modules/Auth/Widget/custom_text.dart';
+import 'package:ecommerce/Modules/Auth/services/api_service.dart';
 import 'package:ecommerce/Modules/Home/Widget/banner_widget.dart';
 import 'package:ecommerce/Modules/Home/controllers/home_controller.dart';
 import 'package:ecommerce/Utils/Constants/asset_constant.dart';
@@ -9,11 +10,42 @@ import 'package:get/get.dart';
 import 'package:icons_plus/icons_plus.dart';
 import 'package:sizer/sizer.dart';
 
-class Home extends StatelessWidget {
+class Home extends StatefulWidget {
   Home({super.key});
 
+  @override
+  State<Home> createState() => _HomeState();
+}
+
+class _HomeState extends State<Home> {
   final HomeController homeController = Get.put(HomeController());
+
   final PageController pageController = PageController();
+
+  List<Map<String, dynamic>> carousalItems = [];
+  bool isLoading = true;
+
+  @override
+  void initState() {
+    super.initState();
+    _fetchCarousal();
+  }
+
+  Future<void> _fetchCarousal() async {
+    try {
+      final carousal = await ApiService.fetchCarousal();
+      setState(() {
+        carousalItems = carousal;
+        isLoading = false;
+      });
+    } catch (e) {
+      print('Error fetching carousal: $e');
+      setState(() {
+        isLoading = false; // Stop loading even on error
+      });
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -195,20 +227,18 @@ class Home extends StatelessWidget {
                 height: 16.h,
                 width: 100.w,
                 child: PageView.builder(
-                  controller: pageController,
-                  itemCount: homeController.bannerList.length,
+                  itemCount: carousalItems.length,
                   onPageChanged: (index) {
                     homeController.currentPage.value = index;
                   },
                   itemBuilder: (context, index) {
-                    final bannerData = homeController.bannerList[index];
-                    final title = bannerData['title'] ?? '';
-                    final subtitle = bannerData['subtitle'] ?? '';
+                    final item = carousalItems[index];
+
                     return BannerWidget(
-                      image: AssetConstant
-                          .banner2tp, // or change this based on your needs
-                      title: title,
-                      subtitle: subtitle,
+                      image: AssetConstant.banner2tp,
+                      // image: item['image'] ?? AssetConstant.banner1,
+                      title: item['title'] ?? 'No Title',
+                      subtitle: item['subtitle'] ?? 'No Subtitle',
                     );
                   },
                 ),
