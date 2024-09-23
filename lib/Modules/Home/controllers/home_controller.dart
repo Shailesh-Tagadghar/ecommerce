@@ -27,6 +27,31 @@ class HomeController extends GetxController {
     }
   }
 
+  //Home Page
+  var dropdownValue = StringConstants.dropLoc1.obs;
+
+  void setDropdownValue(String newValue) {
+    dropdownValue.value = newValue;
+  }
+
+  //for banner value
+  var currentPage = 0.obs;
+
+  final List<Map<String, String>> bannerList = [
+    {
+      'title': StringConstants.collection,
+      'subtitle': StringConstants.discountText,
+    },
+    {
+      'title': StringConstants.collection,
+      'subtitle': StringConstants.discountText,
+    },
+    {
+      'title': StringConstants.collection,
+      'subtitle': StringConstants.discountText,
+    },
+  ];
+
   //Wishlist page list view -- list
   final List<String> wishlistCategory = <String>[
     StringConstants.category1,
@@ -110,19 +135,6 @@ class HomeController extends GetxController {
     AssetConstant.pd2,
     AssetConstant.pd3
   ].obs;
-
-  final List<String> locationList = [
-    "Mumbai",
-    "New York",
-    "Paris",
-    "Cape Town",
-  ].obs;
-
-  var dropdownValue = "Mumbai".obs;
-
-  void setDropdownValue(String newValue) {
-    dropdownValue.value = newValue;
-  }
 
   var currentImage = ''.obs;
   var selectedProduct = ''.obs;

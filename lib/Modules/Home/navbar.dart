@@ -19,7 +19,7 @@ class Navbar extends StatelessWidget {
     final HomeController controller = Get.find<HomeController>();
 
     final List<Widget> pages = [
-      const Home(),
+      Home(),
       Cart(),
       Wishlist(),
       const Search(),

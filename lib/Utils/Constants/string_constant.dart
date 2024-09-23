@@ -108,6 +108,7 @@ class StringConstants {
   static const String productname1 = 'Brown Suite';
   static const String size1 = 'XL';
   static const String productprice1 = '120';
+  static const String productname2 = 'Yellow Shirt';
 
   //Wishlist Screen
   static const String wishlist = 'My Wishlist';
@@ -141,6 +142,23 @@ class StringConstants {
   static const String priceText = 'Total Price';
   static const String price = '83.97';
   static const String addCart = 'Add to Cart';
+
+  //Home Page
+  static const String location = 'Location';
+  static const String dropLoc1 = 'New York, USA';
+  static const String dropLoc2 = 'New Jersey, USA';
+  static const String collection = 'New Collection';
+  static const String discountText = 'Discount 50% for the first transaction';
+  static const String shopnowBtn = 'Shop Now';
+  static const String category = 'Category';
+  static const String seeAll = 'See All';
+  static const String flash = 'Flash Sale';
+  static const String timer = 'Closing in';
+  static const String newest = 'Newest';
+  static const String popular = 'Popular';
+  static const String men = 'Men';
+  static const String women = 'Women';
+  static const String trending = 'Trending';
 }
 
 ///
