@@ -342,8 +342,8 @@ class _HomeState extends State<Home> {
                 height: 1.h,
               ),
               Container(
-                height: 7.2.h,
-                padding: EdgeInsets.only(top: 1.5.h, bottom: 1.5.h),
+                height: 4.5.h,
+                padding: EdgeInsets.symmetric(vertical: 0.3.h),
                 child: Obx(() {
                   if (isLoading.value) {
                     return const Center(
@@ -356,7 +356,7 @@ class _HomeState extends State<Home> {
                     itemBuilder: (context, index) {
                       return Container(
                         width: 40.w,
-                        padding: EdgeInsets.only(left: 4.w),
+                        padding: EdgeInsets.only(left: 2.w),
                         child: CustomButton(
                           label: salesCategoryItems[index]['name'] ??
                               'Unknown', // Adjust key based on your API response
@@ -378,28 +378,42 @@ class _HomeState extends State<Home> {
                 }),
               ),
               SizedBox(
-                height: 1.h,
+                height: 0.001.h,
               ),
               Obx(
                 () {
                   if (isLoading.value) {
                     return const Center(child: CircularProgressIndicator());
                   } else {
-                    return ListView.builder(
-                      itemCount: productsItems.length,
-                      shrinkWrap: true,
-                      physics: const NeverScrollableScrollPhysics(),
-                      itemBuilder: (context, index) {
-                        final item = productsItems[index];
-                        return ProductCartWidget(
-                          name: item['name'],
-                          price: item['price'],
-                          rating: item['rating'],
-                          image: item['image'] ?? AssetConstant.pd3,
-                        );
-                      },
+                    return Container(
+                      color: ColorConstants.background,
+                      child: GridView.builder(
+                        gridDelegate:
+                            const SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: 2, // Number of items per row
+                          childAspectRatio:
+                              0.88, // Adjusts the size of the items
+                          crossAxisSpacing: 2.0, // Spacing between columns
+                          mainAxisSpacing: 2.0, // Spacing between rows
+                        ),
+                        itemCount: productsItems.length,
+                        shrinkWrap: true,
+                        physics: const NeverScrollableScrollPhysics(),
+                        itemBuilder: (context, index) {
+                          final item = productsItems[index];
+                          return ProductCartWidget(
+                            name: item['name'],
+                            price: item['price'],
+                            rating: item['rating'],
+                            image: (item['image'] is List &&
+                                    (item['image'] as List).isNotEmpty)
+                                ? item['image']
+                                    [0] // Use the first image from the list
+                                : AssetConstant.pd3, // Fallback image
+                          );
+                        },
+                      ),
                     );
-                    // return const Text('dATA');
                   }
                 },
               ),
