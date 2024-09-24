@@ -268,7 +268,7 @@ class _HomeState extends State<Home> {
                       return const Center(child: CircularProgressIndicator());
                     } else {
                       return SizedBox(
-                        height: 20.h,
+                        height: 10.h,
                         child: ListView.builder(
                           scrollDirection: Axis.horizontal,
                           itemCount: categoryItems.length,
@@ -285,6 +285,57 @@ class _HomeState extends State<Home> {
                     }
                   },
                 ),
+              ),
+              SizedBox(
+                height: 1.h,
+              ),
+              Obx(
+                () => Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    const CustomText(
+                      text: StringConstants.flash,
+                      color: ColorConstants.blackColor,
+                      fontSize: 14,
+                      weight: FontWeight.w500,
+                    ),
+                    const Spacer(),
+                    const CustomText(
+                      text: StringConstants.timer,
+                      color: ColorConstants.greyColor,
+                      fontSize: 11,
+                      weight: FontWeight.w400,
+                    ),
+                    buildTimeContainer(
+                        homeController.hours.value.toString().padLeft(2, '0'),
+                        context),
+                    Container(
+                      padding: const EdgeInsets.all(4),
+                      child: const CustomText(
+                        text: ":",
+                        fontSize: 14,
+                        weight: FontWeight.w400,
+                      ),
+                    ),
+                    buildTimeContainer(
+                        homeController.minutes.value.toString().padLeft(2, '0'),
+                        context),
+                    Container(
+                      padding: const EdgeInsets.all(4),
+                      child: const CustomText(
+                        text: ":",
+                        fontSize: 14,
+                        weight: FontWeight.w400,
+                      ),
+                    ),
+                    buildTimeContainer(
+                        homeController.seconds.value.toString().padLeft(2, '0'),
+                        context),
+                  ],
+                ),
+              ),
+              SizedBox(
+                height: 1.h,
               ),
             ],
           ),
@@ -314,5 +365,26 @@ class _HomeState extends State<Home> {
       print('Error fetching Category: $e');
       isLoading.value = false;
     }
+  }
+
+  Widget buildTimeContainer(String time, context) {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Container(
+          padding: const EdgeInsets.all(4),
+          decoration: BoxDecoration(
+            color: ColorConstants.lightGrayColor,
+            borderRadius: BorderRadius.circular(5),
+          ),
+          child: CustomText(
+            text: time,
+            fontSize: 10,
+            weight: FontWeight.w400,
+            color: ColorConstants.primary,
+          ),
+        ),
+      ],
+    );
   }
 }

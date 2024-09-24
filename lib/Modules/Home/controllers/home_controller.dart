@@ -1,9 +1,18 @@
+import 'dart:async';
+
 import 'package:ecommerce/Utils/Constants/asset_constant.dart';
 import 'package:ecommerce/Utils/Constants/string_constant.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class HomeController extends GetxController {
+  @override
+  void onInit() {
+    activePage.value = 0;
+    startTimer();
+    super.onInit();
+  }
+
   //for navbar selection
   var selectedIndex = 0.obs;
   //counter button
@@ -37,6 +46,31 @@ class HomeController extends GetxController {
   //for banner value
   var currentPage = 0.obs;
 
+  // for home page timer
+  var hours = 2.obs;
+  var minutes = 0.obs;
+  var seconds = 0.obs;
+  late Timer timer;
+
+  void startTimer() {
+    timer = Timer.periodic(const Duration(seconds: 1), (timer) {
+      if (seconds.value > 0) {
+        seconds.value--;
+      } else if (minutes.value > 0) {
+        minutes.value--;
+        seconds.value = 59;
+      } else if (hours.value > 0) {
+        hours.value--;
+        minutes.value = 59;
+        seconds.value = 59;
+      } else {
+        timer.cancel(); // Stop the timer when it reaches zero
+      }
+    });
+  }
+
+  ///////////////////////////////////////////////////////////////////
+
   //Wishlist page list view -- list
   final List<String> wishlistCategory = <String>[
     StringConstants.category1,
@@ -53,12 +87,6 @@ class HomeController extends GetxController {
 
   //Product Details Screen Controller
   RxInt activePage = 0.obs;
-
-  @override
-  void onInit() {
-    activePage.value = 0;
-    super.onInit();
-  }
 
   changeActivePage(int index) {
     activePage.value = index;

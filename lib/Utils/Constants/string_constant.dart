@@ -153,7 +153,7 @@ class StringConstants {
   static const String category = 'Category';
   static const String seeAll = 'See All';
   static const String flash = 'Flash Sale';
-  static const String timer = 'Closing in';
+  static const String timer = 'Closing in : ';
   static const String newest = 'Newest';
   static const String popular = 'Popular';
   static const String men = 'Men';
