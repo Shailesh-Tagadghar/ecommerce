@@ -1,4 +1,5 @@
 import 'package:ecommerce/Modules/Auth/Widget/custom_text.dart';
+import 'package:ecommerce/Utils/Constants/api_constants.dart';
 import 'package:ecommerce/Utils/Constants/color_constant.dart';
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
@@ -32,7 +33,7 @@ class CategoryWidget extends StatelessWidget {
               child: Padding(
                 padding: const EdgeInsets.all(15),
                 child: Image(
-                  image: AssetImage(image),
+                  image: NetworkImage('${ApiConstants.imageBaseUrl}$image'),
                 ),
               ),
             ),

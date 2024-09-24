@@ -279,8 +279,8 @@ class _HomeState extends State<Home> {
                           itemBuilder: (context, index) {
                             final item = categoryItems[index]; // Debugging line
                             return CategoryWidget(
-                              image: AssetConstant.cat1,
-                              // image: item['image'] ?? AssetConstant.cat1,
+                              // image: AssetConstant.cat1,
+                              image: item['image'] ?? AssetConstant.cat1,
                               name: item['name'] ?? 'No name',
                             );
                           },
