@@ -18,7 +18,7 @@ class HomeController extends GetxController {
   //counter button
   var quantity = 1.obs;
   //Wishlist Category
-  var selectedCategoryIndex = (-1).obs;
+  var selectedCategoryIndex = (0).obs;
 
   //to change navbar index
   void onItemTapped(int index) {
@@ -53,7 +53,7 @@ class HomeController extends GetxController {
   late Timer timer;
 
   //for get sales category
-  var selectedsalesCategoryIndex = (-1).obs;
+  var selectedsalesCategoryIndex = 0.obs;
 
   void setSelectedSalesCategory(int index) {
     selectedsalesCategoryIndex.value = index;

@@ -3,6 +3,7 @@ import 'package:ecommerce/Modules/Auth/Widget/custom_text.dart';
 import 'package:ecommerce/Modules/Auth/services/api_service.dart';
 import 'package:ecommerce/Modules/Home/Widget/banner_widget.dart';
 import 'package:ecommerce/Modules/Home/Widget/category_widget.dart';
+import 'package:ecommerce/Modules/Home/Widget/product_cart_widget.dart';
 import 'package:ecommerce/Modules/Home/controllers/home_controller.dart';
 import 'package:ecommerce/Routes/app_routes.dart';
 import 'package:ecommerce/Utils/Constants/asset_constant.dart';
@@ -29,6 +30,7 @@ class _HomeState extends State<Home> {
   final carousalItems = <Map<String, dynamic>>[].obs;
   final categoryItems = <Map<String, dynamic>>[].obs;
   final salesCategoryItems = <Map<String, dynamic>>[].obs;
+  final productsItems = <Map<String, dynamic>>[].obs;
   final isLoading = true.obs;
 
   @override
@@ -38,6 +40,7 @@ class _HomeState extends State<Home> {
       _fetchCarousal();
       _fetchCategory();
       _fetchSalesCategory();
+      _fetchProducts();
     }
 
     return Scaffold(
@@ -225,10 +228,9 @@ class _HomeState extends State<Home> {
                           },
                           itemBuilder: (context, index) {
                             final item = carousalItems[index];
-
                             return BannerWidget(
-                              image: AssetConstant.banner2tp,
-                              // image: item['image'] ?? AssetConstant.banner1,
+                              // image: AssetConstant.banner2tp,
+                              image: item['image'] ?? AssetConstant.banner1,
                               title: item['title'] ?? 'No Title',
                               subtitle: item['subtitle'] ?? 'No Subtitle',
                             );
@@ -375,6 +377,32 @@ class _HomeState extends State<Home> {
                   );
                 }),
               ),
+              SizedBox(
+                height: 1.h,
+              ),
+              Obx(
+                () {
+                  if (isLoading.value) {
+                    return const Center(child: CircularProgressIndicator());
+                  } else {
+                    return ListView.builder(
+                      itemCount: productsItems.length,
+                      shrinkWrap: true,
+                      physics: const NeverScrollableScrollPhysics(),
+                      itemBuilder: (context, index) {
+                        final item = productsItems[index];
+                        return ProductCartWidget(
+                          name: item['name'],
+                          price: item['price'],
+                          rating: item['rating'],
+                          image: item['image'] ?? AssetConstant.pd3,
+                        );
+                      },
+                    );
+                    // return const Text('dATA');
+                  }
+                },
+              ),
             ],
           ),
         ),
@@ -410,6 +438,18 @@ class _HomeState extends State<Home> {
       final salesCategory = await ApiService.fetchSalesCategory();
       // print('Fetched Categories: $category');
       salesCategoryItems.assignAll(salesCategory);
+      isLoading.value = false;
+    } catch (e) {
+      print('Error fetching sales Category: $e');
+      isLoading.value = false;
+    }
+  }
+
+  Future<void> _fetchProducts() async {
+    try {
+      final products = await ApiService.fetchProducts();
+      // print('Fetched Categories: $category');
+      productsItems.assignAll(products);
       isLoading.value = false;
     } catch (e) {
       print('Error fetching sales Category: $e');

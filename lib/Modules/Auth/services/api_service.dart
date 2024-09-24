@@ -254,7 +254,7 @@ class ApiService {
         final responseBody = await response.stream.bytesToString();
         // print('Response body: $responseBody'); // Log the response body
         final data = jsonDecode(responseBody);
-        // print('carousal DATA : $data');
+        print('carousal DATA : $data');
 
         // Check if data is a Map and contains the 'coupons' key
         if (data is Map && data.containsKey('data')) {
@@ -365,7 +365,7 @@ class ApiService {
         final responseBody = await response.stream.bytesToString();
         // print('Category Response body: $responseBody'); // Log the response body
         final data = jsonDecode(responseBody);
-        print('Sales Category DATA : $data');
+        // print('Sales Category DATA : $data');
 
         // Check if data is a Map and contains the 'coupons' key
         if (data is Map && data.containsKey('data')) {
@@ -396,6 +396,61 @@ class ApiService {
           backgroundColor: Colors.red,
           colorText: Colors.white);
       throw Exception('Failed to Sales Category');
+    }
+  }
+
+  //fetch Products
+  static Future<List<Map<String, dynamic>>> fetchProducts() async {
+    const String url = '${ApiConstants.baseUrl}${ApiConstants.getProducts}';
+
+    final token = GetStorage()
+        .read('token'); // Adjust if your token storage key is different
+    print('Bearer Token : $token');
+    final headers = {
+      'Authorization': 'Bearer $token',
+    };
+
+    try {
+      var request = http.Request('GET', Uri.parse(url));
+      request.headers.addAll(headers);
+
+      // Send the request and await the response
+      http.StreamedResponse response = await request.send();
+
+      if (response.statusCode == 200) {
+        final responseBody = await response.stream.bytesToString();
+        // print('Category Response body: $responseBody'); // Log the response body
+        final data = jsonDecode(responseBody);
+        print('Product Data : $data');
+
+        // Check if data is a Map and contains the 'coupons' key
+        if (data is Map && data.containsKey('data')) {
+          List<dynamic> product = data['data'];
+          // Get.snackbar("Success", "Coupons fetched successfully",
+          //     snackPosition: SnackPosition.BOTTOM,
+          //     backgroundColor: Colors.green,
+          //     colorText: Colors.white);
+          return product
+              .map((product) => product as Map<String, dynamic>)
+              .toList();
+        } else {
+          Get.snackbar("Error", "Unexpected response format",
+              snackPosition: SnackPosition.BOTTOM,
+              backgroundColor: Colors.red,
+              colorText: Colors.white);
+          throw Exception('Unexpected response format');
+        }
+      } else {
+        print('Error response: ${response.reasonPhrase}');
+        throw Exception('Failed to fetch product: ${response.statusCode}');
+      }
+    } catch (e) {
+      print('Error fetching coupons: $e');
+      Get.snackbar("Error", "Failed to fetch product: $e",
+          snackPosition: SnackPosition.BOTTOM,
+          backgroundColor: Colors.red,
+          colorText: Colors.white);
+      throw Exception('Failed to product');
     }
   }
 }
