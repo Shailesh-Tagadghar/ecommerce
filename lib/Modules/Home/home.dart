@@ -3,10 +3,10 @@ import 'package:ecommerce/Modules/Auth/services/api_service.dart';
 import 'package:ecommerce/Modules/Home/Widget/banner_widget.dart';
 import 'package:ecommerce/Modules/Home/Widget/category_widget.dart';
 import 'package:ecommerce/Modules/Home/controllers/home_controller.dart';
+import 'package:ecommerce/Routes/app_routes.dart';
 import 'package:ecommerce/Utils/Constants/asset_constant.dart';
 import 'package:ecommerce/Utils/Constants/color_constant.dart';
 import 'package:ecommerce/Utils/Constants/string_constant.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:icons_plus/icons_plus.dart';
@@ -29,27 +29,6 @@ class _HomeState extends State<Home> {
   final categoryItems = <Map<String, dynamic>>[].obs;
 
   final isLoading = true.obs;
-
-  // @override
-  // void initState() {
-  //   super.initState();
-  //   _fetchCarousal();
-  // }
-
-  // Future<void> _fetchCarousal() async {
-  //   try {
-  //     final carousal = await ApiService.fetchCarousal();
-  //     setState(() {
-  //       carousalItems = carousal;
-  //       isLoading = false;
-  //     });
-  //   } catch (e) {
-  //     print('Error fetching carousal: $e');
-  //     setState(() {
-  //       isLoading = false; // Stop loading even on error
-  //     });
-  //   }
-  // }
 
   @override
   Widget build(BuildContext context) {
@@ -173,15 +152,12 @@ class _HomeState extends State<Home> {
                     width: 75.w,
                     height: 5.h,
                     child: TextField(
-                      // controller: searchControllers.searchControllers,
                       decoration: InputDecoration(
                         prefixIcon: const Icon(
                           Icons.search,
                           color: ColorConstants.rich,
                           size: 28,
                         ),
-                        // suffixIcon: const Icon(Bootstrap.sliders2_vertical,
-                        //     color: ColorConstants.blackColor),
                         hintText: StringConstants.search,
                         hintStyle: const TextStyle(
                           color: ColorConstants.greyColor,
@@ -281,16 +257,23 @@ class _HomeState extends State<Home> {
               SizedBox(
                 height: 1.5.h,
               ),
-              Obx(
-                () => isLoading.value
-                    ? const Center(child: CircularProgressIndicator())
-                    : SizedBox(
-                        height: 5.h,
-                        width: 100.w,
+              GestureDetector(
+                onTap: () {
+                  homeController.selectedIndex.value = 2;
+                  Get.toNamed(AppRoutes.navbarScreen);
+                },
+                child: Obx(
+                  () {
+                    if (isLoading.value) {
+                      return const Center(child: CircularProgressIndicator());
+                    } else {
+                      return SizedBox(
+                        height: 20.h,
                         child: ListView.builder(
+                          scrollDirection: Axis.horizontal,
                           itemCount: categoryItems.length,
                           itemBuilder: (context, index) {
-                            final item = categoryItems[index];
+                            final item = categoryItems[index]; // Debugging line
                             return CategoryWidget(
                               image: AssetConstant.cat1,
                               // image: item['image'] ?? AssetConstant.cat1,
@@ -298,7 +281,10 @@ class _HomeState extends State<Home> {
                             );
                           },
                         ),
-                      ),
+                      );
+                    }
+                  },
+                ),
               ),
             ],
           ),
@@ -314,18 +300,19 @@ class _HomeState extends State<Home> {
       isLoading.value = false; // Update loading state
     } catch (e) {
       print('Error fetching coupons: $e');
-      isLoading.value = false; // Stop loading even on error
+      isLoading.value = false;
     }
   }
 
   Future<void> _fetchCategory() async {
     try {
       final category = await ApiService.fetchCategory();
-      categoryItems.assignAll(category); // Update the observable list
-      isLoading.value = false; // Update loading state
+      // print('Fetched Categories: $category');
+      categoryItems.assignAll(category);
+      isLoading.value = false;
     } catch (e) {
       print('Error fetching Category: $e');
-      isLoading.value = false; // Stop loading even on error
+      isLoading.value = false;
     }
   }
 }
