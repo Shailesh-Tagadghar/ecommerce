@@ -30,6 +30,7 @@ class BannerWidget extends StatelessWidget {
           padding: EdgeInsets.only(
             left: 5.w,
             top: 2.h,
+            bottom: 1.h,
           ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,

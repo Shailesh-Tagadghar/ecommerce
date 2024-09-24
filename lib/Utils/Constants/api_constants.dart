@@ -22,7 +22,7 @@ class ApiConstants {
 
   static const String getCategory = "category/getcategory";
   static const String getCarousal = "/carousal/getcarousal";
-  static const String getSalesCategory = "/salescategory/getsalescategory";
+  static const String getSalesCategory = "salescategory/getsalescategory";
   static const String getProducts = "/product/getproducts";
 
 //Cart Api endpoints

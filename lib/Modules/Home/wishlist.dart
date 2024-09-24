@@ -84,14 +84,14 @@ class Wishlist extends StatelessWidget {
                   );
                 }),
           ),
-          listFoodItems(),
+          listproductItems(),
         ],
       ),
     );
   }
 }
 
-Widget listFoodItems() {
+Widget listproductItems() {
   return Expanded(
     child: Padding(
       padding: EdgeInsets.only(left: 4.w, right: 4.w),

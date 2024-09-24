@@ -52,6 +52,13 @@ class HomeController extends GetxController {
   var seconds = 0.obs;
   late Timer timer;
 
+  //for get sales category
+  var selectedsalesCategoryIndex = (-1).obs;
+
+  void setSelectedSalesCategory(int index) {
+    selectedsalesCategoryIndex.value = index;
+  }
+
   void startTimer() {
     timer = Timer.periodic(const Duration(seconds: 1), (timer) {
       if (seconds.value > 0) {

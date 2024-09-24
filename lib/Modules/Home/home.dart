@@ -1,3 +1,4 @@
+import 'package:ecommerce/Modules/Auth/Widget/custom_button.dart';
 import 'package:ecommerce/Modules/Auth/Widget/custom_text.dart';
 import 'package:ecommerce/Modules/Auth/services/api_service.dart';
 import 'package:ecommerce/Modules/Home/Widget/banner_widget.dart';
@@ -27,7 +28,7 @@ class _HomeState extends State<Home> {
   // List<Map<String, dynamic>> carousalItems = [];
   final carousalItems = <Map<String, dynamic>>[].obs;
   final categoryItems = <Map<String, dynamic>>[].obs;
-
+  final salesCategoryItems = <Map<String, dynamic>>[].obs;
   final isLoading = true.obs;
 
   @override
@@ -36,6 +37,7 @@ class _HomeState extends State<Home> {
     if (isLoading.value) {
       _fetchCarousal();
       _fetchCategory();
+      _fetchSalesCategory();
     }
 
     return Scaffold(
@@ -214,7 +216,7 @@ class _HomeState extends State<Home> {
                 () => isLoading.value
                     ? const Center(child: CircularProgressIndicator())
                     : SizedBox(
-                        height: 16.h,
+                        height: 18.h,
                         width: 100.w,
                         child: PageView.builder(
                           itemCount: carousalItems.length,
@@ -337,6 +339,42 @@ class _HomeState extends State<Home> {
               SizedBox(
                 height: 1.h,
               ),
+              Container(
+                height: 7.2.h,
+                padding: EdgeInsets.only(top: 1.5.h, bottom: 1.5.h),
+                child: Obx(() {
+                  if (isLoading.value) {
+                    return const Center(
+                        child:
+                            CircularProgressIndicator()); // Show loading indicator
+                  }
+                  return ListView.builder(
+                    itemCount: salesCategoryItems.length,
+                    scrollDirection: Axis.horizontal,
+                    itemBuilder: (context, index) {
+                      return Container(
+                        width: 40.w,
+                        padding: EdgeInsets.only(left: 4.w),
+                        child: CustomButton(
+                          label: salesCategoryItems[index]['name'] ??
+                              'Unknown', // Adjust key based on your API response
+                          labelColor: ColorConstants.blackColor,
+                          action: () {
+                            // Handle category selection
+                            homeController.setSelectedSalesCategory(index);
+                          },
+                          isSelected:
+                              homeController.selectedsalesCategoryIndex.value ==
+                                  index,
+                          btnColor: ColorConstants.whiteColor,
+                          fontSize: 11,
+                          weight: FontWeight.w400,
+                        ),
+                      );
+                    },
+                  );
+                }),
+              ),
             ],
           ),
         ),
@@ -363,6 +401,18 @@ class _HomeState extends State<Home> {
       isLoading.value = false;
     } catch (e) {
       print('Error fetching Category: $e');
+      isLoading.value = false;
+    }
+  }
+
+  Future<void> _fetchSalesCategory() async {
+    try {
+      final salesCategory = await ApiService.fetchSalesCategory();
+      // print('Fetched Categories: $category');
+      salesCategoryItems.assignAll(salesCategory);
+      isLoading.value = false;
+    } catch (e) {
+      print('Error fetching sales Category: $e');
       isLoading.value = false;
     }
   }

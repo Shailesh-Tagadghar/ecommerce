@@ -86,6 +86,7 @@ class ApiService {
     }
   }
 
+  //LOGIN USER
   static Future<void> loginUser(Map<String, dynamic> loginData) async {
     final url = Uri.parse('${ApiConstants.baseUrl}${ApiConstants.login}');
 
@@ -338,6 +339,63 @@ class ApiService {
           backgroundColor: Colors.red,
           colorText: Colors.white);
       throw Exception('Failed to fetch coupons');
+    }
+  }
+
+  //fetch sales category
+  static Future<List<Map<String, dynamic>>> fetchSalesCategory() async {
+    const String url =
+        '${ApiConstants.baseUrl}${ApiConstants.getSalesCategory}';
+
+    final token = GetStorage()
+        .read('token'); // Adjust if your token storage key is different
+    print('Bearer Token : $token');
+    final headers = {
+      'Authorization': 'Bearer $token',
+    };
+
+    try {
+      var request = http.Request('GET', Uri.parse(url));
+      request.headers.addAll(headers);
+
+      // Send the request and await the response
+      http.StreamedResponse response = await request.send();
+
+      if (response.statusCode == 200) {
+        final responseBody = await response.stream.bytesToString();
+        // print('Category Response body: $responseBody'); // Log the response body
+        final data = jsonDecode(responseBody);
+        print('Sales Category DATA : $data');
+
+        // Check if data is a Map and contains the 'coupons' key
+        if (data is Map && data.containsKey('data')) {
+          List<dynamic> salesCategory = data['data'];
+          // Get.snackbar("Success", "Coupons fetched successfully",
+          //     snackPosition: SnackPosition.BOTTOM,
+          //     backgroundColor: Colors.green,
+          //     colorText: Colors.white);
+          return salesCategory
+              .map((salesCategory) => salesCategory as Map<String, dynamic>)
+              .toList();
+        } else {
+          Get.snackbar("Error", "Unexpected response format",
+              snackPosition: SnackPosition.BOTTOM,
+              backgroundColor: Colors.red,
+              colorText: Colors.white);
+          throw Exception('Unexpected response format');
+        }
+      } else {
+        print('Error response: ${response.reasonPhrase}');
+        throw Exception(
+            'Failed to fetch Sales Category: ${response.statusCode}');
+      }
+    } catch (e) {
+      print('Error fetching coupons: $e');
+      Get.snackbar("Error", "Failed to fetch Sales Category: $e",
+          snackPosition: SnackPosition.BOTTOM,
+          backgroundColor: Colors.red,
+          colorText: Colors.white);
+      throw Exception('Failed to Sales Category');
     }
   }
 }
