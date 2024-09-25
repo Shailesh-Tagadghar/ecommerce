@@ -45,12 +45,14 @@ class HomeController extends GetxController {
 
   //for banner value
   var currentPage = 0.obs;
+  late PageController pageController;
+  late Timer timer;
 
   // for home page timer
   var hours = 2.obs;
   var minutes = 0.obs;
   var seconds = 0.obs;
-  late Timer timer;
+  // late Timer timer;
 
   //for get sales category
   var selectedsalesCategoryIndex = 0.obs;
@@ -146,7 +148,7 @@ class HomeController extends GetxController {
     }
   }
 
-  PageController pageController = PageController();
+  // PageController pageController = PageController();
 
   RxList<String> productClothImages = [
     AssetConstant.pd3,

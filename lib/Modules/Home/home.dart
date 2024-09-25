@@ -24,7 +24,7 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   final HomeController homeController = Get.put(HomeController());
 
-  final PageController pageController = PageController();
+  // final PageController pageController = PageController();
 
   // List<Map<String, dynamic>> carousalItems = [];
   final carousalItems = <Map<String, dynamic>>[].obs;
@@ -222,6 +222,7 @@ class _HomeState extends State<Home> {
                         height: 18.h,
                         width: 100.w,
                         child: PageView.builder(
+                          controller: homeController.pageController,
                           itemCount: carousalItems.length,
                           onPageChanged: (index) {
                             homeController.currentPage.value = index;
@@ -392,9 +393,9 @@ class _HomeState extends State<Home> {
                             const SliverGridDelegateWithFixedCrossAxisCount(
                           crossAxisCount: 2, // Number of items per row
                           childAspectRatio:
-                              0.88, // Adjusts the size of the items
-                          crossAxisSpacing: 2.0, // Spacing between columns
-                          mainAxisSpacing: 2.0, // Spacing between rows
+                              0.81, // Adjusts the size of the items
+                          crossAxisSpacing: 4.0, // Spacing between columns
+                          mainAxisSpacing: 4.0, // Spacing between rows
                         ),
                         itemCount: productsItems.length,
                         shrinkWrap: true,
