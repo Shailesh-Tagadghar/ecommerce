@@ -1,9 +1,9 @@
 import 'package:ecommerce/Modules/Auth/Widget/custom_button.dart';
 import 'package:ecommerce/Modules/Auth/Widget/custom_text.dart';
-import 'package:ecommerce/Modules/Auth/services/api_service.dart';
 import 'package:ecommerce/Modules/Home/Widget/banner_widget.dart';
 import 'package:ecommerce/Modules/Home/Widget/category_widget.dart';
 import 'package:ecommerce/Modules/Home/Widget/product_cart_widget.dart';
+import 'package:ecommerce/Modules/Home/controllers/data_contoller.dart';
 import 'package:ecommerce/Modules/Home/controllers/home_controller.dart';
 import 'package:ecommerce/Routes/app_routes.dart';
 import 'package:ecommerce/Utils/Constants/asset_constant.dart';
@@ -23,25 +23,26 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   final HomeController homeController = Get.put(HomeController());
+  final DataContoller dataContoller = Get.put(DataContoller());
 
   // final PageController pageController = PageController();
 
   // List<Map<String, dynamic>> carousalItems = [];
-  final carousalItems = <Map<String, dynamic>>[].obs;
-  final categoryItems = <Map<String, dynamic>>[].obs;
-  final salesCategoryItems = <Map<String, dynamic>>[].obs;
-  final productsItems = <Map<String, dynamic>>[].obs;
-  final isLoading = true.obs;
+  // final carousalItems = <Map<String, dynamic>>[].obs;
+  // final categoryItems = <Map<String, dynamic>>[].obs;
+  // final salesCategoryItems = <Map<String, dynamic>>[].obs;
+  // final productsItems = <Map<String, dynamic>>[].obs;
+  // final isLoading = true.obs;
 
   @override
   Widget build(BuildContext context) {
     // Fetch coupons when the widget is built
-    if (isLoading.value) {
-      _fetchCarousal();
-      _fetchCategory();
-      _fetchSalesCategory();
-      _fetchProducts();
-    }
+    // if (isLoading.value) {
+    //   _fetchCarousal();
+    //   _fetchCategory();
+    //   _fetchSalesCategory();
+    //   _fetchProducts();
+    // }
 
     return Scaffold(
       backgroundColor: ColorConstants.whiteColor,
@@ -216,19 +217,18 @@ class _HomeState extends State<Home> {
                 height: 2.h,
               ),
               Obx(
-                () => isLoading.value
+                () => dataContoller.isLoading.value
                     ? const Center(child: CircularProgressIndicator())
                     : SizedBox(
                         height: 18.h,
                         width: 100.w,
                         child: PageView.builder(
-                          controller: homeController.pageController,
-                          itemCount: carousalItems.length,
+                          itemCount: dataContoller.carousalItems.length,
                           onPageChanged: (index) {
                             homeController.currentPage.value = index;
                           },
                           itemBuilder: (context, index) {
-                            final item = carousalItems[index];
+                            final item = dataContoller.carousalItems[index];
                             return BannerWidget(
                               // image: AssetConstant.banner2tp,
                               image: item['image'] ?? AssetConstant.banner1,
@@ -269,16 +269,17 @@ class _HomeState extends State<Home> {
                 },
                 child: Obx(
                   () {
-                    if (isLoading.value) {
+                    if (dataContoller.isLoading.value) {
                       return const Center(child: CircularProgressIndicator());
                     } else {
                       return SizedBox(
                         height: 10.h,
                         child: ListView.builder(
                           scrollDirection: Axis.horizontal,
-                          itemCount: categoryItems.length,
+                          itemCount: dataContoller.categoryItems.length,
                           itemBuilder: (context, index) {
-                            final item = categoryItems[index]; // Debugging line
+                            final item = dataContoller
+                                .categoryItems[index]; // Debugging line
                             return CategoryWidget(
                               // image: AssetConstant.cat1,
                               image: item['image'] ?? AssetConstant.cat1,
@@ -346,20 +347,21 @@ class _HomeState extends State<Home> {
                 height: 4.5.h,
                 padding: EdgeInsets.symmetric(vertical: 0.3.h),
                 child: Obx(() {
-                  if (isLoading.value) {
+                  if (dataContoller.isLoading.value) {
                     return const Center(
                         child:
                             CircularProgressIndicator()); // Show loading indicator
                   }
                   return ListView.builder(
-                    itemCount: salesCategoryItems.length,
+                    itemCount: dataContoller.salesCategoryItems.length,
                     scrollDirection: Axis.horizontal,
                     itemBuilder: (context, index) {
                       return Container(
                         width: 40.w,
                         padding: EdgeInsets.only(left: 2.w),
                         child: CustomButton(
-                          label: salesCategoryItems[index]['name'] ??
+                          label: dataContoller.salesCategoryItems[index]
+                                  ['name'] ??
                               'Unknown', // Adjust key based on your API response
                           labelColor: ColorConstants.blackColor,
                           action: () {
@@ -383,7 +385,7 @@ class _HomeState extends State<Home> {
               ),
               Obx(
                 () {
-                  if (isLoading.value) {
+                  if (dataContoller.isLoading.value) {
                     return const Center(child: CircularProgressIndicator());
                   } else {
                     return Container(
@@ -397,11 +399,11 @@ class _HomeState extends State<Home> {
                           crossAxisSpacing: 4.0, // Spacing between columns
                           mainAxisSpacing: 4.0, // Spacing between rows
                         ),
-                        itemCount: productsItems.length,
+                        itemCount: dataContoller.productsItems.length,
                         shrinkWrap: true,
                         physics: const NeverScrollableScrollPhysics(),
                         itemBuilder: (context, index) {
-                          final item = productsItems[index];
+                          final item = dataContoller.productsItems[index];
                           return ProductCartWidget(
                             name: item['name'],
                             price: item['price'],
@@ -423,53 +425,6 @@ class _HomeState extends State<Home> {
         ),
       ),
     );
-  }
-
-  Future<void> _fetchCarousal() async {
-    try {
-      final carousal = await ApiService.fetchCarousal();
-      carousalItems.assignAll(carousal); // Update the observable list
-      isLoading.value = false; // Update loading state
-    } catch (e) {
-      print('Error fetching coupons: $e');
-      isLoading.value = false;
-    }
-  }
-
-  Future<void> _fetchCategory() async {
-    try {
-      final category = await ApiService.fetchCategory();
-      // print('Fetched Categories: $category');
-      categoryItems.assignAll(category);
-      isLoading.value = false;
-    } catch (e) {
-      print('Error fetching Category: $e');
-      isLoading.value = false;
-    }
-  }
-
-  Future<void> _fetchSalesCategory() async {
-    try {
-      final salesCategory = await ApiService.fetchSalesCategory();
-      // print('Fetched Categories: $category');
-      salesCategoryItems.assignAll(salesCategory);
-      isLoading.value = false;
-    } catch (e) {
-      print('Error fetching sales Category: $e');
-      isLoading.value = false;
-    }
-  }
-
-  Future<void> _fetchProducts() async {
-    try {
-      final products = await ApiService.fetchProducts();
-      // print('Fetched Categories: $category');
-      productsItems.assignAll(products);
-      isLoading.value = false;
-    } catch (e) {
-      print('Error fetching sales Category: $e');
-      isLoading.value = false;
-    }
   }
 
   Widget buildTimeContainer(String time, context) {
