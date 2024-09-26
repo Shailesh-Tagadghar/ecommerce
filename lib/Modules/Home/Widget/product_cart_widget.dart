@@ -34,91 +34,90 @@ class ProductCartWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.only(left: 2.w, right: 2.w),
-      child: Container(
-        padding: const EdgeInsetsDirectional.all(8),
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(12),
-          color: ColorConstants.whiteColor,
-        ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Stack(
-              alignment: Alignment.topRight,
-              children: [
-                ClipRRect(
-                  borderRadius: BorderRadius.circular(12),
-                  child: Image.network(
-                    '${ApiConstants.imageBaseUrl}$image',
-                    fit: BoxFit.cover,
-                  ),
+    return Container(
+      padding: const EdgeInsetsDirectional.all(8),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(12),
+        color: ColorConstants.whiteColor,
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Stack(
+            alignment: Alignment.topRight,
+            children: [
+              ClipRRect(
+                borderRadius: BorderRadius.circular(12),
+                child: Image.network(
+                  '${ApiConstants.imageBaseUrl}$image',
+                  fit: BoxFit.fill,
+                  width: 100.w,
+                  height: 19.h,
                 ),
-                Container(
-                  width: 8.6.w,
-                  height: 4.4.h,
-                  margin: const EdgeInsets.only(right: 8, top: 8),
-                  decoration: BoxDecoration(
-                    color: ColorConstants.whiteColor.withOpacity(0.5),
-                    shape: BoxShape.circle,
-                  ),
-                  child: IconButton(
-                    padding: const EdgeInsets.all(1),
-                    iconSize: 22,
-                    icon: const Icon(
-                      Icons.favorite_outline_outlined,
-                      color: ColorConstants.primary,
-                    ),
-                    onPressed: () {},
-                  ),
+              ),
+              Container(
+                width: 8.6.w,
+                height: 4.4.h,
+                margin: const EdgeInsets.only(right: 8, top: 8),
+                decoration: BoxDecoration(
+                  color: ColorConstants.whiteColor.withOpacity(0.5),
+                  shape: BoxShape.circle,
                 ),
-              ],
-            ),
-            SizedBox(
-              height: 0.8.h,
-            ),
-            CustomText(
-              text: name,
-              fontSize: 11,
-              weight: FontWeight.w400,
-              color: ColorConstants.blackColor,
-            ),
-            SizedBox(
-              height: 0.4.h,
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                CustomText(
-                  text: '\$${price.toString()}',
-                  fontSize: 12,
-                  weight: FontWeight.w500,
-                  color: ColorConstants.blackColor,
+                child: IconButton(
+                  padding: const EdgeInsets.all(1),
+                  iconSize: 22,
+                  icon: const Icon(
+                    Icons.favorite_outline_outlined,
+                    color: ColorConstants.primary,
+                  ),
+                  onPressed: () {},
                 ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Icon(
-                      Icons.star,
-                      color: Colors.amber[500],
-                      size: 14,
-                    ),
-                    SizedBox(
-                      width: 0.5.w,
-                    ),
-                    CustomText(
-                      text: rating.toString(),
-                      fontSize: 10,
-                      weight: FontWeight.w400,
-                      color: ColorConstants.greyColor,
-                    ),
-                  ],
-                )
-              ],
-            )
-          ],
-        ),
+              ),
+            ],
+          ),
+          SizedBox(
+            height: 0.8.h,
+          ),
+          CustomText(
+            text: name,
+            fontSize: 11,
+            weight: FontWeight.w400,
+            color: ColorConstants.blackColor,
+          ),
+          SizedBox(
+            height: 0.4.h,
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              CustomText(
+                text: '\$${price.toString()}',
+                fontSize: 12,
+                weight: FontWeight.w500,
+                color: ColorConstants.blackColor,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Icon(
+                    Icons.star,
+                    color: Colors.amber[500],
+                    size: 14,
+                  ),
+                  SizedBox(
+                    width: 0.5.w,
+                  ),
+                  CustomText(
+                    text: rating.toString(),
+                    fontSize: 10,
+                    weight: FontWeight.w400,
+                    color: ColorConstants.greyColor,
+                  ),
+                ],
+              )
+            ],
+          )
+        ],
       ),
     );
   }
