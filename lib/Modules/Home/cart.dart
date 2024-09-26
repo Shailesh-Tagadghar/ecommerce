@@ -13,23 +13,18 @@ import 'package:icons_plus/icons_plus.dart';
 import 'package:sizer/sizer.dart';
 
 class Cart extends StatelessWidget {
-  Cart({super.key});
-  final List<Map<String, String>> cartItems = [
-    {
-      'image': AssetConstant.pd1,
-      'title': StringConstants.productname,
-      'size': StringConstants.size,
-      'price': StringConstants.productprice,
-    },
-    {
-      'image': AssetConstant.pd2,
-      'title': StringConstants.productname1,
-      'size': StringConstants.size1,
-      'price': StringConstants.productprice1,
-    },
-  ];
+  const Cart({super.key});
+
   @override
   Widget build(BuildContext context) {
+    final cartData = Get.arguments ?? {};
+    final String productName = cartData['name'] ?? 'Unknown Product';
+    final double productPrice = cartData['price'] ?? 0.0;
+    final String productSize = cartData['size'] ?? 'N/A';
+    final String productImage =
+        cartData['image'] ?? AssetConstant.pd1; // Fallback image
+
+    print('cart data from arguments : $cartData');
     return Scaffold(
       backgroundColor: ColorConstants.whiteColor,
       appBar: AppBar(
@@ -78,27 +73,21 @@ class Cart extends StatelessWidget {
         child: Column(
           children: [
             Expanded(
-              child: ListView.builder(
-                itemCount: cartItems.length,
-                itemBuilder: (context, index) {
-                  final item = cartItems[index];
-                  return Column(
-                    children: [
-                      CartItemWidget(
-                        image: item['image']!,
-                        title: item['title']!,
-                        size: item['size']!,
-                        price: item['price']!,
-                      ),
-                      SizedBox(height: 1.5.h),
-                      Divider(
-                        height: 1.h,
-                        color: ColorConstants.lightGrayColor,
-                        thickness: 1,
-                      ),
-                    ],
-                  );
-                },
+              child: Column(
+                children: [
+                  CartItemWidget(
+                    image: productImage,
+                    title: productName,
+                    size: productSize,
+                    price: productPrice.toString(),
+                  ),
+                  SizedBox(height: 1.5.h),
+                  Divider(
+                    height: 1.h,
+                    color: ColorConstants.lightGrayColor,
+                    thickness: 1,
+                  ),
+                ],
               ),
             ),
             Padding(

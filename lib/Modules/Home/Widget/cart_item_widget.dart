@@ -23,10 +23,6 @@ class CartItemWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     final HomeController controller = Get.put(HomeController());
     return Padding(
-      // padding: EdgeInsets.symmetric(
-      //     // vertical: 1.h,
-      //     // horizontal: 4.w,
-      //     ),
       padding: EdgeInsets.only(
         left: 2.w,
         right: 2.w,
@@ -38,11 +34,11 @@ class CartItemWidget extends StatelessWidget {
           // Product Image
           ClipRRect(
             borderRadius: BorderRadius.circular(8),
-            child: Image.asset(
+            child: Image.network(
               image,
               width: 25.w,
               height: 12.h,
-              fit: BoxFit.cover,
+              fit: BoxFit.fill,
             ),
           ),
           SizedBox(

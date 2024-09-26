@@ -1,6 +1,7 @@
 import 'package:ecommerce/Modules/Auth/Widget/custom_button.dart';
 import 'package:ecommerce/Modules/Auth/Widget/custom_text.dart';
 import 'package:ecommerce/Modules/Home/controllers/home_controller.dart';
+import 'package:ecommerce/Routes/app_routes.dart';
 import 'package:ecommerce/Utils/Constants/api_constants.dart';
 import 'package:ecommerce/Utils/Constants/asset_constant.dart';
 import 'package:ecommerce/Utils/Constants/color_constant.dart';
@@ -452,6 +453,20 @@ class Productdetails extends StatelessWidget {
                 height: 6.h,
                 weight: FontWeight.w400,
                 isSelected: true,
+                action: () {
+                  homeController.selectedIndex.value = 1;
+                  final cartData = {
+                    'name': productName,
+                    'price': productPrice,
+                    'size': homeController.selectedProductSize.value,
+                    'color': homeController.selectedProductColor.value,
+                    'image': imageList.isNotEmpty ? imageList[0] : '',
+                  };
+                  Get.toNamed(
+                    AppRoutes.navbarScreen,
+                    arguments: cartData,
+                  );
+                },
               ),
             ),
           ],
