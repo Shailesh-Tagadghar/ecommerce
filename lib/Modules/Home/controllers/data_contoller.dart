@@ -6,6 +6,8 @@ class DataContoller extends GetxController {
   final categoryItems = <Map<String, dynamic>>[].obs;
   final salesCategoryItems = <Map<String, dynamic>>[].obs;
   final productsItems = <Map<String, dynamic>>[].obs;
+  final cartsItems = <Map<String, dynamic>>[].obs;
+
   final isLoading = true.obs;
 
   @override
@@ -15,6 +17,7 @@ class DataContoller extends GetxController {
     _fetchCategory();
     _fetchSalesCategory();
     _fetchProducts();
+    _fetchCarts();
   }
 
   Future<void> _fetchCarousal() async {
@@ -60,6 +63,18 @@ class DataContoller extends GetxController {
       isLoading.value = false;
     } catch (e) {
       print('Error fetching sales Category: $e');
+      isLoading.value = false;
+    }
+  }
+
+  Future<void> _fetchCarts() async {
+    try {
+      final carts = await ApiService.fetchCarts();
+      print('Fetched Carts: $carts');
+      cartsItems.assignAll(carts);
+      isLoading.value = false;
+    } catch (e) {
+      print('Error fetching Carts in controller: $e');
       isLoading.value = false;
     }
   }
