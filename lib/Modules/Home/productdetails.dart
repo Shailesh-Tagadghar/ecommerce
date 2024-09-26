@@ -31,6 +31,7 @@ class Productdetails extends StatelessWidget {
         : 0.0;
 
     // Handling image list with null safety
+
     final List<String> imageList = productData['image'] != null
         ? List<String>.from(productData['image'])
             .map((image) => ApiConstants.imageBaseUrl + image)
@@ -131,44 +132,41 @@ class Productdetails extends StatelessWidget {
                           borderRadius: BorderRadius.circular(12),
                           color: ColorConstants.whiteColor,
                         ),
-                        child: Obx(() {
-                          return ListView.builder(
-                            scrollDirection: Axis.horizontal,
-                            itemCount: imageList.length,
-                            itemBuilder: (context, index) {
-                              bool isSelected =
-                                  homeController.activePage.value == index;
+                        child: ListView.builder(
+                          scrollDirection: Axis.horizontal,
+                          itemCount: imageList.length,
+                          itemBuilder: (context, index) {
+                            bool isSelected =
+                                homeController.activePage.value == index;
 
-                              return InkWell(
-                                onTap: () {
-                                  // Update the active page and jump to the selected page in PageView
-                                  homeController.changeActivePage(index);
-                                  homeController.pageController
-                                      .jumpToPage(index);
-                                },
-                                child: Transform.scale(
-                                  scale: isSelected ? 1.2 : 1.0,
-                                  child: Container(
-                                    margin: EdgeInsets.only(
-                                      top: 0.8.h,
-                                      bottom: 0.8.h,
-                                      left: 1.5.w,
-                                      right: 1.4.w,
-                                    ),
-                                    child: ClipRRect(
-                                      borderRadius: BorderRadius.circular(10),
-                                      child: Image.network(
-                                        imageList[index],
-                                        height: 50,
-                                        fit: BoxFit.cover,
-                                      ),
+                            return InkWell(
+                              onTap: () {
+                                // Update the active page and jump to the selected page in PageView
+                                homeController.changeActivePage(index);
+                                homeController.pageController.jumpToPage(index);
+                              },
+                              child: Transform.scale(
+                                scale: isSelected ? 1.2 : 1.0,
+                                child: Container(
+                                  margin: EdgeInsets.only(
+                                    top: 0.8.h,
+                                    bottom: 0.8.h,
+                                    left: 1.5.w,
+                                    right: 1.4.w,
+                                  ),
+                                  child: ClipRRect(
+                                    borderRadius: BorderRadius.circular(10),
+                                    child: Image.network(
+                                      imageList[index].toString(),
+                                      height: 60,
+                                      fit: BoxFit.cover,
                                     ),
                                   ),
                                 ),
-                              );
-                            },
-                          );
-                        }),
+                              ),
+                            );
+                          },
+                        ),
                       ),
                     ],
                   )

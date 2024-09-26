@@ -100,7 +100,7 @@ class HomeController extends GetxController {
   }
 
   //Product Details Screen Controller
-  var imageList = <String>[].obs;
+  // var imageList = <String>[].obs;
   var activePage = 0.obs;
 
   void changeActivePage(int index) {
