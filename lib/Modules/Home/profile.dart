@@ -190,14 +190,9 @@ class _ProfileState extends State<Profile> {
                 ),
 
                 //1st Row
-                ProfileWidget(
+                const ProfileWidget(
                   name: StringConstants.row1,
                   icon: Bootstrap.person,
-                  onTap: () {
-                    Get.toNamed(
-                      AppRoutes.userDetailScreen,
-                    );
-                  },
                 ),
 
                 //2nd Row

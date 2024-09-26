@@ -7,6 +7,7 @@ class DataContoller extends GetxController {
   final salesCategoryItems = <Map<String, dynamic>>[].obs;
   final productsItems = <Map<String, dynamic>>[].obs;
   final isLoading = true.obs;
+  var imageList = <String>[].obs;
 
   @override
   void onInit() {

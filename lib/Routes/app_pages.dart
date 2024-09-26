@@ -84,7 +84,7 @@ class AppPages {
         transition: transition),
     GetPage(
         name: AppRoutes.productDetailsScreen,
-        page: () => const Productdetails(),
+        page: () => Productdetails(),
         transition: transition),
   ];
 }

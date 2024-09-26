@@ -1,6 +1,7 @@
 import 'package:ecommerce/Modules/Auth/controllers/auth_controller.dart';
 import 'package:ecommerce/Modules/Auth/services/fcm_service.dart';
 import 'package:ecommerce/Modules/Home/controllers/home_controller.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'network_connectivity_controller.dart';
 
@@ -20,6 +21,9 @@ class GlobalControllerBindings extends Bindings {
     );
     Get.put(
       HomeController(),
+    );
+    Get.put(
+      PageController(),
     );
 
     Get.put(

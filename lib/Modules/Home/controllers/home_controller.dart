@@ -1,6 +1,4 @@
 import 'dart:async';
-
-import 'package:ecommerce/Utils/Constants/asset_constant.dart';
 import 'package:ecommerce/Utils/Constants/string_constant.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -9,8 +7,15 @@ class HomeController extends GetxController {
   @override
   void onInit() {
     activePage.value = 0;
+    pageController = PageController();
     startTimer();
     super.onInit();
+  }
+
+  @override
+  void onClose() {
+    pageController.dispose();
+    super.onClose();
   }
 
   //for navbar selection
@@ -95,11 +100,11 @@ class HomeController extends GetxController {
   }
 
   //Product Details Screen Controller
-  RxInt activePage = 0.obs;
+  var imageList = <String>[].obs;
+  var activePage = 0.obs;
 
-  changeActivePage(int index) {
+  void changeActivePage(int index) {
     activePage.value = index;
-    pageController.jumpToPage(index);
   }
 
   // WishList Category List
@@ -118,45 +123,17 @@ class HomeController extends GetxController {
   }
 
   // Product Details SIZE Section
-  RxList<String> productSizeList = ["S", "M", "L", "XL", "XXL", "XXXL"].obs;
-  RxString selectedProductSize = "".obs;
 
-  void selectSize(String size) {
-    if (selectedProductSize.value == size) {
-      selectedProductSize.value = "";
-    } else {
-      selectedProductSize.value = size;
-    }
-  }
-
-  // Product Details Colors Section
-  RxList<String> productColorList = [
-    "0xff60442f",
-    "0xff9a8070",
-    "0xff432e1f",
-    "0xff57575b",
-  ].obs;
-
-  RxList<dynamic> selectedProductColorList = [].obs;
+  var selectedProductColor = ''.obs;
+  var selectedProductSize = ''.obs;
 
   void selectColor(String color) {
-    if (selectedProductColorList.contains(color)) {
-      selectedProductColorList.remove(color);
-    } else {
-      selectedProductColorList.clear();
-      selectedProductColorList.add(color);
-    }
+    selectedProductColor.value = color; // Update the selected color
   }
 
-  // PageController pageController = PageController();
-
-  RxList<String> productClothImages = [
-    AssetConstant.pd3,
-    AssetConstant.pd2,
-    AssetConstant.pd1,
-    AssetConstant.pd2,
-    AssetConstant.pd3
-  ].obs;
+  void selectSize(String size) {
+    selectedProductSize.value = size; // Update the selected size
+  }
 
   var currentImage = ''.obs;
   var selectedProduct = ''.obs;
